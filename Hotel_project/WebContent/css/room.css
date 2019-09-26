@@ -1,0 +1,168 @@
+@charset "ISO-8859-1";
+
+.roomCard{
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+}
+.roomImg{
+	width: 60vw;
+	height:100hv;
+	overflow: hidden;
+}
+
+.roomImg img{
+	position:relative;
+	height: 100%;
+	left: -90px;
+	
+}
+.roomForm{
+	color: #4e4e4e;
+	width: 40%;	
+	padding: 20px 15px;
+	text-decoration: none;
+	display: flex;
+	flex-direction: column;
+}
+.roomForm h2{
+	margin: 10px;
+}
+.roomForm .roomFeatures{
+	position:relative;
+	text-align:center;
+	z-index: 1;
+	
+}
+
+.roomForm .roomFeatures	h3{
+	font-size: 18px;
+	margin: 10px;
+	font-family: inherit;
+	font-weight: 500;
+	line-height: 1.1;
+	color: inherit;
+}
+.roomFeatures li{	
+	list-style-type: none;
+	color: #A1A1A1;
+	text-transform: capitalize;
+	font-size: 12px;
+	font-weight: 400;
+	padding: 3px 0px;
+}
+.roomForm h2{
+	text-align: center;
+	color:#B99F77;
+	border-bottom: 1px solid #B99F77;
+	padding-bottom:5px;
+	font-weight: 400;
+	font-size: 30px;
+	margin-top: 20px;
+}
+.roomForm ul{
+	list-style-type: none;
+}
+.roomForm form{
+	padding: 0 60px;
+	margin: 35px 10px 15px 10px;
+}
+.roomForm form p{
+	position:relative;
+	font-size:15px;
+	margin-bottom: 5px;
+}
+.roomForm form select{
+	width: 100%;
+	color:#4e4e4e;
+	margin: 5px 0%;
+	padding: 5px;
+	border: 0;
+}
+.roomForm form input[type="date"]{
+	padding: 5px;
+    color: #95a5a6;
+	font-family: "Helvetica", arial, sans-serif;
+	border:1px solid #ecf0f1;
+	
+}
+.roomForm form input[type="number"]{
+	width:100%;
+	padding: 5px;
+    color: #95a5a6;
+	font-family: "Helvetica", arial, sans-serif;
+	border:1px solid #ecf0f1;
+	-webkit-appearance: textfield;
+     -moz-appearance: textfield;
+          appearance: textfield;
+	
+}
+.roomForm form .selectDiv{
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+}
+.roomForm form .selectDiv .selectCard{
+	width: 100%;
+	padding:5px 20px 5px 0;
+	display: flex;
+	flex-direction: column;
+}
+.roomForm form .selectDiv .selectCard p{
+	margin-bottom: 10px;
+}
+.roomForm form input[type="date"]::-webkit-clear-button {
+    display: none;
+}
+.roomForm form input[type="date"]::-webkit-inner-spin-button { 
+    display: none;
+}
+.roomForm button {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-top: 40px;
+	
+}
+
+
+
+
+
+
+
+
+@media ( max-width :1000px) {
+	.roomCard{
+		flex-direction: column;
+	}
+	.roomCard-reverse{
+		flex-direction: column-reverse;
+	}
+	.roomImg{
+	width: 100%;
+	}
+	.roomForm{
+	width: 100%
+	}
+}
+
+@media ( max-width :600px) {
+	
+	.roomForm form{
+	padding:5px 0px;
+	margin: 35px 10px 15px 10px;
+}	
+	.roomForm form select{
+	width: 100%;
+	margin: 5px 0;
+	padding: 5px;
+	border: 0;
+}
+	.roomForm form .selectDiv{
+	display: flex;
+	flex-direction: column;
+}
+
+	
+}
