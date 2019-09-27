@@ -89,7 +89,7 @@
 		<%
 			} 
 		else if(sessionUserBean.getAdmin_role_type().equals("emp")) {%>
-			<a href="list_employees.jsp">ADMIN</a><span class="division"> |</span>
+			<a href="admin-employee.jsp">ADMIN</a><span class="division"> |</span>
 		<%
 			} 
 		%>
