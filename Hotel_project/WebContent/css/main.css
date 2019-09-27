@@ -12,7 +12,7 @@ body {
 	overflow-x: hidden;
 	scroll-behavior: smooth;
 }
-button {
+/* button {
 	position:relative;
 	background: #fe435b !important;
 	width: 160px;
@@ -23,7 +23,7 @@ button {
 	padding: 10px;
 	cursor: pointer;
 }
-
+*/
 a {
 	text-decoration: none !important;
 }

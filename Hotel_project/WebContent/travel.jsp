@@ -80,7 +80,7 @@
 				<h3>Find the Adventure of a lifetime</h3>
 			</div>
 			<div class="travel_req">
-				<form action="TransManageHandler" method="post">
+				<form action="TransManageHandler" method="post" onsubmit="return confirmInsert()">
 					<input type="hidden" name="action" value="newTravel">
 					<input type="hidden" name="uid" value="<%=uid%>">
 					<input type="hidden" name="uname" value="<%=username%>">
@@ -105,11 +105,11 @@
 			</div>
 		</div>
 	</section>
-	<div class="travel_main_2" >
+	<div class="travel_main_2" id="recentRideTable" >
 		<div>
 			<h3>Recent Ride</h3>
 		</div>
-		<table style="text-align: center;">
+		<table style="text-align: center;" >
 			<tr>
 				<th>Request Id</th>
 				<th>Destination</th>
@@ -228,6 +228,7 @@
 							  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 							    <button type="button" class=" btn dropdown-item" data-toggle="modal" data-target="#dropdown_menu<%=travel.getTid()%>" data-whatever="<%=travel.getTid()%>">Edit</button>
 							    <button type="button" class="btn dropdown-item"><a href="TransManageHandler?action=deleteReq&tid=<%=travel.getTid()%>">Del</a></button>
+							    <button type="button" class="btn dropdown-item" onclick="confirmDel(<%=travel.getTid()%>)">Del 2</button>
 							  </div>
 						</div>
 					</td>
@@ -356,6 +357,28 @@ function dateGet(){
 	today = yyyy+'-'+mm+'-'+dd;
 	document.getElementById("datefield").setAttribute("min", today);
 }	
+
+function confirmDel(id){
+	
+	var doIt=confirm('Do you want to delete the record?');
+	  if(doIt){
+		  document.location='TransManageHandler?action=deleteReq&tid='+id;
+	   
+	    }
+	  else{
+
+	    }
+}
+function confirmInsert(){
+	
+	var doIt=confirm('Do you want to insert the record?');
+	  if(doIt){
+		 return true;
+	   	    }
+	  else{
+		return false;
+	    }
+}
 /* 
 	var id2=document.getElementById('id2');
 

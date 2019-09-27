@@ -1,5 +1,15 @@
 @charset "ISO-8859-1";
-
+button {
+	position:relative;
+	background: #fe435b !important;
+	width: 160px;
+	height: 56px;
+	font: 16px 'Montserrat', sans-serif;
+	color: #fff;
+	border: 0;
+	padding: 10px;
+	cursor: pointer;
+}
 .roomCard{
 	width: 100%;
 	display: flex;

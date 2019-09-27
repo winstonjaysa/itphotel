@@ -48,11 +48,11 @@
 		<p>MAIN NAVIGATION</p>
 		<a data-tab="#tab_1" data-tabCss="#panel_1">
 			<div class="panel active" id="Panel_1">
-				<i class="fas fa-comments"></i><span>Messages ( User )</span>
+				<i class="fas fa-comments"></i><span>Messages( User )</span>
 			</div>
 		</a> <a data-tab="#tab_2" data-tabCss="#panel_2">
 			<div class="panel" id="Panel_2">
-				<i class="fas fa-comment-dots"></i><span>Messages ( Admin ) </span>
+				<i class="fas fa-comment-dots"></i><span>Messages( Admin ) </span>
 			</div>
 		</a> <a data-tab="#tab_3" data-tabCss="#panel_3">
 			<div class="panel" id="Panel_3">
@@ -99,7 +99,7 @@
 				List<ContactUsBeans> adminContactList = dao.getAdminsContactMeassages(0);
 			%>
 			
-			<table id="myTable2" style="text-align: center;">
+			<table id="myTable2" style="text-align: center;width: 800px">
 				<tbody>
 					<tr>
 						<th>Admin</th>
@@ -111,7 +111,7 @@
 					%>
 					<tr id="<%=cb2.getCid()%>">
 						<td><%=cb2.getUname() %></td>
-						<td><%=cb2.getInbox()%></td>
+						<td style="text-align: left;"><%=cb2.getInbox()%></td>
 						<td><a href="ContactusHandler?action=delete&cid=<%=cb2.getCid()%>">delete</a></td>
 					</tr>
 					<%
