@@ -2,7 +2,10 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="com.lx.Beans.employeeBean"%>
 <%@ page import="com.lx.Dao.employeeDao"%>
+<%@ page import="com.lx.Beans.attendanceBean"%>
+<%@ page import="com.lx.Dao.salaryDao"%>
 <%@ page import="com.lx.Handler.EmployeeHandler"%>
+<%@ page import="com.lx.Handler.SalaryHandler"%>
 <%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
@@ -55,7 +58,7 @@ margin-top: 100px;
 #choose{
 
 margin-top: 50px;
-margin-left: 420px;
+margin-left: -420px;
 
 }
 
@@ -64,6 +67,13 @@ margin-left: 420px;
 margin-right:300px;
 
 
+
+}
+
+#align{
+
+margin-left: -1000px;
+margin-bottom: 0px;
 
 }
 
@@ -118,6 +128,11 @@ margin-right:300px;
 		</a> <a data-tab="#tab_3" data-tabCss="#panel_3">
 			<div class="panel" id="Panel_3">
 				<i class="fas fa-cogs"></i> <span>Upload image</span>
+			</div>
+		</a>
+		<a data-tab="#tab_4" data-tabCss="#panel_4">
+			<div class="panel" id="Panel_4">
+				<i class="fas fa-cogs"></i> <span>time sheet</span>
 			</div>
 		</a>
 	</div>
@@ -327,7 +342,7 @@ margin-right:300px;
 <div id="choose">
 <input type="file" id="real-file" name="image" hidden="hidden"/>
 
-<button type="button" id="custom-button" >CHOOSE A FILE</button>
+<button type="button" id="custom-button">CHOOSE A FILE</button>
 <span id="custom-text">No file chosen, yet.</span>
 
 </div>
@@ -344,18 +359,62 @@ margin-right:300px;
           
         </form>
         </div>
-        </div>
-					
-					
-					
-					
-					
+        </div>	
 				</div>
 			</section>
 		</div>
 		
-		
-		
+		<div id="tab_4" class="panel_main">
+			<section>
+				<div class="card-1">
+				
+				
+				<div class="form-style">
+						<form  method="POST" action="SalaryHandler" name = "myForm" >
+							<input type="hidden" name="action" value="insert" />
+							
+							<h3>Add Employee Salary info</h3>
+							
+							<div class="form_item">
+								<label>Employee ID</label>
+								<input type="number" name="propid" placeholder="pid" id="pid">
+							</div>
+							<div class="form_item">
+								<label>Tax</label>
+								<input type="text" name="tax" placeholder="nic" id="nic">
+							</div>
+							<div class="form_item">
+								<label>hours worked</label>
+								<input type="text" name="hworked" placeholder="name" id="ename">
+							</div>
+							
+							<div class="form_item">
+								<label>Leave taken(in Days)</label>
+								<input type="text" name="leavetaken" placeholder="address" id="address">
+							</div>
+							
+
+							<button type="submit">Add Employee info</button>
+							
+                             <a href="#" onClick="autoFill(); return true;" >Click to Autofill</a>
+						</form>
+						
+					</div>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+							</div>
+			</section>
+		</div>
+					
+        
+   
 		
 		
 		

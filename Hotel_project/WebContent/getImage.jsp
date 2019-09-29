@@ -1,6 +1,6 @@
-<%@ page import="com.lx.Beans.Employee"%>
-<%@ page import="com.lx.Dao.EmployeeDbUtil"%>
-<%@ page import="com.lx.Handler.EmployeeControllerServlet"%>
+<%@ page import="com.lx.Beans.employeeBean"%>
+<%@ page import="com.lx.Dao.employeeDao"%>
+<%@ page import="com.lx.Handler.EmployeeHandler"%>
 <%@ page import="com.lx.DbConnection.ConnectionProvider" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.Blob"%>
