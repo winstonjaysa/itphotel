@@ -128,6 +128,8 @@
 							<th>paymentMethod</th>
 							<th>category</th>
 							<th>price</th>
+							<th></th>
+							<th></th>
 						</tr>
 						<%
 							paymentDao dao = new paymentDao();
@@ -141,7 +143,39 @@
 							<td><%=payment.getPaymentMethod()%></td>
 							<td><%=payment.getCategory()%></td>
 							<td><%=payment.getPrice()%></td>
+							<td><button type="button" class=" btn dropdown-item" data-toggle="modal" data-target="#dropdown_menu<%=payment.getPid()%>" data-whatever="<%=payment.getPid()%>">Edit</button></td>
+							<td><button type="button" class="btn dropdown-item" onclick="confirmDel(<%=payment.getPid()%>)">Delete</button></td>
 						</tr>
+						
+						<div class="modal fade" id="dropdown_menu<%=payment.getPid()%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">  
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						   	<div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">Change</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+	    				    </div>
+						      <form action="payamenthandler?pid=<%=payment.getPid()%>"  method="post">
+						     		<div class="form_body">
+							     		<div class="form-group">
+							         		 <input type="hidden" value="editPayment" name="action">
+											 <label>Destination </label><br>
+											 <input type="text" name="category" value="<%=payment.getCategory()%>" required="required"><br>
+										</div>
+										<div class="form-group">
+											<label>Need date </label><br>
+											<input type="text" name="paymentMethod" value="<%=payment.getPaymentMethod()%>" required="required"><br>
+										</div>
+						     		</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<button type="submit" class="btn btn-primary">Edit</button>
+										</div>
+						       </form>
+						    </div>
+						  </div>
+					</div>
 						<%
 							}
 						%>
@@ -232,5 +266,28 @@ window.onclick = function(event) {
 		lastSelectedTab = "#tab_1";
 	}
 	$(lastSelectedTab).fadeIn();
+	
+	
+	
+
+	$('#dropdown_menu').on('show.bs.modal', function (event){
+		  var button = $(event.relatedTarget)
+		  var recipient = button.data('whatever')
+		  var modal = $(this)
+		  modal.find('.modal-title').text('Send message to ' + recipient )
+		  modal.find('.modal-body input').val(recipient)
+		})
+
+		
+function confirmDel(id){
+		
+	var doIt=confirm('Do you want to delete the record?');
+	  if(doIt){
+			  document.location='payamenthandler?action=removerPayment&pid='+id;
+		    }
+	  else{
+
+		    }
+	}		
 </script>
 </html>

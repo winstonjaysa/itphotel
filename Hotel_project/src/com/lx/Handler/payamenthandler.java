@@ -39,44 +39,25 @@ public class payamenthandler extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-//		String redirect="";
-//        String billId = request.getParameter("billid");        
-//        String action = request.getParameter("action");
-//        
-//        if(action.equalsIgnoreCase("delete")) 
-//        {
-//        	String paymentId = request.getParameter("paymentId");
-//        	int pid = Integer.parseInt(paymentId);
-//        	dao.removerPayment(pid);
-//        	redirect = PropertyRecord;
-//        	request.setAttribute("properties", dao.getAllpayment());
-//            System.out.println("Record Deleted Successfully");       	       	
-//        }
+		
+        String action = request.getParameter("action");
+        
+        if(action.equalsIgnoreCase("removerPayment")) 
+        {
+        	String paymentId = request.getParameter("paymentId");
+        	int pid =Integer.parseInt(request.getParameter("pid"));
+        	dao.removerPayment(pid);
+        	response.sendRedirect("admin-payment.jsp");
+        	System.out.println("Record Deleted Successfully"); 
+        	
+        }
 //        
 //        else if (action.equalsIgnoreCase("editform"))        	
 //        {        	
 //        	redirect = Edit;            
 //        }
 //        
-//        else if (action.equalsIgnoreCase("edit"))
-//        {
-//        	String paymentId = request.getParameter("paymentId");
-//        	int pid = Integer.parseInt(paymentId);
-//        	paymentBean pb = new paymentBean();
-//        	
-//        	
-//        	pb.setBillid(pid);
-//         	pb.setDate(request.getParameter("date"));
-//        	pb.setCatogory(request.getParameter("catogory"));
-//        	pb.setPaymentMethod(request.getParameter("paymentMethod"));
-//        	//price double
-//        	dao.editPayment(pb);
-//        	
-//        	request.setAttribute("properties", pb);
-//            redirect = PropertyRecord;
-//            System.out.println("Record updated Successfully");
-//        	
-//        }
+        
         
 //        else if (action.equalsIgnoreCase("listpayment"))
 //            
@@ -119,6 +100,20 @@ public class payamenthandler extends HttpServlet {
         	//request.setAttribute("payment", dao.getAllpayment());    
            	System.out.println("Record Added Successfully");
         	       	
+        }else if (action.equalsIgnoreCase("editPayment"))
+        {
+        	paymentBean pb = new paymentBean();
+        	
+        	
+        	pb.setPaymentMethod(request.getParameter("paymentMethod"));
+        	pb.setCategory(request.getParameter("category"));
+        	pb.setPid(Integer.parseInt(request.getParameter("pid")));
+        	//pb.setPaymentMethod(request.getParameter("paymentMethod"));
+        	//price double
+        	dao.editPayment(pb);
+        	response.sendRedirect("admin-payment.jsp");
+            System.out.println("Record updated Successfully");
+        	
         }
 	}
 

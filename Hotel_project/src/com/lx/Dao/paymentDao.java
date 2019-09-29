@@ -47,45 +47,47 @@ public class paymentDao
 		}
 	 }
 	 
-//	 public void removerPayment(int paymentId) 
-//	 {
-//		 try 
-//		{
-//			 String sql = "DELETE FROM payment WHERE billid=? ";
-//			 PreparedStatement ps = conn.prepareStatement(sql);
-//			 ps.setInt(1, paymentId);
-//			 ps.executeUpdate();
-//			
-//		} 
-//		 
-//		 catch (SQLException e)
-//		 
-//		{
-//			 e.printStackTrace();
-//		}			 
-//		 
-//	 }
+	 
+	 
+	 public void removerPayment(int paymentId) 
+	 {
+		 try 
+		{
+			 String sql = "DELETE FROM payment WHERE pid=? ";
+			 PreparedStatement ps = conn.prepareStatement(sql);
+			 ps.setInt(1, paymentId);
+			 ps.executeUpdate();
+			
+		} 
+		 
+		 catch (SQLException e)
+		 
+		{
+			 e.printStackTrace();
+		}			 
+		 
+	 }
 //	 
-//	 public void editPayment(paymentBean pb) 
-//	 {
-//		 try 
-//		 {
-//			 String sql = "UPDATE payment SET billid=? ,date=? ,paymentMethod=?,catogory=?,price=?" +" WHERE billid=?";
-//	    	 PreparedStatement ps = conn.prepareStatement(sql);
+	 public void editPayment(paymentBean pb) 
+	 {
+		 try 
+		 {
+			 String sql = "UPDATE payment SET paymentMethod=?,category=? WHERE pid=?";
+	    	 PreparedStatement ps = conn.prepareStatement(sql);
 //	    	 	ps.setString(1, pb.getDate());
-//	    		ps.setString(2, pb.getPaymentMethod());
-//	    		ps.setString(3, pb.getCatogory());
-//	    		ps.setDouble(4, pb.getPrice());
-//	    		ps.setInt(5, pb.getBillid());
-//	    		ps.executeUpdate(); 
-//	    		
-//		 } 
-//		 catch (SQLException e) 
-//		 {
-//			 e.printStackTrace();
-//		 }
-//		 
-//	 }
+	    	 	ps.setString(1, pb.getPaymentMethod());
+	    		ps.setString(2, pb.getCategory());
+	    		//ps.setDouble(4, pb.getPrice());
+	    		ps.setInt(3, pb.getPid());
+	    		ps.executeUpdate(); 
+	    		
+		 } 
+		 catch (SQLException e) 
+		 {
+			 e.printStackTrace();
+		 }
+		 
+	 }
 //	 
 //	 
 	 public List getAllpayment() 
