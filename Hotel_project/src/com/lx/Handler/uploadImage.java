@@ -61,7 +61,7 @@ public class uploadImage extends HttpServlet {
 	                if (result > 0) {
 	                    response.sendRedirect("view.jsp");
 	                } else {
-	                    response.sendRedirect("index.jsp?message=Some+Error+Occurred");
+	                    response.sendRedirect("admin-employee.jsp#tab_1");
 	                }
 	            } catch (Exception e) {
 	                out.println(e);

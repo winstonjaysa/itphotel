@@ -17,14 +17,15 @@ public class salaryDao {
 	private String position;
 	private double hourlyrate;
 	private double fixedsalary;
+	private double salary;
+	private double tax;
+	private int hoursworked;
+	private int leavetaken;
+	
+	
 	public salaryDao() {
 		conn = ConnectionProvider.getConeection();
 	}
-
-	
-	
-	
-	
 	
 	
 	public void addEmployee(attendanceBean pb) 
@@ -47,6 +48,9 @@ public class salaryDao {
             	position=ref.getPosition();
             	hourlyrate=ref.getHourlyrate();
             	fixedsalary=ref.getFixed();
+            	
+        
+            	
             }
 		} 
     	
@@ -59,17 +63,51 @@ public class salaryDao {
 		
     	try 
     	{
+    		
+    		
+    		tax=pb.getTax();
+    		hoursworked=pb.getHoursworked();
+    	    leavetaken = pb.getLeavetaken();
+    	
+    	    
+    	    if(!(hourlyrate== 0.0)) {
+    	    	
+    	    	double hsalary = hoursworked*hourlyrate;
+    	    	double taxsalary = (tax/100)*hsalary;
+    	    	salary = hsalary-taxsalary;
+    	    	
+    	    }
+    	    
+    	    else if(!(fixedsalary==0.0)) {
+    	    
+    	    	
+    	    	double daysal = fixedsalary/30;
+    	    	double normsal = daysal * leavetaken;
+    	    	double taxsalary = (tax/100)*fixedsalary;
+    	    	salary = fixedsalary - normsal - taxsalary;
+    	    	
+    	    	
+    	    	
+    	    }
+    	    
+    		
     		String sql = "insert into salary"
 			+"(employeeid,tax,hoursworked,leavetaken,totalsalary)"
 					+"values (?,?,?,?,?)";
+    		
+    		
+    		
     		PreparedStatement ps = conn.prepareStatement(sql);
+    	
+    		
     		
     		ps.setInt(1,pb.getId());
-    		ps.setDouble(2, pb.getTax());
-    		ps.setInt(3, pb.getHoursworked());
-    		ps.setInt(4, pb.getLeavetaken());
-    		ps.setDouble(5,hourlyrate);
+    		ps.setDouble(2, tax);
+    		ps.setInt(3, hoursworked);
+    		ps.setInt(4, leavetaken);
+    		ps.setDouble(5,salary);
     		ps.executeUpdate();
+    	
     		
 		} 
     	

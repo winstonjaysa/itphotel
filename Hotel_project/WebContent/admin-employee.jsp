@@ -95,13 +95,13 @@ margin-bottom: 0px;
 	int uid=0;
 	
 	if(session.getAttribute("currentSessionUser")==null){
-		response.sendRedirect("home.jsp");
+		response.sendRedirect("index.jsp");
 	}
 	else if(session.getAttribute("currentSessionUser")!=null && !sessionCurrentBean.getRole().equals("admin")){
-		response.sendRedirect("home.jsp");
+		response.sendRedirect("index.jsp");
 	}
 	else if((session.getAttribute("currentSessionUser")!=null && sessionCurrentBean.getRole().equals("admin") && (!sessionCurrentBean.getAdmin_role_type().equals("emp") || sessionCurrentBean.getAdmin_role_type().equals(" ")))){
-		response.sendRedirect("home.jsp");
+		response.sendRedirect("index.jsp");
 	}
 	else if(session.getAttribute("currentSessionUser")!=null && sessionCurrentBean.getRole().equals("admin") && sessionCurrentBean.getAdmin_role_type().equals("emp") ){
 		//UserBean sss=(UserBean) session.getAttribute("currentSessionUser");
@@ -180,7 +180,7 @@ margin-bottom: 0px;
 								%>
 							<tr id="<%=pb.getId()%>">	
 									
-								<td class="column6"><img src="getImage.jsp?id=<%=pb.getId()%> alt="no image" border=3 height=100 width=100></img></td>			
+								<td class="column6"><img src="getImage.jsp?id=<%=pb.getId()%>" alt="no image" border=3 height=100 width=100></img></td>			
 								<td class="column6"><%=pb.getId()%></td>
 								<td class="column6"><%=pb.getPid()%></td>
 								<td class="column6"><%=pb.getNic()%></td>
@@ -338,24 +338,24 @@ margin-bottom: 0px;
 					
 					<div id="form">
 					<div class="form-style">
-        <form action="uploadImage" method="post" enctype="multipart/form-data">
-<div id="choose">
-<input type="file" id="real-file" name="image" hidden="hidden"/>
+                    <form action="uploadImage" method="post" enctype="multipart/form-data">
+					<div id="choose">
+					<input type="file" id="real-file" name="image" hidden="hidden"/>
 
-<button type="button" id="custom-button">CHOOSE A FILE</button>
-<span id="custom-text">No file chosen, yet.</span>
+					<button type="button" id="custom-button">CHOOSE A FILE</button>
+					<span id="custom-text">No file chosen, yet.</span>
 
 </div>
    <br><br>
-            <div id="scale">
-            Employee Id:
-            <input type="number" name="empid" required="required"/><br/><br/>
-            </div>
-            <input type="submit" id="button" style=" display:block;
-  height: 50px;
-  width: 100px;
-  background: rgb(202, 60, 60);
-  color:white"/>
+            		<div id="scale">
+           			 Key Id:
+            		<input type="number" name="empid" required="required"/><br/><br/>
+            		</div>
+            		<input type="submit" id="button" style=" display:block;
+  															height: 50px;
+  															width: 100px;
+ 															background: rgb(202, 60, 60);
+  															color:white"/>
           
         </form>
         </div>
@@ -492,6 +492,8 @@ margin-bottom: 0px;
               document.myForm.position.focus() ;
               return false;
            }
+           
+      
 
            if( document.myForm.age.value == "" ) {
               alert( "Please employees age!");
