@@ -123,16 +123,21 @@ margin-bottom: 0px;
 			</div>
 		</a> <a data-tab="#tab_2" data-tabCss="#panel_2">
 			<div class="panel" id="Panel_2">
-				<i class="fas fa-couch"></i> <span>Add Employee</span>
+				<i class="fa fa-user" aria-hidden="true"></i> <span>Add Employee</span>
 			</div>
 		</a> <a data-tab="#tab_3" data-tabCss="#panel_3">
 			<div class="panel" id="Panel_3">
-				<i class="fas fa-cogs"></i> <span>Upload image</span>
+				<i class="fa fa-file-image-o" aria-hidden="true"></i> <span>Upload image</span>
 			</div>
 		</a>
 		<a data-tab="#tab_4" data-tabCss="#panel_4">
 			<div class="panel" id="Panel_4">
-				<i class="fas fa-cogs"></i> <span>time sheet</span>
+				<i class="fa fa-money" aria-hidden="true"></i><span>Salary Calc</span>
+			</div>
+		</a>
+		<a data-tab="#tab_5" data-tabCss="#panel_5">
+			<div class="panel" id="Panel_5">
+				<i class="fas fa-chart-bar"></i> <span>Salary Info</span>
 			</div>
 		</a>
 	</div>
@@ -341,17 +346,18 @@ margin-bottom: 0px;
                     <form action="uploadImage" method="post" enctype="multipart/form-data">
 					<div id="choose">
 					<input type="file" id="real-file" name="image" hidden="hidden"/>
-
-					<button type="button" id="custom-button">CHOOSE A FILE</button>
-					<span id="custom-text">No file chosen, yet.</span>
-
-</div>
-   <br><br>
-            		<div id="scale">
-           			 Key Id:
-            		<input type="number" name="empid" required="required"/><br/><br/>
-            		</div>
+					<button type="button" id="custom-button1" style="margin-bottom:60px;margin-right:60px">CHOOSE A FILE</button>
+                    
+                    </div>
+<!--             		<span id="custom-text" style="margin-left:50px;">No file chosen, yet.</span> -->
+            		<div class="form_item">
+            		
+								<label>Key Id</label>
+								<input type="text" name="empid" placeholder="Key Id" required="required">
+							</div>
+            		
             		<input type="submit" id="button" style=" display:block;
+            		                                        margin-left:380px;
   															height: 50px;
   															width: 100px;
  															background: rgb(202, 60, 60);
@@ -370,33 +376,33 @@ margin-bottom: 0px;
 				
 				
 				<div class="form-style">
-						<form  method="POST" action="SalaryHandler" name = "myForm" >
+						<form  method="POST" action="SalaryHandler" name = "myForm1" onsubmit= "return(validate1());">
 							<input type="hidden" name="action" value="insert" />
 							
 							<h3>Add Employee Salary info</h3>
 							
 							<div class="form_item">
-								<label>Employee ID</label>
-								<input type="number" name="propid" placeholder="pid" id="pid">
+								<label>Key ID</label>
+								<input type="number" name="propid" placeholder="Key ID" id="pid1">
 							</div>
 							<div class="form_item">
 								<label>Tax</label>
-								<input type="text" name="tax" placeholder="nic" id="nic">
+								<input type="text" name="tax" placeholder="Tax" id="tax">
 							</div>
 							<div class="form_item">
 								<label>hours worked</label>
-								<input type="text" name="hworked" placeholder="name" id="ename">
+								<input type="text" name="hworked" placeholder="hours worked" id="hworked">
 							</div>
 							
 							<div class="form_item">
 								<label>Leave taken(in Days)</label>
-								<input type="text" name="leavetaken" placeholder="address" id="address">
+								<input type="text" name="leavetaken" placeholder="Leave taken" id="ltaken">
 							</div>
 							
 
 							<button type="submit">Add Employee info</button>
 							
-                             <a href="#" onClick="autoFill(); return true;" >Click to Autofill</a>
+                             <a href="#" onClick="autoFill1(); return true;" >Click to Autofill</a>
 						</form>
 						
 					</div>
@@ -414,8 +420,75 @@ margin-bottom: 0px;
 		</div>
 					
         
-   
+   <div id="tab_5" class="panel_main">
+			<section>
+				<div class="card-1">
+			
+	            <%
+					salaryDao dao1 = new salaryDao();
+					List<attendanceBean> salaryList = dao1.getAllSalary();
+				%>
+	
+				
+				<br>
+					<h3>Salary Info</h3>
+					
+	
+					<table id="myTable" class="table-wrapper-scroll-y my-custom-scrollbar" style="width:985px;">
+						<thead>
+							    <tr class="table100-head">
+							    
+								<th class="column3">KeyID</th>
+								<th class="column6">Name</th>
+								<th class="column6">Position</th>
+		                        <th class="column6">Hourly rate</th>
+		                        <th class="column6">Fixed salary</th>
+		                        <th class="column3">Tax</th>
+								<th class="column6">Hoursworked</th>
+								<th class="column6">Leavetaken</th>
+		                        <th class="column6">Total Salary</th>
+								
+								<th class="column6">Verify</th>
+								
+							</tr>
+						</thead>
+						<tbody>
 		
+								<%
+									for (attendanceBean pb : salaryList) {
+								%>
+							<tr id="<%=pb.getId()%>">
+									
+									
+								<td class="column6"><%=pb.getId()%></td>
+								<td class="column6"><%=pb.getName()%></td>
+								<td class="column6"><%=pb.getPosition()%></td>
+								<td class="column6"><%=pb.getHourlyrate()%></td>
+								<td class="column6"><%=pb.getFixed()%></td>
+		                        <td class="column6"><%=pb.getTax()%></td>
+								<td class="column6"><%=pb.getHoursworked()%></td>
+								<td class="column6"><%=pb.getLeavetaken()%></td>
+								<td class="column6">Rs <%=pb.getSalary()%></td>
+		
+								
+		<td class="column6">
+       <a href="SalaryHandler?action=delete&employeeId=<%=pb.getId()%>" onclick="if(!(confirm('Are you sure about the payment?'))) return false">
+       Paid
+	</a>
+	</td>
+								
+							</tr>
+							<%
+								}
+								//}
+							%>
+		
+						</tbody>
+					</table>
+				
+							</div>
+			</section>
+		</div>
 		
 		
 </body>
@@ -425,7 +498,7 @@ margin-bottom: 0px;
         
         
         const realFileBtn = document.getElementById("real-file");
-        const customBtn = document.getElementById("custom-button");
+        const customBtn = document.getElementById("custom-button1");
         const customTxt = document.getElementById("custom-text");
 
         customBtn.addEventListener("click", function() {
@@ -543,6 +616,53 @@ margin-bottom: 0px;
   </script>
   
   
+  
+<script type ="text/javascript">
+
+        function validate1() {
+
+     
+        	pid = document.getElementById("pid1");
+        	tax = document.getElementById("tax");
+        	hworked = document.getElementById("hworked");
+        	ltaken = document.getElementById("ltaken");
+        	
+
+           if( document.myForm1.pid1.value == "" ) {
+              alert( "Please provide the Key id!" );
+              document.myForm1.pid1.focus() ;
+              return false;
+           }
+           if( document.myForm1.tax.value == "" && document.myForm1.tax.value < 0) {
+
+              alert( "Please provide a valid tax Rate" );
+              document.myForm1.tax.focus() ;
+              return false;
+          
+              
+           }
+           
+             if((document.myForm1.hworked.value != 0.0)&&(document.myForm1.ltaken.value != 0.0)){  
+        		 
+        	   
+        	   if((document.myForm1.hworked.value == 0.0)||(document.myForm1.ltaken.value == 0.0)){
+        		   return true;
+        	   }
+        	   
+        		alert("staff cant have both salary method");
+        		document.myForm1.hworked.focus() ;
+        		return false;
+        		
+        		
+        		}  
+
+           return( true );
+      
+        }
+
+  </script>
+  
+  
   <script type="text/javascript">
   function autoFill() {
     document.getElementById('pid').value = 234;
@@ -566,6 +686,16 @@ margin-bottom: 0px;
   }
 </script>
   
+  <script type="text/javascript">
+  
+  function autoFill1() {
+    document.getElementById('pid1').value = 48;
+    document.getElementById('tax').value = 20.0;
+    document.getElementById('hworked').value = 0;
+    document.getElementById('ltaken').value = 5;
+    
+  }
+</script>
   
   
   

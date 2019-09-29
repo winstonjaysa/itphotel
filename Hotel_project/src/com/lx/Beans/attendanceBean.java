@@ -7,8 +7,45 @@ public class attendanceBean {
 	private double tax;
 	private int hoursworked;
 	private int leavetaken;
+	private double salary;
+	private String Position;
+	private Double Hourlyrate;
+	private Double Fixed;
+	private String Name;
 	
 	
+	
+	public String getPosition() {
+		return Position;
+	}
+	public void setPosition(String position) {
+		Position = position;
+	}
+	public Double getHourlyrate() {
+		return Hourlyrate;
+	}
+	public void setHourlyrate(Double hourlyrate) {
+		Hourlyrate = hourlyrate;
+	}
+	public Double getFixed() {
+		return Fixed;
+	}
+	public void setFixed(Double fixed) {
+		Fixed = fixed;
+	}
+	public String getName() {
+		return Name;
+	}
+	public void setName(String name) {
+		Name = name;
+	}
+	
+	public double getSalary() {
+		return salary;
+	}
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
 	public int getId() {
 		return id;
 	}
