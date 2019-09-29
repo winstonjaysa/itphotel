@@ -95,13 +95,13 @@ margin-bottom: 0px;
 	int uid=0;
 	
 	if(session.getAttribute("currentSessionUser")==null){
-		response.sendRedirect("home.jsp");
+		response.sendRedirect("index.jsp");
 	}
 	else if(session.getAttribute("currentSessionUser")!=null && !sessionCurrentBean.getRole().equals("admin")){
-		response.sendRedirect("home.jsp");
+		response.sendRedirect("index.jsp");
 	}
 	else if((session.getAttribute("currentSessionUser")!=null && sessionCurrentBean.getRole().equals("admin") && (!sessionCurrentBean.getAdmin_role_type().equals("emp") || sessionCurrentBean.getAdmin_role_type().equals(" ")))){
-		response.sendRedirect("home.jsp");
+		response.sendRedirect("index.jsp");
 	}
 	else if(session.getAttribute("currentSessionUser")!=null && sessionCurrentBean.getRole().equals("admin") && sessionCurrentBean.getAdmin_role_type().equals("emp") ){
 		//UserBean sss=(UserBean) session.getAttribute("currentSessionUser");
