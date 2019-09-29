@@ -48,6 +48,7 @@ public class UserHandler extends HttpServlet {
 				 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/index.jsp");
 				 requestDispatcher.forward(request, response);
 				 System.out.println("Logged out");
+		
 				 }
 			}catch (Exception e) {
 				e.printStackTrace();
@@ -78,7 +79,7 @@ public class UserHandler extends HttpServlet {
 						session.setAttribute("currentU", userbean.getFname());
 						session.setAttribute("currentRole", userbean.getAdmin_role_type());
 						
-						session.setMaxInactiveInterval(600);
+						session.setMaxInactiveInterval(-1);
 						if(userbean.getRole().equals("admin")) {
 						System.out.print("role is (admin) ");
 						System.out.println(userbean.getAdmin_role_type());
