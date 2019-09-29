@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.lx.Beans.LaundryBeans;
+import com.lx.Beans.paymentBean;
 import com.lx.Dao.LaundryDao;
 
 
@@ -56,7 +57,23 @@ public class LaundryHandler extends HttpServlet {
 			dao.NewLoundryReq(laundry);
 			System.out.println("inserted");
 			response.sendRedirect("user-laundry.jsp#ltable");
-		}
+			
+			
+		}else if (action.equalsIgnoreCase("editLaundryReq"))
+        {
+        	LaundryBeans lb = new LaundryBeans();
+        	
+        	
+        	lb.setBag(Integer.parseInt(request.getParameter("bag")));
+        	lb.setBeaded_skirt(Integer.parseInt(request.getParameter("Beaded_skirt")));
+        	lb.setLid(Integer.parseInt(request.getParameter("lid")));
+        	//pb.setPaymentMethod(request.getParameter("paymentMethod"));
+        	//price double
+        	dao.editLaundryReq(lb);
+        	response.sendRedirect("user-laundry.jsp");
+            System.out.println("Record updated Successfully");
+        	
+        }
 	}
 
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lx.Beans.LaundryBeans;
+import com.lx.Beans.paymentBean;
 import com.lx.DbConnection.ConnectionProvider;
 
 public class LaundryDao {
@@ -118,4 +119,28 @@ public class LaundryDao {
 			e.printStackTrace();
 		}
 	}
+	
+	public void editLaundryReq(LaundryBeans lb) 
+	 {
+		 try 
+		 {
+			 String sql = "UPDATE laundryreq SET bag=?,beaded_skirt=? WHERE lid=?";
+	    	 PreparedStatement ps = conn.prepareStatement(sql);
+//	    	 	
+	    	 	
+	    	 	ps.setInt(1, lb.getBag());
+	    	 	ps.setInt(2, lb.getBeaded_skirt());
+	    	 	ps.setInt(3, lb.getLid());
+	    	 	
+	    	 	ps.executeUpdate();
+	    		
+		 } 
+		 catch (SQLException e) 
+		 {
+			 e.printStackTrace();
+		 }
+		 
+	 }
+	
+	
 }

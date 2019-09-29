@@ -107,18 +107,10 @@
 				<td><%=laundry.getItem()%></td>
 				<td><%=laundry.getDate()%></td>
 				<td><%=laundry.getTotal()%></td>
-				<td>
-					<%
-						laundry.getBag();
-					%>
-				</td>
-				<td>
-					<%
-						laundry.getBeaded_skirt();
-					%>
-				</td>
+				<td><%=laundry.getBag() %></td>
+				<td><%=laundry.getBeaded_skirt() %></td>
 				<td><a href="LaundryHandler?action=deleteReq&lid=<%=laundry.getLid()%>">Delete</a></td>
-				<td><a href="LaundryHandler?action=editLaundryReq&lid=<%=laundry.getLid()%>"button type="button" class=" btn dropdown-item" data-toggle="modal" data-target="#dropdown_menu<%=laundry.getLid()%>" data-whatever="<%=laundry.getLid()%>" >Edit</button></td>
+				<td><button class="btn dropdown-item" data-toggle="modal" data-target="#dropdown_menu<%=laundry.getLid()%>" data-whatever="<%=laundry.getLid()%>" >Edit</button></td>
 			</tr>
 			
 			<div class="modal fade" id="dropdown_menu<%=laundry.getLid()%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">  

@@ -6,7 +6,7 @@ public class paymentBean
 	int pid;
 	String date,billid;
 	String paymentMethod;
-	String catogory;
+	String category;
 	double price;
 	
 	
@@ -36,10 +36,10 @@ public class paymentBean
 		this.paymentMethod = paymentMethod;
 	}
 	public String getCategory() {
-		return catogory;
+		return category;
 	}
-	public void setCategory(String catogory) {
-		this.catogory = catogory;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	public double getPrice() {
 		return price;
