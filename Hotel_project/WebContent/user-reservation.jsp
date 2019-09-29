@@ -31,7 +31,7 @@
 	}
 %>
 </head>
-<body>
+<body onresize="resizeNavi()">
 
 <%@include file="naviBar-user.jsp"%>
 <div class="main">
@@ -52,7 +52,7 @@
 					<li>shoe shine service</li>
 					<li>Internet Access</li>	
 			</div>
-			<form  action="ReservationHandler" method="post">
+			<form  action="ReservationHandler" method="post" onsubmit="return confirmInsert()">
 				<input type="hidden" name="reservation_type" value="2">
 				<input type="hidden" name="uid" value="<%=uid%>">
 				<input type="hidden" name="uname" value="<%=uname%>">
@@ -127,7 +127,7 @@
 					<li>shoe shine service</li>
 					<li>Internet Access</li>	
 			</div>
-			<form  action="ReservationHandler" method="post">
+			<form  action="ReservationHandler" method="post" onsubmit="return confirmInsert()">
 				<input type="hidden" name="reservation_type" value="1">
 				<input type="hidden" name="uid" value="<%=uid%>">
 				<input type="hidden" name="uname" value="<%=uname%>">
@@ -197,7 +197,7 @@
 					<li>shoe shine service</li>
 					<li>Internet Access</li>	
 			</div>
-			<form  action="ReservationHandler" method="post">
+			<form  action="ReservationHandler" method="post" onsubmit="return confirmInsert()">
 				<input type="hidden" name="reservation_type" value="3">
 				<input type="hidden" name="uid" value="<%=uid%>">
 				<input type="hidden" name="uname" value="<%=uname%>">
@@ -363,5 +363,16 @@ function dateGet(){
 	today = yyyy+'-'+mm+'-'+dd;
 	document.getElementById("datefield").setAttribute("min", today);
 }	
+
+function confirmInsert(){
+	
+	var doIt=confirm('Do you want to insert the record?');
+	  if(doIt){
+		 return true;
+	   	    }
+	  else{
+		return false;
+	    }
+}
 </script>
 </html>

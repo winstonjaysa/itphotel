@@ -29,13 +29,13 @@
 	String uRole=null;
 
 	if(session.getAttribute("currentSessionUser")==null){
-		response.sendRedirect("home.jsp");
+		response.sendRedirect("index.jsp");
 	}
 	else if(session.getAttribute("currentSessionUser")!=null && !sessionCurrentBean.getRole().equals("admin")){
-		response.sendRedirect("home.jsp");
+		response.sendRedirect("index.jsp");
 	}
 	else if((session.getAttribute("currentSessionUser")!=null && sessionCurrentBean.getRole().equals("admin") && (!sessionCurrentBean.getAdmin_role_type().equals("cont") || sessionCurrentBean.getAdmin_role_type().equals(" ")))){
-		response.sendRedirect("home.jsp");
+		response.sendRedirect("index.jsp");
 	}
 	else if(session.getAttribute("currentSessionUser")!=null && sessionCurrentBean.getRole().equals("admin") && sessionCurrentBean.getAdmin_role_type().equals("cont") ){
 	//UserBean sss=(UserBean) session.getAttribute("currentSessionUser");

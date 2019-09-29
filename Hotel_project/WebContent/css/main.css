@@ -119,10 +119,12 @@ table a {
 	
 }
 .resNavi{
-	
 }
 .hiddenNaviIcon{
 	display:none;
+}
+#naviopen{
+	display: none;
 }
 #naviclose{
 	display: none;
@@ -698,7 +700,7 @@ table a {
 @media ( max-width :1000px) {
 
 .resNavi{
-	display: none;
+	display:none;
 	flex-direction: column;
 	position:relative;
 	top:-10px;
@@ -728,7 +730,9 @@ table a {
 .resNavi nav span{
 	display: none;
 }
-
+#naviopen{
+	display: block;
+}
 .hiddenNaviIcon{
 	display:block;
 	float:right;

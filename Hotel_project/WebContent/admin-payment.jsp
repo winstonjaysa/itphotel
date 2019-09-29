@@ -86,15 +86,26 @@
 							</div>
 							<div class="form_item">
 								<label>Date</label>
-								<input type="text" name="date">
+								<input type="date" name="date">
 							</div>
 							<div class="form_item">
 								<label>Payment Method</label>
-								<input type="text" name="paymentMethod">
+								<select name="paymentMethod">
+									<option>Cash</option>
+									<option>Visa</option>
+								</select>
 							</div>
 							<div class="form_item">
 								<label>Category</label>
-								<input type="text" name="category">
+								<select name="category">
+									<option>Travel</option>
+									<option>Electricity</option>
+									<option>Reservation</option>
+									<option>Water</option>
+									<option>Employee</option>
+									<option>Laundry</option>
+									<option>Other</option>
+								</select>
 							</div>
 							<div class="form_item">
 								<label>Price</label>

@@ -58,7 +58,7 @@
 				</span>
 				<span class="title">Inbox</span>
 			</div>
-			<a href="UserHandler?action=logout">
+			<a href="UserHandler?action=logout" >
 				<div class="acc-card">
 					<span>
 						<i class="fas fa-power-off"></i>
@@ -116,7 +116,7 @@
 				</span>
 				<span class="title">Inbox</span>
 			</div>
-			<a href="UserHandler?action=logout">
+			<a href="UserHandler?action=logout" onclick="clearSession()">
 				<div class="acc-card">
 					<span>
 						<i class="fas fa-power-off"></i>
@@ -184,17 +184,46 @@
 </div>
 
 <script>
+
+var x=0;
+
 function openNav() {
-  document.getElementById("resNavi").style.display="flex";
+	
+	document.getElementById("resNavi").style.display="flex";
   document.getElementById("naviopen").style.display="none";
   document.getElementById("naviclose").style.display="block";
   //document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+  x=1;
+
+	
 }
 
 function closeNav() {
   document.getElementById("resNavi").style.display="none";
   document.getElementById("naviopen").style.display="block";
   document.getElementById("naviclose").style.display="none";
+  
 }
 
+function clearSession(){
+	//sessionStorage.clear();
+	sessionStorage.removeItem("currentTab");
+}
+
+function resizeNavi(){
+	 if (screen.width < 1000){
+		document.getElementById("resNavi").style.display="none";
+		document.getElementById("naviopen").style.display="block";
+		document.getElementById("naviclose").style.display="none";
+	}
+	 
+	 if(x==1){
+		 if (screen.width > 1000){
+				document.getElementById("resNavi").style.display="block";
+				document.getElementById("naviclose").style.display="none";
+				document.getElementById("naviopen").style.display="none";
+				x=0;
+		}
+	 }
+}
 </script>
