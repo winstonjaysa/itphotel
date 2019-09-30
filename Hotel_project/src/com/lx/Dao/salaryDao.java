@@ -89,9 +89,139 @@ public class salaryDao {
 		}
     }
 	
-	
+	public double totsal() 
+    {
+		double value = 0.0;
+		try {
+			String sql = "SELECT SUM(totalsalary) FROM salary";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			rs.next();
+			String sum = rs.getString(1);
+			System.out.println(sum);
+			value = Double.parseDouble(sum);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return value;
+    }	
 
 	
+	public double totemp() 
+    {
+		double value = 0.0;
+		try {
+			String sql = "SELECT COUNT(empid) FROM employee";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			rs.next();
+			String count = rs.getString(1);
+			System.out.println(count);
+			value = Double.parseDouble(count);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return value;
+    }	
+	
+	public String maxemp() 
+    {
+		String value="";
+		try {
+			String sql = "SELECT name FROM salary WHERE totalsalary IN (SELECT Max(totalsalary) FROM salary)";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			rs.next();
+			String count = rs.getString(1);
+			System.out.println(count);
+			value = (count);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return value;
+    }	
+	
+	public double tothourly() 
+    {
+		double value = 0.0;
+		try {
+			String sql = "SELECT COUNT(empid) FROM employee WHERE fixedsalary=0";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			rs.next();
+			String count = rs.getString(1);
+			System.out.println(count);
+			value = Double.parseDouble(count);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return value;
+    }	
+	
+	public double totfixed() 
+    {
+		double value = 0.0;
+		try {
+			String sql = "SELECT COUNT(empid) FROM employee WHERE hourlyrate=0";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			rs.next();
+			String count = rs.getString(1);
+			System.out.println(count);
+			value = Double.parseDouble(count);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return value;
+    }	
+	
+	public double male() 
+    {
+		double value = 0.0;
+		try {
+			String sql = "SELECT COUNT(empid) FROM employee WHERE gender='Male'";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			rs.next();
+			String count = rs.getString(1);
+			System.out.println(count);
+			value = Double.parseDouble(count);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return value;
+    }	
+	
+	public double female() 
+    {
+		double value = 0.0;
+		try {
+			String sql = "SELECT COUNT(empid) FROM employee WHERE gender='Female'";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			rs.next();
+			String count = rs.getString(1);
+			System.out.println(count);
+			value = Double.parseDouble(count);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return value;
+    }	
 	
 	public void addEmployee(attendanceBean pb) 
     {
@@ -125,8 +255,7 @@ public class salaryDao {
     	{
     		e.printStackTrace();
 		}
-		
-		
+    	
 		
     	try 
     	{

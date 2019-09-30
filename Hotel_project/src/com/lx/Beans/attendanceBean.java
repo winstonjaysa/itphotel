@@ -12,9 +12,15 @@ public class attendanceBean {
 	private Double Hourlyrate;
 	private Double Fixed;
 	private String Name;
+	private int count;
 	
 	
-	
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	public String getPosition() {
 		return Position;
 	}
