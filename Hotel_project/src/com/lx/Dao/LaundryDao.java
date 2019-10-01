@@ -21,7 +21,7 @@ public class LaundryDao {
 	
 	public void NewLoundryReq(LaundryBeans laundryBeans) {
 		try {
-			String sql = "INSERT INTO laundryreq (uid,uname,nic,item,date,quantity,bag,beaded_skirt,unitprice,total) VALUES(?,?,?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO laundryreq (uid,uname,nic,item,date,quantity,bag,beaded_skirt,unitprice,total,status) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 			
 			PreparedStatement ls = conn.prepareStatement(sql);
 			
@@ -35,6 +35,7 @@ public class LaundryDao {
 			ls.setInt(8, laundryBeans.getBeaded_skirt());
 			ls.setDouble(9,laundryBeans.getUnitPrice());
 			ls.setDouble(10,laundryBeans.getTotal());
+			ls.setInt(11, laundryBeans.getStatus());
 			
 			ls.executeUpdate();
 			
@@ -82,6 +83,7 @@ public class LaundryDao {
 				lb.setTotal(re.getDouble("total"));
 				lb.setBag(re.getInt("bag"));
 				lb.setBeaded_skirt(re.getInt("beaded_skirt"));
+				lb.setStatus(re.getInt("status"));
 				
 				laundry.add(lb);
 			}

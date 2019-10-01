@@ -52,8 +52,8 @@
 					<li>shoe shine service</li>
 					<li>Internet Access</li>	
 			</div>
-			<form  action="ReservationHandler" method="post" onsubmit="return confirmInsert()">
-				<input type="hidden" name="reservation_type" value="2">
+			<form  action="ReservationHandler?action=resRoom" method="post" onsubmit="return confirmInsert()">
+				<input type="hidden" name="reservation_type" value="1">
 				<input type="hidden" name="uid" value="<%=uid%>">
 				<input type="hidden" name="uname" value="<%=uname%>">
 				<div class="selectDiv">
@@ -81,21 +81,21 @@
 				<div class="selectDiv">
 					<div class="selectCard">
 						<p>Check-in</p>
-						<input id="datefield1" type='date' name="check-in" min='1899-01-01' max='2022-07-01' onclick="dateGet()"></input>
+						<input id="datefield1" type='date' name="check_in" min='1899-01-01' max='2022-07-01' onclick="dateGet()"></input>
 					</div>
 					<div class="selectCard">
 						<p>Check-out</p>
-						<input id="datefield2" type='date' name="check-out" min='1899-01-01' max='2022-07-01' onclick="dateGet()"></input>
+						<input id="datefield2" type='date' name="check_out" min='1899-01-01' max='2022-07-01' onclick="dateGet()"></input>
 					</div>
 				</div>
 				<div class="selectDiv">
 					<div class="selectCard">
 						<p>Adult</p>
-						<input type="number" max="5" min="0" >
+						<input type="number" name="adults" max="5" min="0" >
 					</div>
 					<div class="selectCard">
 						<p>Children</p>
-						<input type="number" max="10" min="0">
+						<input type="number" name="children" max="10" min="0">
 					</div>
 				</div>
 						<!-- 	<li><input type="radio" name="budget_package_type" value="1500">Rs-1500</li>
@@ -127,16 +127,16 @@
 					<li>shoe shine service</li>
 					<li>Internet Access</li>	
 			</div>
-			<form  action="ReservationHandler" method="post" onsubmit="return confirmInsert()">
-				<input type="hidden" name="reservation_type" value="1">
+			<form  action="ReservationHandler?action=resRoom" method="post" onsubmit="return confirmInsert()">
+				<input type="hidden" name="reservation_type" value="2">
 				<input type="hidden" name="uid" value="<%=uid%>">
 				<input type="hidden" name="uname" value="<%=uname%>">
 				<div class="selectDiv">
-					<div class="selectCard">
+					<div class="selectCard" >
 						<p>Type of room :</p>
-						<select>
-							<option value="A/C">A/C</option>
-							<option value="Non A/C	">Non A/C</option>
+						<select name="air_type">
+							<option value="1">A/C</option>
+							<option value="2">Non A/C</option>
 						</select>
 					</div>
 						<!--  <input type="radio" name="air_type" value="2" />A/C
@@ -144,7 +144,7 @@
 						 -->
 					<div class="selectCard">
 						<p>Package type(per day)</p>
-						<select>
+						<select name="budget_package_type">
 							<option value="1500">Rs-1500</option>
 							<option value="1850">Rs-1850(only breakfast)</option>
 							<option value="2500">Rs-2500(only lunch + dessert)</option>
@@ -156,24 +156,36 @@
 				<div class="selectDiv">
 					<div class="selectCard">
 						<p>Check-in</p>
-						<input id="datefield1" type='date' name="check-in" min='1899-01-01' max='2022-07-01' onclick="dateGet()"></input>
+						<input id="datefield1" type='date' name="check_in" min='1899-01-01' max='2022-07-01' onclick="dateGet()"></input>
 					</div>
 					<div class="selectCard">
 						<p>Check-out</p>
-						<input id="datefield2" type='date' name="check-out" min='1899-01-01' max='2022-07-01' onclick="dateGet()"></input>
+						<input id="datefield2" type='date' name="check_out" min='1899-01-01' max='2022-07-01' onclick="dateGet()"></input>
 					</div>
 				</div>
 				<div class="selectDiv">
 					<div class="selectCard">
 						<p>Adult</p>
-						<input type="number" max="5" min="0" >
+						<input type="number" name="adults" max="5" min="0" >
 					</div>
 					<div class="selectCard">
 						<p>Children</p>
-						<input type="number" max="10" min="0">
+						<input type="number" name="children" max="10" min="0">
 					</div>
 				</div>
-				<button type="submit" name="submit">Book now</button>
+						<!-- 	<li><input type="radio" name="budget_package_type" value="1500">Rs-1500</li>
+							<li><input type="radio" name="budget_package_type" value="1850">
+							Rs-1850(only breakfast)</li>
+							<li><input type="radio" name="budget_package_type" value="2500">
+							Rs-2500(only lunch + dessert)</li>
+							<li><input type="radio" name="budget_package_type" value="2500">
+							Rs-2700(only breakfast + lunch & dessert)</li>
+							<li><input type="radio" name="budget_package_type" value="3200">
+							Rs-3200(Breakfast + Lunch &Dinner)</li>
+							 -->
+					
+						<button type="submit" name="submit">Book now</button>
+					
 			</form>
 		</div>
 		<div class="roomImg">
@@ -197,16 +209,16 @@
 					<li>shoe shine service</li>
 					<li>Internet Access</li>	
 			</div>
-			<form  action="ReservationHandler" method="post" onsubmit="return confirmInsert()">
+			<form  action="ReservationHandler?action=resRoom" method="post" onsubmit="return confirmInsert()">
 				<input type="hidden" name="reservation_type" value="3">
 				<input type="hidden" name="uid" value="<%=uid%>">
 				<input type="hidden" name="uname" value="<%=uname%>">
 				<div class="selectDiv">
-					<div class="selectCard">
+					<div class="selectCard" >
 						<p>Type of room :</p>
-						<select>
-							<option value="A/C">A/C</option>
-							<option value="Non A/C	">Non A/C</option>
+						<select name="air_type">
+							<option value="1">A/C</option>
+							<option value="2">Non A/C</option>
 						</select>
 					</div>
 						<!--  <input type="radio" name="air_type" value="2" />A/C
@@ -214,7 +226,7 @@
 						 -->
 					<div class="selectCard">
 						<p>Package type(per day)</p>
-						<select>
+						<select name="budget_package_type">
 							<option value="1500">Rs-1500</option>
 							<option value="1850">Rs-1850(only breakfast)</option>
 							<option value="2500">Rs-2500(only lunch + dessert)</option>
@@ -226,24 +238,36 @@
 				<div class="selectDiv">
 					<div class="selectCard">
 						<p>Check-in</p>
-						<input id="datefield1" type='date' name="check-in" min='1899-01-01' max='2022-07-01' onclick="dateGet()"></input>
+						<input id="datefield1" type='date' name="check_in" min='1899-01-01' max='2022-07-01' onclick="dateGet()"></input>
 					</div>
 					<div class="selectCard">
 						<p>Check-out</p>
-						<input id="datefield2" type='date' name="check-out" min='1899-01-01' max='2022-07-01' onclick="dateGet()"></input>
+						<input id="datefield2" type='date' name="check_out" min='1899-01-01' max='2022-07-01' onclick="dateGet()"></input>
 					</div>
 				</div>
 				<div class="selectDiv">
 					<div class="selectCard">
 						<p>Adult</p>
-						<input type="number" max="5" min="0" >
+						<input type="number" name="adults" max="5" min="0" >
 					</div>
 					<div class="selectCard">
 						<p>Children</p>
-						<input type="number" max="10" min="0">
+						<input type="number" name="children" max="10" min="0">
 					</div>
 				</div>
-				<button type="submit" name="submit">Book now</button>
+						<!-- 	<li><input type="radio" name="budget_package_type" value="1500">Rs-1500</li>
+							<li><input type="radio" name="budget_package_type" value="1850">
+							Rs-1850(only breakfast)</li>
+							<li><input type="radio" name="budget_package_type" value="2500">
+							Rs-2500(only lunch + dessert)</li>
+							<li><input type="radio" name="budget_package_type" value="2500">
+							Rs-2700(only breakfast + lunch & dessert)</li>
+							<li><input type="radio" name="budget_package_type" value="3200">
+							Rs-3200(Breakfast + Lunch &Dinner)</li>
+							 -->
+					
+						<button type="submit" name="submit">Book now</button>
+					
 			</form>
 		</div>
 	</div>

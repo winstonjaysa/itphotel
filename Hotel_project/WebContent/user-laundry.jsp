@@ -22,11 +22,13 @@
 
 <%
 	int uid = 0;
+	String uname=null;
 	if (session.getAttribute("currentSessionUser") == null) {
 		response.sendRedirect("index.jsp");
 	} else if (session.getAttribute("currentSessionUser") != null) {
 		UserBean userbean = (UserBean) session.getAttribute("currentSessionUser");
 		uid = userbean.getUid();
+		uname=userbean.getUname();
 	}
 %>
  <script src="validation/user-laundry.js"></script>
@@ -43,6 +45,7 @@
 				<form onsubmit="return validate();" action="LaundryHandler" method="post">
 					<input type="hidden" name="action" value="newLaundryRq">
 					<input type="hidden" name="uid" value="<%=uid%>">
+					<input type="hidden" name="uname" value="<%=uname%>">
 					
 					<h3>Add Laundry request Details</h3>
 					

@@ -299,6 +299,8 @@
 						<th>Total</th>
 						<th>Bag</th>
 						<th>Beaded Skirt</th>
+						<th>Status</th>
+						<th></th>
 						<th></th>
 					</tr>
 	
@@ -318,6 +320,12 @@
 						<td><%=laundry.getTotal()%></td>
 						<td><%=laundry.getBag() %></td>
 						<td><%=laundry.getBeaded_skirt() %></td>
+						
+						<% if(laundry.getStatus()==0){ %>
+							<td class="pending-td">Pending</td>
+						<%}else if(laundry.getStatus()==1){ %>
+							<td class="success-td">finished</td>
+						<%} %>
 						<td><a
 							href="LaundryHandler?action=deleteReq&lid=<%=laundry.getLid()%>">Delete</a></td>
 						<td><button class="btn dropdown-item" data-toggle="modal"
@@ -381,9 +389,15 @@
 			<div class="travel_main_2" >
 				<table style="text-align: center;">
 					<tr>
-						<th>Uid</th>
-						<th>Uname</th>
-						<th>Budget package type</th>
+						<th>Rid</th>
+						<th>Room type</th>
+						<th>Package</th>
+						<th>Check-in </th>
+						<th>Check-out</th>
+						<th>Adults</th>
+						<th>Children</th>
+						<th></th>
+						<th></th>
 	
 					</tr>
 	
@@ -393,11 +407,64 @@
 	
 					for (ReservationBeans res : resList) {
 				%>
-					<tr>
-						<td><%=res.getUid()%></td>
-						<td><%=res.getUname()%></td>
+					<tr id="<%=res.getRid()%>">
+						<td><%=res.getRid()%></td>
+					<%if(res.getReservation_type()==1){ %>
+						<td>Executive</td>
+					<%}else if(res.getReservation_type()==2){ %>
+						<td>Presidential</td>
+					<%} else if(res.getReservation_type()==3){ %>
+						<td>Deluxe</td>
+					<%} %>
 						<td><%=res.getBudget_package_type()%></td>
+						<td><%=res.getCheck_in()%></td>
+						<td><%=res.getCheck_out()%></td>
+						<td><%=res.getAdults()%></td>
+						<td><%=res.getChildren()%></td>
+						
+						<td>
+							<button class="btn dropdown-item" data-toggle="modal" data-target="#dropdown_menu<%=res.getRid()%>"
+								data-whatever="<%=res.getRid()%>">
+									Edit
+							</button>
+						</td>
+						<td>
+							<a href="ReservationHandler?action=deleteReservationReq&rid=<%=res.getRid()%>">
+								Delete
+							</a>
+							<!-- <button type="button" onclick="ReservationHandler?action=deleteReservationReq&rid=<%=res.getRid()%>">Delete</button> -->
+						</td>
 					</tr>
+					<div class="modal fade" id="dropdown_menu<%=res.getRid()%>"
+						tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Change</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<form action="ReservationHandler?rid=<%=res.getRid()%>" method="post">
+									<div class="form_body">
+										<div class="form-group">
+											<input type="hidden" value="editReservationReq" name="action">
+											<label>Budget_package_type</label><br> 
+											<input type="number" name="budget_package_type" value="<%=res.getBudget_package_type()%>"
+												required="required"><br>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Close</button>
+										<button type="submit" class="btn btn-primary">Edit</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
 					<%
 					}
 				%>

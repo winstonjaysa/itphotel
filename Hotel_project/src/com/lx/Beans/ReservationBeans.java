@@ -1,9 +1,9 @@
 package com.lx.Beans;
 
 public class ReservationBeans {
-	private int rid,uid,reservation_type,budget_package_type,air_type,room_size_type,mini_bar,swimming_pool;
-	private int days,rooms_count;
-	private String uname,arrival_date;
+	private int rid,uid,reservation_type,budget_package_type,air_type,mini_bar,swimming_pool;
+	private int children,adults;
+	private String uname,check_in,check_out;
 	
 	
 	public int getRid() {
@@ -36,12 +36,7 @@ public class ReservationBeans {
 	public void setAir_type(int air_type) {
 		this.air_type = air_type;
 	}
-	public int getRoom_size_type() {
-		return room_size_type;
-	}
-	public void setRoom_size_type(int room_size_type) {
-		this.room_size_type = room_size_type;
-	}
+	
 	public int getMini_bar() {
 		return mini_bar;
 	}
@@ -54,17 +49,30 @@ public class ReservationBeans {
 	public void setSwimming_pool(int swimming_pool) {
 		this.swimming_pool = swimming_pool;
 	}
-	public int getDays() {
-		return days;
+	
+	public String getCheck_in() {
+		return check_in;
 	}
-	public void setDays(int days) {
-		this.days = days;
+	public void setCheck_in(String check_in) {
+		this.check_in = check_in;
 	}
-	public int getRooms_count() {
-		return rooms_count;
+	public String getCheck_out() {
+		return check_out;
 	}
-	public void setRooms_count(int rooms_count) {
-		this.rooms_count = rooms_count;
+	public void setCheck_out(String check_out) {
+		this.check_out = check_out;
+	}
+	public int getChildren() {
+		return children;
+	}
+	public void setChildren(int children) {
+		this.children = children;
+	}
+	public int getAdults() {
+		return adults;
+	}
+	public void setAdults(int adults) {
+		this.adults = adults;
 	}
 	public String getUname() {
 		return uname;
@@ -72,13 +80,5 @@ public class ReservationBeans {
 	public void setUname(String uname) {
 		this.uname = uname;
 	}
-	public String getArrival_date() {
-		return arrival_date;
-	}
-	public void setArrival_date(String arrival_date) {
-		this.arrival_date = arrival_date;
-	}
-	
-
 	
 }

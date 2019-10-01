@@ -54,6 +54,9 @@ public class LaundryHandler extends HttpServlet {
 			laundry.setTotal(Double.parseDouble(request.getParameter("total")));
 			laundry.setBag(Integer.parseInt(request.getParameter("bag")));
 			laundry.setBeaded_skirt(Integer.parseInt(request.getParameter("breaded-skirt")));
+			laundry.setStatus(0);
+			
+			
 			dao.NewLoundryReq(laundry);
 			System.out.println("inserted");
 			response.sendRedirect("user-laundry.jsp#ltable");

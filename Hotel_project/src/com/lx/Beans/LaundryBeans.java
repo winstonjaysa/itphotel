@@ -2,7 +2,7 @@ package com.lx.Beans;
 
 public class LaundryBeans {
 	private String uname, nic, item, date;
-	private int lid, quantity,bag,beaded_skirt,beaded_shalwar_top,uid;
+	private int lid, quantity,bag,beaded_skirt,beaded_shalwar_top,uid,status;
 	private double unitPrice, total;
 	
 	
@@ -42,6 +42,12 @@ public class LaundryBeans {
 	}
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	public String getDate() {
 		return date;
