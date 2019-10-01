@@ -304,6 +304,7 @@ table a {
 }
 .panel_main{
         display: none;
+        height: 800px;
       }
 .active{
 	background:#303b4e;
