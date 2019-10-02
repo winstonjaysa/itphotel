@@ -73,13 +73,14 @@ public class ContactusHandler extends HttpServlet {
         	
         }
         
-        else if (action.equalsIgnoreCase("listUser"))
-            
+        else if(action.equalsIgnoreCase("removeFeedback")) 
         {
-          // redirect = contactRecord;
-         // request.setAttribute("contactus", dao.getAllcontact());
-           
-        } 
+        	int fid = Integer.parseInt(request.getParameter("fid"));
+        	dao.removeFeedback(fid);
+        	response.sendRedirect("admin-contactus.jsp");
+        	
+            System.out.println("Record Deleted Successfully");       	       	
+        }
        
 		
 	}
@@ -117,19 +118,58 @@ public class ContactusHandler extends HttpServlet {
         {	
         	String link = request.getParameter("link");
         	int id = Integer.parseInt(uId);
+        	int msType = Integer.parseInt(request.getParameter("msType"));
         	ContactUsBeans cb = new ContactUsBeans();
-	
-        	cb.setUid(id);
-        	cb.setTo_uid(Integer.parseInt(request.getParameter("to_uid")));
-        	cb.setUname(request.getParameter("uname"));  
-        	cb.setInbox(request.getParameter("inbox"));
-        	cb.setStatus(false);
+	        //conadmin	
+        	if(msType==1) {
+		        	cb.setUid(id);
+		        	cb.setTo_uid(Integer.parseInt(request.getParameter("to_uid")));
+		        	cb.setUname(request.getParameter("uname"));  
+		        	cb.setReply(request.getParameter("reply"));
+		        	cb.setStatus(false);
+		        	
+		        	dao.conAdminsMessages(cb);
+	        	}else if(msType==2) {
+		        	cb.setUid(id);
+		        	cb.setTo_uid(Integer.parseInt(request.getParameter("to_uid")));
+		        	cb.setUname(request.getParameter("uname"));  
+		        	cb.setInbox(request.getParameter("inbox"));
+		        	cb.setStatus(false);
+		        	
+		        	dao.adminsMessages(cb);
+	        	}
         	
-        	dao.adminsMessages(cb);
         	response.sendRedirect(link);
         	System.out.println("Rec1ord Added Successfully");
         	       	
+        }else if(action.equalsIgnoreCase("addFeedback")) 
+        {
+        	ContactUsBeans cb = new ContactUsBeans();
+	
+        	
+        	cb.setDescription(request.getParameter("description"));
+        	cb.setFeedName(request.getParameter("feedName"));
+        	
+        	dao.addFeedback(cb);
+        	response.sendRedirect("admin-contactus.jsp");
+        	
+        	System.out.println("Record Added Successfully");
+        	       	
+        }else if(action.equalsIgnoreCase("editFeedback")) 
+        {
+        	ContactUsBeans cb = new ContactUsBeans();
+	
+        	cb.setFid(Integer.parseInt(request.getParameter("fid")));
+        	cb.setDescription(request.getParameter("description"));
+        	cb.setFeedName(request.getParameter("feedName"));
+        	
+        	dao.editFeedback(cb);
+        	response.sendRedirect("admin-contactus.jsp");
+        	
+        	System.out.println("Record Added Successfully");
+        	       	
         }
+        
 	}
 
 }

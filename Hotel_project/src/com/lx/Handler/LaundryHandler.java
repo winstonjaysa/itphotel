@@ -34,7 +34,7 @@ public class LaundryHandler extends HttpServlet {
 			dao.delLaundryData(laundry);
 			
 			System.out.println("delete successfull");
-			response.sendRedirect("user-laundry.jsp");
+			response.sendRedirect("user-laundry.jsp?status=successReq");
 		}
 	}
 
@@ -59,7 +59,7 @@ public class LaundryHandler extends HttpServlet {
 			
 			dao.NewLoundryReq(laundry);
 			System.out.println("inserted");
-			response.sendRedirect("user-laundry.jsp#ltable");
+			response.sendRedirect("user-laundry.jsp?status=successReq");
 			
 			
 		}else if (action.equalsIgnoreCase("editLaundryReq"))
@@ -73,7 +73,7 @@ public class LaundryHandler extends HttpServlet {
         	//pb.setPaymentMethod(request.getParameter("paymentMethod"));
         	//price double
         	dao.editLaundryReq(lb);
-        	response.sendRedirect("user-laundry.jsp");
+        	response.sendRedirect("user-laundry.jsp?status=successReq");
             System.out.println("Record updated Successfully");
         	
         }

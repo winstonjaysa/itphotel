@@ -109,7 +109,27 @@
 		</div>
 	</div>
 </div>
-
+<div class="feedbackDiv">
+	<h2>"What you think about us"</h2>
+	<%
+	contactUsDao conDao = new contactUsDao();
+	List<ContactUsBeans> userContactList = conDao.getFeedback();
+		
+	for(ContactUsBeans cb:userContactList){
+	%>
+	<div class="sub-feedbackDiv">
+		<p><span>"</span>
+			<%=cb.getDescription() %>
+			<span>"</span>
+		</p>
+		<h6>
+		 	<span>- </span><%=cb.getFeedName() %>
+		</h6>
+	</div>
+	<%
+	}
+	%>
+</div>
 <div class="footerdiv">
 	<div class="part">
 		<a href="user-contactus.jsp">Contact us ...</a>

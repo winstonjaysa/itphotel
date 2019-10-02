@@ -33,12 +33,21 @@
 %>
  <script src="validation/user-laundry.js"></script>
 </head>
+<%
+	if(request.getParameter("status")!=null&& request.getParameter("status").equals("successReq")){
+			%>
+<body onload="notifyPopup()">
+<%}else {%>
 <body>
+<%} %>
 	<%@include file="naviBar-user.jsp"%>
 	<br>
 	<br>
-	<br>
+	
 	<section>
+		<div class="popup-notification-pannel" id="popup-notification-pannel">
+			<p>successfully. <i class="fas fa-clipboard-check"></i></p>
+		</div>
 		<div class="card-1">
 			<div class="form-style">
 			<div id="error_message"></div>
@@ -76,9 +85,7 @@
 			</div>
 		</div>
 	</section>
-	<br>
-	<br>
-	<br>
+	
 	<div class="travel_main_2" id="ltable">
 		<div>
 			<h3>Recent Laundry Requests</h3>
@@ -213,5 +220,15 @@
 		lastSelectedTab = "#tab_1";
 	}
 	$(lastSelectedTab).fadeIn();
+	
+	//window.onload = function(){
+	function notifyPopup(){
+		document.getElementById("popup-notification-pannel").style.opacity = 1;
+		window.setTimeout(fadeout, 3000);
+		}
+	 
+	function fadeout() {
+		  document.getElementById('popup-notification-pannel').style.opacity = '0';
+		}
 </script>
 </html>

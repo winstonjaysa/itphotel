@@ -61,6 +61,30 @@ public class UserDao {
 		
 		return users;
 	}
+	public List getAllAdmins() {
+		List users=new ArrayList(); 
+		
+		try {
+			String sql="SELECT * FROM users WHERE role='admin'";
+			
+			PreparedStatement ps=conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			
+			while(rs.next()) {
+				UserBean userbean=new UserBean();
+				
+				userbean.setUid(rs.getInt("uid"));
+				userbean.setUname(rs.getString("uname"));
+				userbean.setRole(rs.getString("role"));
+				
+				users.add(userbean);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return users;
+	}
 	
 	public UserBean loginCheck(UserBean ub) {
 		

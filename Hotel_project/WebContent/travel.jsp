@@ -34,12 +34,21 @@
 	}
 %>
 </head>
-<body >
+<%
+	if(request.getParameter("status")!=null&& request.getParameter("status").equals("successReq")){
+			%>
+<body onload="notifyPopup()">
+<%}else {%>
+<body>
+<%} %>
 
 <%@include file="naviBar-user.jsp" %>
 <div class="main">
-
+	
 	<section >
+		<div class="popup-notification-pannel" id="popup-notification-pannel">
+			<p>successfully. <i class="fas fa-clipboard-check"></i></p>
+		</div>
 		<div class="headTitle">
 			<h2>Popular destinations in 2019</h2>
 		</div>
@@ -102,6 +111,7 @@
 					</div>
 					<button type="submit">Arrange</button>
 				</form>
+				
 			</div>
 		</div>
 	</section>
@@ -161,7 +171,9 @@
 							  </div>
 						</div>
 					</td>
-
+					
+					
+					
 					<div class="modal fade" id="MesssgeDialogBox<%=travel.getTid()%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
 
 						  <div class="modal-dialog" role="document">
@@ -292,7 +304,7 @@
 </div>
 </body>
 <script type="text/javascript">
-	
+
 function functionAcc() {
 	  document.getElementById("accDropdown").classList.toggle("show");
 	}
@@ -317,6 +329,16 @@ $('#dropdown_menu').on('show.bs.modal', function (event){
 	  modal.find('.modal-title').text('Send message to ' + recipient )
 	  modal.find('.modal-body input').val(recipient)
 	})
+	
+	
+$("#navigation a").on("click", function(e){
+    e.preventDefault();
+    
+    var currTab = $(this).data("tab");
+    sessionStorage.setItem("currentTab", currTab);
+    $(".panel_main").hide();
+    $(currTab).fadeIn();
+  });
 
 /* ********** */
 	/* javascript for showing the bottom of the div content with overflow hidden */
@@ -379,6 +401,17 @@ function confirmInsert(){
 		return false;
 	    }
 }
+
+
+//window.onload = function(){
+function notifyPopup(){
+	document.getElementById("popup-notification-pannel").style.opacity = 1;
+	window.setTimeout(fadeout, 3000);
+	}
+ 
+function fadeout() {
+	  document.getElementById('popup-notification-pannel').style.opacity = '0';
+	}
 /* 
 	var id2=document.getElementById('id2');
 

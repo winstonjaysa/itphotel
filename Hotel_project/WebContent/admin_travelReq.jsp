@@ -15,7 +15,6 @@
 					<th>Arranged date</th>
 					<th>Cost</th>
 					<th>Status</th>
-					<th>Status</th>
 					<th></th>
 				</tr>
 				<%
@@ -29,7 +28,7 @@
 					<td><%=travel.getDestination() %></td>
 					<td><%=travel.getNeedDate() %></td>
 					<td><%=travel.getCost() %></td>
-					<td><%=travel.getIsApproved() %></td>
+					
 					<%
 						if (travel.getIsApproved() == 1) {
 					%>

@@ -18,6 +18,45 @@
 <script src="https://kit.fontawesome.com/6bcee8e3da.js"></script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<style type="text/css">
+.summary{
+	position:relative;
+	display:flex;
+	flex-wrap:wrap;
+	width:100%;
+	top:10px;
+	left:50px;
+	margin-bottom: 50px;
+}
+
+.card{
+	display:block;
+	width: 200px;
+	height: 70px;
+	min-height: 70px;
+	padding: 5px 10px;
+	margin: 10px;
+}
+.card:nth-child(1){
+	background: #f39c12;
+}
+.card:nth-child(2){
+	background: #00a65a;
+}
+.card:nth-child(3){
+	background: #dd4b39;
+}
+.card:nth-child(4){
+	background: #00c0ef;
+}
+.card h6{
+	color:white;
+	margin: 4px 10px;
+}
+.card p{
+	margin: 10px 10px;
+}
+</style>
 <title>admin-contactUs</title>
 </head>
 <body>
@@ -59,6 +98,12 @@
 				<i class="fas fa-cogs"></i> <span>Change</span>
 			</div>
 		</a>
+		<a data-tab="#tab_4" data-tabCss="#panel_4">
+		<div class="panel" id="Panel_4">
+			<i class="fas fa-chart-bar"></i>
+			<span>Summary</span>
+		</div>
+	</a>
 </div>
 <div class="mainDiv">
 		<div id="tab_1" class="panel_main">
@@ -95,6 +140,7 @@
 			</table>
 		</div>
 		<div id="tab_2" class="panel_main">
+			
 			<%
 				List<ContactUsBeans> adminContactList = dao.getAdminsContactMeassages(0);
 			%>
@@ -112,13 +158,106 @@
 					<tr id="<%=cb2.getCid()%>">
 						<td><%=cb2.getUname() %></td>
 						<td style="text-align: left;"><%=cb2.getInbox()%></td>
-						<td><a href="ContactusHandler?action=delete&cid=<%=cb2.getCid()%>">delete</a></td>
+						<td><a href="ContactusHandler?action=delete&cid=<%=cb2.getCid()%>" onclick="return confirm('Are you sure you want to delete this message?')">delete</a></td>
 					</tr>
 					<%
 						}
 					%>
 				</tbody>
 			</table>
+		</div>
+		<div id="tab_3" class="panel_main">
+			<h3 style="margin-top: 40px !important;">Add Feedback</h3>
+			<div class="con-admin-form">
+				<form action="ContactusHandler?action=addFeedback" method="post" onsubmit="return confirmInsert()">
+					<label>Feedback</label>
+					<input type="text" name="description" >
+					<label>Name</label>
+					<input type="text" name="feedName">
+					<button type="submit" >submit</button>
+				</form>
+			</div>
+			<div class="admin-table">
+				<h3>Feedback</h3>
+				<table id="myTable2" style="text-align: center;margin-bottom: 80px;">
+				<tr>	
+					<th>Fid</th>
+					<th>Description</th>
+					<th>Name</th>
+					<th></th>
+					<th></th>
+					
+				<tr>
+				<tbody>
+					<%
+						List<ContactUsBeans> feedback = dao.getFeedback();
+						for(ContactUsBeans cb:feedback){
+					%>
+					<tr id="<%=cb.getFid()%>">
+						<td><%=cb.getFid() %></td>
+						<td class="admin-td-max-width"><%=cb.getDescription() %></td>
+						<td><%=cb.getFeedName() %></td>
+						<td><button type="button" class=" btn dropdown-item" data-toggle="modal" data-target="#dropdown_menu<%=cb.getFid()%>" data-whatever="<%=cb.getFid()%>">Edit</button></td>
+						<td><a href="ContactusHandler?action=removeFeedback&fid=<%=cb.getFid()%>" onclick="return confirm('Are you sure you want to delete this feedback?')">Delete</a></td>
+						
+					</tr>
+					<div class="modal fade" id="dropdown_menu<%=cb.getFid()%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">  
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						   	<div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">Change</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+	    				    </div>
+						      <form action="ContactusHandler?action=editFeedback&fid=<%=cb.getFid()%>"  method="post">
+						     		<div class="form_body">
+							     		<div class="form-group">
+							         		 <input type="hidden" value="editPayment" name="action">
+											 <label>Destination </label><br>
+											 <input type="text" name="description" value="<%=cb.getDescription()%>" required="required"><br>
+										</div>
+										<div class="form-group">
+											<label>Name </label><br>
+											<input type="text" name="feedName" value="<%=cb.getFeedName()%>" required="required"><br>
+										</div>
+						     		</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<button type="submit" class="btn btn-primary">Edit</button>
+										</div>
+						       </form>
+						    </div>
+						  </div>
+					</div>
+					<%
+						}
+					%>
+				</tbody>
+			</table>
+			</div>
+		</div>
+		<div id="tab_4" class="panel_main">
+			<div class="summary">
+				<section>
+					<div class="card">
+						<h6>Gross profit </h6>
+						<p></p>
+					</div>
+					<div class="card">
+						<h6>Total Feedback </h6>
+						<p><%=dao.totUsers() %></p>
+					</div>
+					<div class="card">
+						<h6>Total Requests </h6>
+						<p></p>
+					</div>
+					<div class="card">
+						<h6>Unread messages </h6>
+						<p></p>
+					</div>
+				</section>
+			</div>
 		</div>
 </div>
 </body>
@@ -163,5 +302,15 @@
 		  modal.find('.modal-body input').val(recipient)
 		})
 
+function confirmInsert(){
+	
+	var doIt=confirm('Do you want to insert the record?');
+	  if(doIt){
+		 return true;
+	   	    }
+	  else{
+		return false;
+	    }
+}
 </script>
 </html>

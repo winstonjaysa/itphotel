@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.lx.DbConnection.ConnectionProvider;
 import com.lx.Beans.ContactUsBeans;
+import com.lx.Beans.LaundryBeans;
 
 
 
@@ -74,6 +75,30 @@ public class contactUsDao
 	    		e.printStackTrace();
 			}
 	    }
+	  public void conAdminsMessages(ContactUsBeans cb) 
+	    {
+	    	try 
+	    	{
+	    		String sql = "INSERT INTO contactadminmessage(uid,to_uid,uname,reply,status) VALUES (?,?,?,?,?)";
+	    		PreparedStatement ps = conn.prepareStatement(sql);
+	    		
+	    		
+	    		ps.setInt(1, cb.getUid());
+	    		ps.setInt(2, cb.getTo_uid());
+	    		ps.setString(3, cb.getUname() );
+	    		ps.setString(4, cb.getReply() );
+	    		ps.setBoolean(5, cb.isStatus());
+	    		
+	    		ps.executeUpdate();
+	    		
+			} 
+	    	
+	    	catch (SQLException e) 
+	    	{
+	    		e.printStackTrace();
+			}
+	    }
+	  
 	  
 	  
 	    public void removecontact(int contactId) 
@@ -222,5 +247,116 @@ public class contactUsDao
 //	    }
 //	    
 //	    
+	    public void addFeedback(ContactUsBeans cb) 
+	    {
+	    	try 
+	    	{
+	    		String sql = "INSERT INTO feedback_home(description,feedName) VALUES (?,?)";
+	    		PreparedStatement ps = conn.prepareStatement(sql);
+	    		
+	    		
+	    		ps.setString(1, cb.getDescription());
+	    		ps.setString(2, cb.getFeedName() );
+	    		
+	    		ps.executeUpdate();
+	    		
+			} 
+	    	
+	    	catch (SQLException e) 
+	    	{
+	    		e.printStackTrace();
+			}
+	    }
+	    
+	    public List getFeedback() 
+	    {
+	    	List contacts = new ArrayList();
+	    	
+	    	try
+	    	{
+	    		String sql = "SELECT * FROM feedback_home ";
+	    		PreparedStatement ps = conn.prepareStatement(sql);
+	    		ResultSet rs = ps.executeQuery();
+	    		
+	    		while (rs.next()) {
+	    			ContactUsBeans cb = new ContactUsBeans();
 
+	    			cb.setFid(rs.getInt("fid"));
+	    			cb.setDescription(rs.getString("description"));
+	    			cb.setFeedName(rs.getString("feedName"));
+	    			
+    			
+	    			contacts.add(cb);
+	    			
+	    		}
+	    		
+			}
+	    	
+	    	catch (SQLException e) 
+	    	{
+	    		e.printStackTrace();
+			}
+	    	
+	    	return contacts;
+	    }
+	    
+	    public void editFeedback(ContactUsBeans cb) 
+		 {
+			 try 
+			 {
+				 String sql = "UPDATE feedback_home SET description=?,feedName=? WHERE fid=?";
+		    	 PreparedStatement ps = conn.prepareStatement(sql);
+   	 	
+		    	 	ps.setString(1, cb.getDescription());
+		    	 	ps.setString(2, cb.getFeedName());
+		    	 	ps.setInt(3, cb.getFid());
+		    	 	
+		    	 	ps.executeUpdate();
+		    		
+			 } 
+			 catch (SQLException e) 
+			 {
+				 e.printStackTrace();
+			 }
+			 
+		 }
+	    
+	    public void removeFeedback(int contactId) 
+	    {
+	    	try
+	    	{
+	    		String sql = "DELETE FROM feedback_home WHERE fid=?";
+	   		 	PreparedStatement ps = conn.prepareStatement(sql);
+	   		 	ps.setInt(1, contactId);
+	   		 	ps.executeUpdate();
+	   		 	
+			} 
+	    	
+	    	catch (SQLException e)
+	    	{
+	    		e.printStackTrace();
+			}
+	    }
+	    
+	    
+	    
+	    //report 
+	    
+	    public Integer totUsers() {
+			int count = 0;
+			try {
+				String sql = "SELECT COUNT(cid) FROM contactus";
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery();
+
+				rs.next();
+				String sum = rs.getString(1);
+				count = Integer.parseInt(sum);
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return count;
+
+		}
 }
