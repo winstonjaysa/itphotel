@@ -97,6 +97,7 @@ public class TransManageHandler extends HttpServlet {
 		}
 		
 		else if (action.equals("editTravelReq")) {
+			String url = request.getParameter("lastUrl");
 			int tid = Integer.parseInt(request.getParameter("tid"));
 
 			TransManageBeans travel = new TransManageBeans();
@@ -109,7 +110,7 @@ public class TransManageHandler extends HttpServlet {
 			dao.editTravelReq(travel);
 
 			System.out.println("Edit successfull the reqested travel details!");
-			response.sendRedirect("travel.jsp");
+			response.sendRedirect(url);
 		}
 		
 		

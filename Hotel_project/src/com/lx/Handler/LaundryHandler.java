@@ -40,6 +40,7 @@ public class LaundryHandler extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
+		String url = request.getParameter("lastUrl");
 		
 		if(action.equals("newLaundryRq")) {
 			LaundryBeans laundry = new LaundryBeans();
@@ -62,6 +63,7 @@ public class LaundryHandler extends HttpServlet {
 			response.sendRedirect("user-laundry.jsp?status=successReq");
 			
 			
+			
 		}else if (action.equalsIgnoreCase("editLaundryReq"))
         {
         	LaundryBeans lb = new LaundryBeans();
@@ -73,8 +75,9 @@ public class LaundryHandler extends HttpServlet {
         	//pb.setPaymentMethod(request.getParameter("paymentMethod"));
         	//price double
         	dao.editLaundryReq(lb);
-        	response.sendRedirect("user-laundry.jsp?status=successReq");
-            System.out.println("Record updated Successfully");
+        	//response.sendRedirect("user-laundry.jsp?status=successReq");
+        	response.sendRedirect(url+"?status=successReq");
+        	System.out.println("Record updated Successfully");
         	
         }
 	}

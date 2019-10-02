@@ -296,8 +296,10 @@ table a {
 	font-size: 18px;
 }
 #popup-notification-pannel p i{
+	position:relative;
+	top:5px;
 	font-size: 30px;
-	margin: 5px 5px 5px 20px;
+	margin: 5px 5px 5px 15px;
 }
 /********************/
 .leftPanel{

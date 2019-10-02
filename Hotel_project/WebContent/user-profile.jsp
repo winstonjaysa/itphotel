@@ -235,11 +235,11 @@
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
-									<form action="TransManageHandler?tid=<%=travel.getTid()%>"
-										method="post">
+									<form action="TransManageHandler?tid=<%=travel.getTid()%>" method="post">
 										<div class="form_body">
 											<div class="form-group">
 												<input type="hidden" value="editTravelReq" name="action">
+												<input type="hidden" value="user-profile.jsp" name="lastUrl">
 												<label>Destination </label><br> <input type="text"
 													name="destination" value="<%=travel.getDestination()%>"
 													required="required"><br>
@@ -345,11 +345,11 @@
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
-								<form action="LaundryHandler?lid=<%=laundry.getLid()%>"
-									method="post">
+								<form action="LaundryHandler?lid=<%=laundry.getLid()%>" method="post">
 									<div class="form_body">
 										<div class="form-group">
 											<input type="hidden" value="editLaundryReq" name="action">
+											<input type="hidden" value="user-profile.jsp" name="lastUrl">
 											<label>User Name</label><br> <input type="text"
 												name="destination" value="<%=laundry.getUname()%>"
 												required="required"><br>

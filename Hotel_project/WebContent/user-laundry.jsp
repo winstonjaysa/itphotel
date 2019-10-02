@@ -46,7 +46,7 @@
 	
 	<section>
 		<div class="popup-notification-pannel" id="popup-notification-pannel">
-			<p>successfully. <i class="fas fa-clipboard-check"></i></p>
+			<p>successfully. <i class="fas fa-check-circle"></i></p>
 		</div>
 		<div class="card-1">
 			<div class="form-style">
@@ -58,9 +58,7 @@
 					
 					<h3>Add Laundry request Details</h3>
 					
-					<div class="form_item">
-						<label>uname</label> <input type="text" name="uname" id = "uname">
-					</div>
+					
 					<div class="form_item">
 						<label>date</label> <input type="date" name="date">
 					</div>
@@ -86,86 +84,105 @@
 		</div>
 	</section>
 	
-	<div class="travel_main_2" id="ltable">
-		<div>
-			<h3>Recent Laundry Requests</h3>
-		</div>
-		<table style="text-align: center;">
-			<tr>
-				<th>Lid</th>
-				<th>Uid</th>
-				<th>Uname</th>
-				<th>Item</th>
-				<th>Date</th>
-				<th>Total</th>
-				<th>Bag</th>
-				<th>Beaded Skirt</th>
-				<th></th>
-			</tr>
-
-			<%
-				LaundryDao dao = new LaundryDao();
-				List<LaundryBeans> laundryList = dao.getUserLaundryReq(uid);
-
-				for (LaundryBeans laundry : laundryList) {
-			%>
-			<tr id="<%=laundry.getLid()%>">
-				
-				<td><%=laundry.getLid()%></td>
-				<td><%=laundry.getUid()%></td>
-				<td><%=laundry.getUname()%></td>
-				<td><%=laundry.getItem()%></td>
-				<td><%=laundry.getDate()%></td>
-				<td><%=laundry.getTotal()%></td>
-				<td><%=laundry.getBag() %></td>
-				<td><%=laundry.getBeaded_skirt() %></td>
-				<td><a href="LaundryHandler?action=deleteReq&lid=<%=laundry.getLid()%>">Delete</a></td>
-				<td><button class="btn dropdown-item" data-toggle="modal" data-target="#dropdown_menu<%=laundry.getLid()%>" data-whatever="<%=laundry.getLid()%>" >Edit</button></td>
-			</tr>
-			
-			<div class="modal fade" id="dropdown_menu<%=laundry.getLid()%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">  
-						  <div class="modal-dialog" role="document">
-						    <div class="modal-content">
-						   	<div class="modal-header">
-						        <h5 class="modal-title" id="exampleModalLabel">Change</h5>
-						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						          <span aria-hidden="true">&times;</span>
-						        </button>
-	    				    </div>
-						      <form action="LaundryHandler?lid=<%=laundry.getLid()%>"  method="post">
-						     		<div class="form_body">
-							     		<div class="form-group">
-							         		 <input type="hidden" value="editLaundryReq" name="action">
-											 <label>User Name</label><br>
-											 <input type="text" name="destination" value="<%=laundry.getUname()%>" required="required"><br>
+	<div class="travel_main_2" >
+				<div>
+					<h3>Recent Laundry Requests</h3>
+				</div>
+				<table style="text-align: center;">
+					<tr>
+						<th>Lid</th>
+						<th>Uid</th>
+						<th>Uname</th>
+						<th>Item</th>
+						<th>Date</th>
+						<th>Total</th>
+						<th>Bag</th>
+						<th>Beaded Skirt</th>
+						<th>Status</th>
+						<th></th>
+						<th></th>
+					</tr>
+	
+					<%
+					LaundryDao laundryDao = new LaundryDao();
+					List<LaundryBeans> laundryList = laundryDao.getUserLaundryReq(uid);
+	
+					for (LaundryBeans laundry : laundryList) {
+				%>
+					<tr id="<%=laundry.getLid()%>">
+	
+						<td><%=laundry.getLid()%></td>
+						<td><%=laundry.getUid()%></td>
+						<td><%=laundry.getUname()%></td>
+						<td><%=laundry.getItem()%></td>
+						<td><%=laundry.getDate()%></td>
+						<td><%=laundry.getTotal()%></td>
+						<td><%=laundry.getBag() %></td>
+						<td><%=laundry.getBeaded_skirt() %></td>
+						
+						<% if(laundry.getStatus()==0){ %>
+							<td class="pending-td">Pending</td>
+						<%}else if(laundry.getStatus()==1){ %>
+							<td class="success-td">finished</td>
+						<%} %>
+						<td><a
+							href="LaundryHandler?action=deleteReq&lid=<%=laundry.getLid()%>">Delete</a></td>
+						<td><button class="btn dropdown-item" data-toggle="modal"
+								data-target="#dropdown_menu<%=laundry.getLid()%>"
+								data-whatever="<%=laundry.getLid()%>">Edit</button></td>
+					</tr>
+	
+					<div class="modal fade" id="dropdown_menu<%=laundry.getLid()%>"
+						tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Change</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<form action="LaundryHandler?lid=<%=laundry.getLid()%>" method="post">
+									<div class="form_body">
+										<div class="form-group">
+											<input type="hidden" value="editLaundryReq" name="action">
+											<input type="hidden" value="user-laundry.jsp" name="lastUrl">
+											<label>User Name</label><br> <input type="text"
+												name="destination" value="<%=laundry.getUname()%>"
+												required="required"><br>
 										</div>
 										<div class="form-group">
-											<label>Need date </label><br>
-											<input type="date" name="needdate" value="<%=laundry.getDate()%>" required="required"><br>
+											<label>Need date </label><br> <input type="date"
+												name="needdate" value="<%=laundry.getDate()%>"
+												required="required"><br>
 										</div>
 										<div class="form-group">
-											<label>Bag </label><br>
-											<input type="text" name="bag" value="<%=laundry.getBag()%>" required="required"><br>
+											<label>Bag </label><br> <input type="text" name="bag"
+												value="<%=laundry.getBag()%>" required="required"><br>
 										</div>
 										<div class="form-group">
-											<label>Beaded Skirt</label><br>
-											<input type="text" name="Beaded_skirt" value="<%=laundry.getBeaded_skirt()%>" required="required"><br>
+											<label>Beaded Skirt</label><br> <input type="text"
+												name="Beaded_skirt" value="<%=laundry.getBeaded_skirt()%>"
+												required="required"><br>
 										</div>
-						     		</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-											<button type="submit" class="btn btn-primary">Edit</button>
-										</div>
-						       </form>
-						    </div>
-						  </div>
-					</div> 
-			
-			<%
-				}
-			%>
-		</table>
-	</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Close</button>
+										<button type="submit" class="btn btn-primary">Edit</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+	
+					<%
+					}
+				%>
+				</table>
+			</div>
 </body>
 <script type="text/javascript">
 	var first = document.getElementById('bag');

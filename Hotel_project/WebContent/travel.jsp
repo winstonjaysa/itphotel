@@ -261,6 +261,7 @@
 						     		<div class="form_body">
 							     		<div class="form-group">
 							         		 <input type="hidden" value="editTravelReq" name="action">
+							         		 <input type="hidden" value="travel.jsp" name="lastUrl">
 											 <label>Destination </label><br>
 											 <input type="text" name="destination" value="<%=travel.getDestination()%>" required="required"><br>
 										</div>
