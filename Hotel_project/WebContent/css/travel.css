@@ -237,6 +237,18 @@ input:focus {
 	padding: 0 20px;
 	border: solid 2px rgba(255, 255, 255, 0.5);
 }
+.find_item select {
+	width: 100%;
+	height: 50px;
+	color: #fff;
+	background: rgba(0, 0, 0, 0.2);
+	padding: 0 20px;
+	border: solid 2px rgba(255, 255, 255, 0.5);
+}
+
+.find_item select option{
+	background: #0d152d;
+}
 
 .find_item input:hover {
 	border: solid 2px rgba(254, 67, 91, 0.5);

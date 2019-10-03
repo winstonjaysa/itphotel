@@ -5,7 +5,7 @@ import java.sql.Date;
 public class TransManageBeans {
 	private int uid, tid,mid,countTid;
 	private String uname, fname, destination,adminMessage,userMessage;
-	private String NeedDate,status;
+	private String NeedDate,status,vehicle;
 	private double cost;
 	private int isApproved;
 	private Date datetime;
@@ -72,7 +72,13 @@ public class TransManageBeans {
 	public void setCost(double cost) {
 		this.cost = cost;
 	}
+	public String getVehicle() {
+		return vehicle;
+	}
 
+	public void setVehicle(String vehicle) {
+		this.vehicle = vehicle;
+	}
 
 	public int getIsApproved() {
 		return isApproved;

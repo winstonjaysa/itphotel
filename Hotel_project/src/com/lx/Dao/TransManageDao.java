@@ -24,16 +24,17 @@ public class TransManageDao {
 
 	public void NewArrange(TransManageBeans transmanagebean) {
 		try {
-			String sql = "INSERT INTO travel (uid,uname,destination,needDate,cost,isApproved)VALUES(?,?,?,?,?,?)";
+			String sql = "INSERT INTO travel (uid,uname,destination,vehicle,needDate,cost,isApproved)VALUES(?,?,?,?,?,?,?)";
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 
 			ps.setInt(1, transmanagebean.getUid());
 			ps.setString(2, transmanagebean.getUname());
 			ps.setString(3, transmanagebean.getDestination());
-			ps.setString(4, transmanagebean.getNeedDate());
-			ps.setDouble(5, transmanagebean.getCost());
-			ps.setInt(6, transmanagebean.getIsApproved());
+			ps.setString(4, transmanagebean.getVehicle());
+			ps.setString(5, transmanagebean.getNeedDate());
+			ps.setDouble(6, transmanagebean.getCost());
+			ps.setInt(7, transmanagebean.getIsApproved());
 
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -107,6 +108,7 @@ public class TransManageDao {
 
 				tr.setTid(rs.getInt("tid"));
 				tr.setDestination(rs.getString("destination"));
+				tr.setVehicle(rs.getString("vehicle"));
 				tr.setNeedDate(rs.getString("needDate"));
 				tr.setCost(rs.getDouble("cost"));
 				tr.setIsApproved(rs.getInt("isApproved"));
@@ -327,14 +329,15 @@ public class TransManageDao {
 
 	public void editTravelReq(TransManageBeans travel) {
 		try {
-			String sql = "UPDATE travel SET destination=?,needDate=?,cost=? WHERE tid=?";
+			String sql = "UPDATE travel SET destination=?,vehicle=?,needDate=?,cost=? WHERE tid=?";
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 
 			ps.setString(1, travel.getDestination());
-			ps.setString(2, travel.getNeedDate());
-			ps.setDouble(3, travel.getCost());
-			ps.setInt(4, travel.getTid());
+			ps.setString(2, travel.getVehicle());
+			ps.setString(3, travel.getNeedDate());
+			ps.setDouble(4, travel.getCost());
+			ps.setInt(5, travel.getTid());
 
 			ps.executeUpdate();
 		} catch (SQLException e) {

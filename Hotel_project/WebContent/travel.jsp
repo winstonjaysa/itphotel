@@ -96,19 +96,33 @@
 					
 					<div class="find_item">
 						<label >Destination</label>
-						<input type="text" name="destination" id="dLocation" placeholder="Destination" required >
+						<input type="text" name="destination" id="dLocation" placeholder="Destination" required readonly="readonly">
+					</div>
+					<div class="find_item">
+						<label >Vehicle type</label>
+						<!-- <input type="text" name="vehicle" id="vehicleType" placeholder="Vehicle type" required > -->
+						<select name="vehicle" id="vehicleType" required>
+							
+							<option>Tuk</option>
+							<option>Buddy</option>
+							<option>Micro</option>
+							<option>Mini</option>
+							<option>Car</option>
+							<option>Minivan</option>
+							<option>Van</option>
+							<option>Vip</option>
+						</select>
 	
 					</div>
 					<div class="find_item">
 						<label >Cost (lkr)</label>
-						<input type="text" name="cost" id="travelCost" placeholder="Cost" required >
+						<input type="text" name="cost" id="travelCost" placeholder="Cost" readonly="readonly">
 	
 					</div>
 					<div class="find_item">
 						<label>Need Date </label>
 						<input id="datefield" type='date' name="needdate" min='1899-01-01' max='2022-07-01' onclick="dateGet()"></input>
-						<!-- <input type="date" name="needdate" required="required" class="gg"> -->
-					</div>
+						</div>
 					<button type="submit">Arrange</button>
 				</form>
 				
@@ -123,6 +137,7 @@
 			<tr>
 				<th>Request Id</th>
 				<th>Destination</th>
+				<th>Vehicle Type</th>
 				<th>Request date</th>
 				<th>Amount</th>
 				<th>Confirm</th>
@@ -138,6 +153,7 @@
 			<tr id="<%=travel.getTid()%>">
 				<td><%=travel.getTid()%></td>
 				<td><%=travel.getDestination()%></td>
+				<td><%=travel.getVehicle()%></td>
 				<td><%=travel.getNeedDate()%></td>
 				<td><%=travel.getCost()%></td>
 				<%
@@ -262,12 +278,36 @@
 							     		<div class="form-group">
 							         		 <input type="hidden" value="editTravelReq" name="action">
 							         		 <input type="hidden" value="travel.jsp" name="lastUrl">
-											 <label>Destination </label><br>
-											 <input type="text" name="destination" value="<%=travel.getDestination()%>" required="required"><br>
+											 <label>Destination </label>
+											 <br>
+											 <select name="destination" id="dLocationEdit" onchange="funcDestinationEdit()">
+												<option>ArugamBay</option>
+												<option>HortonPlace</option>
+												<option>YalaPark</option>
+												<option>Trincomalee</option>
+											 </select>
+											 <br>
+											 <label >Vehicle type</label>
+											 <br>
+											 <select name="vehicle" id="vehicleType" value="<%=travel.getVehicle() %>" required>
+												<option>Tuk</option>
+												<option>Buddy</option>
+												<option>Micro</option>
+												<option>Mini</option>
+												<option>Car</option>
+												<option>Minivan</option>
+												<option>Van</option>
+												<option>Vip</option>
+											</select>
+											<br>
+											<label >Cost (lkr)</label>
+											<br>
+											<input type="text" name="travelCostEdit" id="travelCostEdit" placeholder="Cost" >
 										</div>
 										<div class="form-group">
 											<label>Need date </label><br>
-											<input type="date" name="needdate" value="<%=travel.getNeedDate()%>" required="required"><br>
+											<input type="date" name="needdate" value="<%=travel.getNeedDate()%>" required="required">
+											<br>
 										</div>
 						     		</div>
 										<div class="modal-footer">
@@ -361,6 +401,21 @@ $("#navigation a").on("click", function(e){
 			document.getElementById('travelCost').value=13400;
 		}else if(x=='Trincomalee'){
 			document.getElementById('travelCost').value=15850;
+		}
+		
+	}
+	function funcDestinationEdit() {
+		
+		var x=document.getElementById('dLocationEdit').value;	
+		
+		if(x=='ArugamBay'){
+			document.getElementById('travelCostEdit').value=19750;
+		}else if(x=='HortonPlace'){
+			document.getElementById('travelCostEdit').value=11500;
+		}else if(x=='YalaPark'){
+			document.getElementById('travelCostEdit').value=13400;
+		}else if(x=='Trincomalee'){
+			document.getElementById('travelCostEdit').value=15850;
 		}
 		
 	}

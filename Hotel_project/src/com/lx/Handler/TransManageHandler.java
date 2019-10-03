@@ -69,6 +69,7 @@ public class TransManageHandler extends HttpServlet {
 			travel.setUid(Integer.parseInt(request.getParameter("uid")));
 			travel.setUname(request.getParameter("uname"));
 			travel.setDestination(request.getParameter("destination"));
+			travel.setVehicle(request.getParameter("vehicle"));
 			travel.setNeedDate(request.getParameter("needdate"));
 			travel.setCost(cost);
 			travel.setIsApproved(0);
@@ -104,7 +105,8 @@ public class TransManageHandler extends HttpServlet {
 
 			travel.setTid(tid);
 			travel.setDestination(request.getParameter("destination"));
-			travel.setCost(50);
+			travel.setVehicle(request.getParameter("vehicle"));
+			travel.setCost(Integer.parseInt(request.getParameter("travelCostEdit")));
 			travel.setNeedDate(request.getParameter("needdate"));
 
 			dao.editTravelReq(travel);
