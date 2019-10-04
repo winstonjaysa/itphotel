@@ -1,5 +1,8 @@
 package com.lx.Beans;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class employeeBean {
 	
 	private int id;
@@ -12,12 +15,19 @@ public class employeeBean {
 	private String Position;
 	private Double Hourlyrate;
 	private Double Fixed;
+	private String dob;
 	
 	
 	
 	
 	
 	
+	public String getDob() {
+		return dob;
+	}
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
 	public int getId() {
 		return id;
 	}
