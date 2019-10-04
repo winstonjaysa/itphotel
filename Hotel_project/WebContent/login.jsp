@@ -39,7 +39,7 @@
 	<%@include file="naviBar-user.jsp"%>
 
 	
-<div class="trpdiv">
+<div class="trpdiv" style="width: 400px;">
 	<span class="status-warning">
 		<%
 		if(request.getParameter("status")!=null&& request.getParameter("status").equals("wrongvalid")){
@@ -55,7 +55,7 @@
 		%>
 	</span>
 	<h2>Login</h2>
-	<form action="UserHandler" method="post">
+	<form action="UserHandler" method="post" >
 		<input type="hidden" name="action" value="login">
 		<label>Username | Email</label>
 		<input type="text" name="userName">

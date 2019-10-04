@@ -45,7 +45,7 @@
 <%@include file="naviBar-user.jsp" %>
 <div class="main">
 	
-	<section >
+	<section id="travelSug">
 		<div class="popup-notification-pannel" id="popup-notification-pannel">
 			<p>successfully. <i class="fas fa-clipboard-check"></i></p>
 		</div>
@@ -96,7 +96,7 @@
 					
 					<div class="find_item">
 						<label >Destination</label>
-						<input type="text" name="destination" id="dLocation" placeholder="Destination" required readonly="readonly">
+						<a href="#travelSug"><input type="text" name="destination" id="dLocation" placeholder="Destination" required readonly="readonly"></a>
 					</div>
 					<div class="find_item">
 						<label >Vehicle type</label>
@@ -195,7 +195,7 @@
 						  <div class="modal-dialog" role="document">
 						    <div class="modal-content">
 						   	<div class="modal-header">
-						        <h5 class="modal-title" id="exampleModalLabel">Change</h5>
+						        <h5 class="modal-title" id="exampleModalLabel">Message to Admin</h5>
 
 						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						          <span aria-hidden="true">&times;</span>
@@ -268,7 +268,7 @@
 						  <div class="modal-dialog" role="document">
 						    <div class="modal-content">
 						   	<div class="modal-header">
-						        <h5 class="modal-title" id="exampleModalLabel">Change</h5>
+						        <h5 class="modal-title" id="exampleModalLabel">Change Ride Request</h5>
 						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						          <span aria-hidden="true">&times;</span>
 						        </button>
@@ -280,7 +280,7 @@
 							         		 <input type="hidden" value="travel.jsp" name="lastUrl">
 											 <label>Destination </label>
 											 <br>
-											 <select name="destination" id="dLocationEdit" onchange="funcDestinationEdit()">
+											 <select name="destination" id="dLocationEdit<%=travel.getTid()%>" onchange="funcDestinationEdit(<%=travel.getTid()%>)">
 												<option>ArugamBay</option>
 												<option>HortonPlace</option>
 												<option>YalaPark</option>
@@ -289,9 +289,9 @@
 											 <br>
 											 <label >Vehicle type</label>
 											 <br>
-											 <select name="vehicle" id="vehicleType" value="<%=travel.getVehicle() %>" required>
-												<option>Tuk</option>
-												<option>Buddy</option>
+											 <select name="vehicle" id="vehicleType" required>
+												<option >Tuk</option>
+												<option >Buddy</option>
 												<option>Micro</option>
 												<option>Mini</option>
 												<option>Car</option>
@@ -302,7 +302,7 @@
 											<br>
 											<label >Cost (lkr)</label>
 											<br>
-											<input type="text" name="travelCostEdit" id="travelCostEdit" placeholder="Cost" >
+											<input type="text" name="travelCostEdit" id="travelCostEdit<%=travel.getTid()%>" placeholder="Cost" value="19750">
 										</div>
 										<div class="form-group">
 											<label>Need date </label><br>
@@ -404,18 +404,18 @@ $("#navigation a").on("click", function(e){
 		}
 		
 	}
-	function funcDestinationEdit() {
+	function funcDestinationEdit(parY) {
 		
-		var x=document.getElementById('dLocationEdit').value;	
+		var x=document.getElementById('dLocationEdit'+parY).value;	
 		
 		if(x=='ArugamBay'){
-			document.getElementById('travelCostEdit').value=19750;
+			document.getElementById('travelCostEdit'+parY).value=19750;
 		}else if(x=='HortonPlace'){
-			document.getElementById('travelCostEdit').value=11500;
+			document.getElementById('travelCostEdit'+parY).value=11500;
 		}else if(x=='YalaPark'){
-			document.getElementById('travelCostEdit').value=13400;
+			document.getElementById('travelCostEdit'+parY).value=13400;
 		}else if(x=='Trincomalee'){
-			document.getElementById('travelCostEdit').value=15850;
+			document.getElementById('travelCostEdit'+parY).value=15850;
 		}
 		
 	}

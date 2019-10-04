@@ -226,8 +226,9 @@ table a {
   	left:-120px;
   	margin-top:5px;
   	width:180px;
+  	height:auto;
   	background:#fff;
-  	overflow: auto;
+  	overflow: hidden;
  	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   	z-index: 1;
 }
@@ -310,6 +311,7 @@ table a {
 	height: 100%;
 	background: #404E67;;
 	top:70px;
+	overflow: hidden;
 }
 .leftPanel .panel{
 	display:block;
@@ -400,6 +402,21 @@ table a {
 }
 
 .form_body input {
+	display: block;
+	width: 100%;
+	padding: .375rem .75rem;
+	font-size: .875rem;
+	line-height: 1.5;
+	color: #5c6873;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #e4e7ea;
+	border-radius: .25rem;
+	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+	/*transform:translate(-50%,0);*/
+}
+.form_body select {
 	display: block;
 	width: 100%;
 	padding: .375rem .75rem;

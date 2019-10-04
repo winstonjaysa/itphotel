@@ -37,24 +37,30 @@
 	<%@include file="naviBar-user.jsp"%>
 
 
-	<div class="trpdiv customtrpdiv">
+	<div class="trpdiv customtrpdiv" style="width: 830px;">
 	<div id="error_message"></div>
 		<form action="UserHandler" method="post" onsubmit="return validate();">
 			<h2>Register</h2>
 			<div id="error_message"></div>
 			<input type="hidden" name="action" value="register"> 
-			<label>User Name </label>
-			<input type="text" name="uname" id="uname">
-			<label>Password</label>
-			<input type="text" name="pwd" id="pwd">
-			<label>Phone Number</label>
-			<input type="text" name = "phone" id="phone">
-			<label>Email</label>
-			<input type="text" name = "email" id="email">
-			<label>firstName </label>
-			<input type="text" name="fname" id="fname">
-			<label>lastName </label>
-			<input type="text" name="lname" id="lname">
+			<div class="trpdiv_form_div" >
+				<div style="padding: 10px;">
+					<label>User Name </label>
+					<input type="text" name="uname" id="uname">
+					<label>Password</label>
+					<input type="text" name="pwd" id="pwd">
+				</div>
+				<div style="padding: 10px;">
+					<label>Phone Number</label>
+					<input type="text" name = "phone" id="phone">
+					<label>Email</label>
+					<input type="text" name = "email" id="email">
+					<label>firstName </label>
+					<input type="text" name="fname" id="fname">
+					<label>lastName </label>
+					<input type="text" name="lname" id="lname">
+				</div>
+			</div>
 			<input type="submit" value="Register">
 		</form>
 	</div>
