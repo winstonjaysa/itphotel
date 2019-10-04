@@ -1,6 +1,10 @@
 package com.lx.Handler;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -97,14 +101,13 @@ public class EmployeeHandler extends HttpServlet {
         	int id = Integer.parseInt(pId);
         	employeeBean pbean = new employeeBean();
 
-           
         	
         	pbean.setPid(id);
         	pbean.setNic(request.getParameter("nic"));
         	pbean.setName(request.getParameter("ename"));
         	pbean.setAddress(request.getParameter("address"));
         	pbean.setGender(request.getParameter("rad"));
-        	pbean.setAge(Integer.parseInt(request.getParameter("age")));
+        	pbean.setDob(request.getParameter("dob"));
         	pbean.setPosition(request.getParameter("position"));
         	pbean.setHourlyrate(Double.parseDouble(request.getParameter("hourlyrate")));
         	pbean.setFixed(Double.parseDouble(request.getParameter("fixedsalary")));

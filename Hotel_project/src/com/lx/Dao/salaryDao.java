@@ -25,6 +25,7 @@ public class salaryDao {
 	private int hoursworked;
 	private int leavetaken;
 	private String name;
+	private String[] names;
 	
 	
 	public salaryDao() {
@@ -54,9 +55,10 @@ public class salaryDao {
     			pb.setPosition(rs.getString("position"));
     			pb.setHourlyrate(rs.getDouble("hourlyrate"));
     			pb.setFixed(rs.getDouble("fixedsalary"));
-    		   
+    		    
+    		
             	
-           
+                  
     			salary.add(pb);
     			
     		}

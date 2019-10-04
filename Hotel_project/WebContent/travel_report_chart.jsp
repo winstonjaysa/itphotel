@@ -114,6 +114,8 @@ h4 {
 				<h4><span id="currentMonth">month</span> Taxi request status</h4>
 				<canvas id="myChart" height="200px"></canvas>
 		</div>
+		
+		
 	</div>
 	<!-- <section>
 		<button onclick="my()">Tap</button>

@@ -173,7 +173,7 @@ margin-bottom: 0px;
 								<th class="column6">Name</th>
 								<th class="column6">Address</th>
 								<th class="column6">Gender</th>
-								<th class="column6">Age</th>
+								<th class="column6">DOB</th>
 								<th class="column6">Position</th>
 		                        <th class="column6">Hourly rate</th>
 		                         <th class="column6">Fixed salary</th>
@@ -197,7 +197,7 @@ margin-bottom: 0px;
 								<td class="column6"><%=pb.getName()%></td>
 								<td class="column6"><%=pb.getAddress()%></td>
 								<td class="column6"><%=pb.getGender()%></td>
-								<td class="column6"><%=pb.getAge()%></td>
+								<td class="column6"><%=pb.getDob()%></td>
 								<td class="column6"><%=pb.getPosition()%></td>
 								<td class="column6"><%=pb.getHourlyrate()%></td>
 								<td class="column6"><%=pb.getFixed()%></td>
@@ -313,8 +313,8 @@ margin-bottom: 0px;
                                  <input type="radio"  value="Female" name="rad" id="rad1"><label>Female</label>
 							</div>
 							<div class="form_item">
-								<label>Age</label>
-								<input type="number" name="age" placeholder="age" id="age">
+								<label>Date of birth</label>
+								<input type="date" name="dob" placeholder="age" id="age">
 							</div>
 							<div class="form_item">
 								<label>Position</label>
@@ -580,8 +580,7 @@ margin-bottom: 0px;
               document.myForm.position.focus() ;
               return false;
            }
-           
-      
+          
 
            if( document.myForm.age.value == "" ) {
               alert( "Please employees age!");

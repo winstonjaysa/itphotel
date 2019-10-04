@@ -4,7 +4,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import com.lx.Beans.employeeBean;
 import com.lx.DbConnection.ConnectionProvider;
@@ -14,6 +18,14 @@ public class employeeDao {
 	
 	
 	private Connection conn;
+	private Date date1;
+	
+
+    //date1 = new java.util.Date();
+	//java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+	//date1 =new SimpleDateFormat("dd/MM/yyyy").parse(pb.getDob());
+	
+	
 
     public employeeDao()
     {
@@ -22,20 +34,26 @@ public class employeeDao {
     
     
     public void addEmployee(employeeBean pb) 
+    
     {
     	try 
     	{
     		String sql = "insert into employee"
-			+"(pid,nic,name,address,gender,age,position,hourlyrate,fixedsalary)"
+			+"(pid,nic,name,address,gender,dateofbirth,position,hourlyrate,fixedsalary)"
 					+"values (?,?,?,?,?,?,?,?,?)";
     		PreparedStatement ps = conn.prepareStatement(sql);
+    		
+    		//java.util.Date utilDate = new java.util.Date();
+    		//java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+    		//date1 =new SimpleDateFormat("dd/MM/yyyy").parse(pb.getDob());
+    		
     		
     		ps.setInt(1,pb.getPid());
     		ps.setString(2, pb.getNic());
     		ps.setString(3, pb.getName());
     		ps.setString(4, pb.getAddress());
     		ps.setString(5, pb.getGender());
-    		ps.setInt(6,pb.getAge());
+    		ps.setString(6,pb.getDob());
     		ps.setString(7, pb.getPosition());
     		ps.setDouble(8, pb.getHourlyrate());
     		ps.setDouble(9, pb.getFixed());
@@ -113,6 +131,18 @@ public class employeeDao {
     		
     		while (rs.next()) {
     			employeeBean pb = new employeeBean();
+    		
+    			String date1 = rs.getString("dateofbirth");
+    			
+    			DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+ 			Date startDate;
+   			try {
+  			    startDate = df.parse(date1);
+   			    String newDateString = df.format(startDate);
+    			    System.out.println(newDateString);
+ 			} catch (Exception e) {
+    			    e.printStackTrace();
+    			}
     			
     			pb.setId(rs.getInt("empid"));
     			pb.setPid(rs.getInt("pid"));
@@ -120,11 +150,12 @@ public class employeeDao {
     			pb.setName(rs.getString("name"));
     			pb.setAddress(rs.getString("address"));
     			pb.setGender(rs.getString("gender"));
-    			pb.setAge(rs.getInt("age"));
+    			pb.setDob(rs.getString("dateofbirth"));
     			pb.setPosition(rs.getString("position"));
     			pb.setHourlyrate(rs.getDouble("hourlyrate"));
     			pb.setFixed(rs.getDouble("fixedsalary"));
-    		
+    		    
+    			
     			
     			employee.add(pb);
     			
@@ -157,7 +188,7 @@ public class employeeDao {
     			pb.setName(rs.getString("name"));
     			pb.setAddress(rs.getString("address"));
     			pb.setGender(rs.getString("gender"));
-    			pb.setAge(rs.getInt("age"));
+    			pb.setAge(rs.getInt("dateofbirth"));
     			pb.setPosition(rs.getString("position"));
     			pb.setHourlyrate(rs.getDouble("hourlyrate"));
     			pb.setFixed(rs.getDouble("fixedsalary"));
