@@ -9,6 +9,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/travel.css">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -60,7 +61,7 @@
 		<p>MAIN NAVIGATION</p>
 		<a data-tab="#tab_1" data-tabCss="#panel_1">
 			<div class="panel active" id="Panel_1">
-				<i class="fas fa-file-invoice-dollar"></i> <span>AddBills</span>
+				<i class="fas fa-tshirt"></i> <span>Laundry</span>
 			</div>
 		</a> <a data-tab="#tab_2" data-tabCss="#panel_2">
 			<div class="panel" id="Panel_2">
@@ -76,9 +77,12 @@
 	</div>
 	<div class="mainDiv">
 		<div id="tab_1" class="panel_main">
-			<section>
-				<div class="card-1">
+				<div class="travel_main_2">
+					<div>
+						<h3>Recent Laundry Requests</h3>
+					</div>
 					<table style="text-align: center;">
+					
 						<tr>
 							<th>Lid</td>
 							<th>User</th>
@@ -138,7 +142,6 @@
 						%>
 					</table>
 				</div>
-			</section>
 		</div>
 	</div>
 	<div id="tab_2" class="panel_main">

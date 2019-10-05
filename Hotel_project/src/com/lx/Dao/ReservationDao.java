@@ -48,6 +48,41 @@ public class ReservationDao {
 		}
 	}
 	
+	public List displayAllReservationreq() {
+		List resev=new ArrayList();
+		
+		try {
+			String sql=null;
+			sql="SELECT * FROM reservation";
+				
+			
+			PreparedStatement ps=conn.prepareStatement(sql);
+			ResultSet re=ps.executeQuery();
+			
+			while(re.next()) {
+				ReservationBeans rb=new ReservationBeans();
+				
+				rb.setRid(re.getInt("rid"));
+				rb.setReservation_type(re.getInt("reservation_type"));
+				rb.setUid(re.getInt("uid"));
+				rb.setUname(re.getString("uname"));
+				rb.setAir_type(re.getInt("air_type"));
+				rb.setCheck_in(re.getString("check_in"));
+				rb.setBudget_package_type(re.getInt("budget_package_type"));
+				rb.setCheck_out(re.getString("check_out"));
+				rb.setMini_bar(re.getInt("mini_bar"));
+				rb.setAdults(re.getInt("adults"));
+				rb.setSwimming_pool(re.getInt("swimming_pool"));
+				rb.setChildren(re.getInt("children"));
+				
+				resev.add(rb);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return resev;
+	}
+	
 	
 	public List displayUserReservationreq(int size,int uid) {
 		List resev=new ArrayList();

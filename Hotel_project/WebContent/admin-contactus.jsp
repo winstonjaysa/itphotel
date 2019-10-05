@@ -28,6 +28,36 @@
 	left:50px;
 	margin-bottom: 50px;
 }
+.summary section {
+	display: flex;
+	flex-wrap: wrap;
+}
+.ui-tabs-anchor {
+	outline: none;
+	width: 1200px;
+	height: 800px;
+}
+
+.container canvas {
+	height: 500px;
+}
+
+.container {
+	width: 420PX;
+	height: 330px !important;
+	padding: 15px;
+	background: #f2f5fb;
+	margin: 10px 10px;
+}
+.summary{
+	position:relative;
+	display:flex;
+	flex-wrap:wrap;
+	width:100%;
+	top:10px;
+	left:50px;
+	margin-bottom: 50px;
+}
 
 .card{
 	display:block;
@@ -241,12 +271,12 @@
 			<div class="summary">
 				<section>
 					<div class="card">
-						<h6>Gross profit </h6>
-						<p></p>
+						<h6>Total Feedback </h6>
+						<p><%=dao.totFeedbacks() %></p>
 					</div>
 					<div class="card">
-						<h6>Total Feedback </h6>
-						<p><%=dao.totUsers() %></p>
+						<h6>Gross profit </h6>
+						<p></p>
 					</div>
 					<div class="card">
 						<h6>Total Requests </h6>
@@ -258,9 +288,22 @@
 					</div>
 				</section>
 			</div>
+			<div class="summary">
+				 <div class="container">
+					<input type="number" id="feedback" value="<%=dao.reportChart("Feedback")%>" disabled hidden>
+					<input type="number" id="laundry" value="<%=dao.reportChart("Laundry")%>" disabled hidden>
+					<input type="number" id="travel" value="<%=dao.reportChart("Travel")%>" disabled hidden>
+					<input type="number" id="reservation" value="<%=dao.reportChart("Reservation")%>" disabled hidden>
+					
+					
+						<h4><span id="currentMonth">month</span> Taxi request status</h4>
+						<canvas id="myChart" height="320px"></canvas>
+				</div>  
+			</div>			
 		</div>
 </div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 <script>
 	function functionAcc() {
 		document.getElementById("accDropdown").classList.toggle("show");
@@ -312,5 +355,53 @@ function confirmInsert(){
 		return false;
 	    }
 }
+	
+	
+	var feedback = document.getElementById("feedback").value;
+	var laundry = document.getElementById("laundry").value;
+	var travel = document.getElementById("travel").value;
+	var reservation = document.getElementById("reservation").value;
+	var ctx = document.getElementById('myChart').getContext('2d');
+	var myChart = new Chart(ctx,
+			{
+				type : 'bar',
+				data : {
+					labels : [ 'feedback', 'laundry', 'travel','reservation' ],
+					datasets : [ {
+						label : '# of Votes',
+						data : [ feedback, laundry, travel,reservation ],
+						backgroundColor : [
+						//'rgba(255, 99, 132, 0.2)',
+						'rgba(204, 246, 228, 0.3)',
+						//'rgba(54, 162, 235, 0.2)',
+						'rgba(253, 230, 216, 0.3)',
+						//'rgba(255, 206, 86, 0.2)',
+						'rgba(253, 216, 239, 0.3)',
+								'rgba(75, 192, 192, 0.2)',
+								'rgba(153, 102, 255, 0.2)',
+								'rgba(255, 159, 64, 0.2)' ],
+						borderColor : [
+						//'rgba(255, 99, 132, 1)',
+						'rgba(38, 134, 78, 1)',
+						//'rgba(54, 162, 235, 1)',
+						'rgba(201, 102, 50, 1)',
+						//'rgba(255, 206, 86, 1)',
+						'rgba(222, 11, 142, 1)', 'rgba(75, 192, 192, 1)',
+								'rgba(153, 102, 255, 1)',
+								'rgba(255, 159, 64, 1)' ],
+						borderWidth : 1
+					} ]
+				},
+				options : {
+					scales : {
+						yAxes : [ {
+							ticks : {
+								beginAtZero : true
+							}
+						} ]
+					}
+				}
+			});
+	
 </script>
 </html>

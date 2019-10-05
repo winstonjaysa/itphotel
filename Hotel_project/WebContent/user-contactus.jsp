@@ -47,7 +47,15 @@
 		<label>email</label>
 		<input type="text" name="email" id="email">
 		<label>subject</label>
-		<input type="text" name="subject" id="subject">
+		<!-- <input type="text" name="subject" id="subject">  -->
+		<select name="subject" id="subject">
+			<option >Travel</option>
+			<option >Laundry</option>
+			<option >Reservation</option>
+			<option >Feedback</option>
+			
+			
+		</select>
 		<label>message</label>
 		<input type="text" name="message" id="message">
 		<label>date</label>

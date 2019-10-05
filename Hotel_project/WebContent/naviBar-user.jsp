@@ -100,6 +100,10 @@
 		else if(sessionUserBean.getAdmin_role_type().equals("laun")) {%>
 			<a href="admin-laundry.jsp">ADMIN</a><span class="division"> |</span>
 		<%
+			}
+		else if(sessionUserBean.getAdmin_role_type().equals("reservation")) {%>
+			<a href="admin-reservation.jsp">ADMIN</a><span class="division"> |</span>
+		<%
 			} 
 		%>
 		<a href="admin.jsp">Features</a><span class="division"> |</span>
@@ -158,7 +162,7 @@
 					<div class="notifyCard">
 						<div>
 							<div class="uNotifyImg">
-								<img src="img/user2-160x160.jpg">
+								<img src="user-propic.jsp?uid=<%=msNot.getUid() %>" onclick="functionAcc()" id="acc-img">
 							</div>
 							<div class="notifyTitle">
 								<span>
@@ -237,4 +241,21 @@ function resizeNavi(){
 		}
 	 }
 }
+
+function functionAcc() {
+	document.getElementById("accDropdown").classList.toggle("show");
+	}
+window.onclick = function(event) {
+	if (!event.target.matches('#acc-img')) {
+		var dropdowns = document.getElementsByClassName("acc_ico-content");
+		var i;
+		for (i = 0; i < dropdowns.length; i++) {
+			var openDropdown = dropdowns[i];
+			if (openDropdown.classList.contains('show')) {
+				openDropdown.classList.remove('show');
+			}
+		}
+	}
+}
+
 </script>

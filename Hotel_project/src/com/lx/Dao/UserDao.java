@@ -105,6 +105,7 @@ public class UserDao {
 				userbean.setFname(rs.getString("fname"));
 				userbean.setLname(rs.getString("lname"));
 				userbean.setRole(rs.getString("role"));
+				userbean.setAdmin_role_type(rs.getString("admin-role-type"));
 				
 				users.add(userbean);
 			}

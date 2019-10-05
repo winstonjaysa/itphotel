@@ -327,13 +327,13 @@
 			}else if(travelList.size()==0 && session.getAttribute("currentSessionUser")!=null){
 			%>
 				<tr style="text-align: center">
-					<td colspan="5"><h6>You don't have any requested ride yet.</h6></td>
+					<td colspan="7"><h6>You don't have any requested ride yet.</h6></td>
 				</tr>
 			<%
 			}else if(session.getAttribute("currentSessionUser")==null){
 			%>
 				<tr style="text-align: center">
-					<td colspan="5"><h6>You don't have any logging indices.</h6></td>
+					<td colspan="7"><h6>You don't have any logging indices.</h6></td>
 				</tr>
 			<%
 			}

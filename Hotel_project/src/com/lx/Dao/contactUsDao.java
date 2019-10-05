@@ -342,7 +342,7 @@ public class contactUsDao
 	    
 	    //report 
 	    
-	    public Integer totUsers() {
+	    public Integer totFeedbacks() {
 			int count = 0;
 			try {
 				String sql = "SELECT COUNT(cid) FROM contactus";
@@ -358,5 +358,24 @@ public class contactUsDao
 			}
 			return count;
 
+		}
+	    
+	    public Integer reportChart(String type) {
+			int ans = 0;
+			try {
+				String sql = "SELECT COUNT(cid) FROM contactus WHERE subject=?";
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ps.setString(1, type);
+
+				ResultSet rs = ps.executeQuery();
+
+				rs.next();
+				String x = rs.getString(1);
+				System.out.println(x);
+				ans = Integer.parseInt(x);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return ans;
 		}
 }

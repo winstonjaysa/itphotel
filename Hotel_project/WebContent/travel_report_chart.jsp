@@ -111,8 +111,13 @@ h4 {
 				<canvas id="myChart" height="200px"></canvas>
 		</div>
 		<div class="container">
-				<h4><span id="currentMonth">month</span> Taxi request status</h4>
-				<canvas id="myChart" height="200px"></canvas>
+			<input type="number" id="y_confm" value="<%=dao.reportChart_yearly(1)%>" disabled hidden>
+			<input type="number" id="y_pending" value="<%=dao.reportChart_yearly(0)%>" disabled hidden>
+			<input type="number" id="y_deny" value="<%=dao.reportChart_yearly(2)%>" disabled hidden>
+			
+			
+				<h4><span >2019</span> Taxi request status</h4>
+				<canvas id="y_myChart" height="200px"></canvas>
 		</div>
 		
 		
@@ -124,6 +129,7 @@ h4 {
 	 -->
 	
 	<script>
+		//mothly
 		var conf = document.getElementById("confm").value;
 		var pending = document.getElementById("pending").value;
 		var deny = document.getElementById("deny").value;
@@ -168,6 +174,53 @@ h4 {
 						}
 					}
 				});
+		
+		//year
+		var y_conf = document.getElementById("y_confm").value;
+		var y_pending = document.getElementById("y_pending").value;
+		var y_deny = document.getElementById("y_deny").value;
+		var y_ctx = document.getElementById('y_myChart').getContext('2d');
+		var y_myChart = new Chart(y_ctx,
+				{
+					type : 'bar',
+					data : {
+						labels : [ 'Confirm', 'Pending', 'Deny' ],
+						datasets : [ {
+							label : '# of Votes',
+							data : [ y_conf, y_pending, y_deny ],
+							backgroundColor : [
+							//'rgba(255, 99, 132, 0.2)',
+							'rgba(204, 246, 228, 0.3)',
+							//'rgba(54, 162, 235, 0.2)',
+							'rgba(253, 230, 216, 0.3)',
+							//'rgba(255, 206, 86, 0.2)',
+							'rgba(253, 216, 239, 0.3)',
+									'rgba(75, 192, 192, 0.2)',
+									'rgba(153, 102, 255, 0.2)',
+									'rgba(255, 159, 64, 0.2)' ],
+							borderColor : [
+							//'rgba(255, 99, 132, 1)',
+							'rgba(38, 134, 78, 1)',
+							//'rgba(54, 162, 235, 1)',
+							'rgba(201, 102, 50, 1)',
+							//'rgba(255, 206, 86, 1)',
+							'rgba(222, 11, 142, 1)', 'rgba(75, 192, 192, 1)',
+									'rgba(153, 102, 255, 1)',
+									'rgba(255, 159, 64, 1)' ],
+							borderWidth : 1
+						} ]
+					},
+					options : {
+						scales : {
+							yAxes : [ {
+								ticks : {
+									beginAtZero : true
+								}
+							} ]
+						}
+					}
+				});
+		
 	</script>
 
 	<script>

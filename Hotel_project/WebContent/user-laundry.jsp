@@ -63,19 +63,21 @@
 						<label>date</label> <input type="date" name="date">
 					</div>
 					<div class="form_item">
-						<label>bag</label> <input type="number" name="bag" id="bag"
-							min="0" max="15">
+						<label>bag</label> 
+						<input type="number" name="bag" id="bag" min="0" max="15">
 					</div>
 					<div class="form_item">
-						<label>breaded skirt</label> <input type="number"
-							name="breaded-skirt" id="skirt" min="0" max="15"> <br>
+						<label>breaded skirt</label> 
+						<input type="number" name="breaded-skirt" id="skirt" min="0" max="15"> <br>
 						<br>
 					</div>
 					<div class="form_item">
-						<label>items</label> <input type="text" name="item" id="dis-items">
+						<label>items</label> 
+						<input type="text" name="item" id="dis-items" readonly>
 					</div>
 					<div class="form_item">
-						<label>total</label> <input type="text" name="total" id="dis-tot">
+						<label>total</label> 
+						<input type="text" name="total" id="dis-tot" readonly>
 					</div>
 					<!-- <button type="submit">submit</button>  -->
 					<input type="submit">
@@ -91,39 +93,38 @@
 				<table style="text-align: center;">
 					<tr>
 						<th>Lid</th>
-						<th>Uid</th>
-						<th>Uname</th>
 						<th>Item</th>
 						<th>Date</th>
-						<th>Total</th>
+						<th>Price</th>
 						<th>Bag</th>
 						<th>Beaded Skirt</th>
 						<th>Status</th>
 						<th></th>
 						<th></th>
 					</tr>
-	
+
 					<%
 					LaundryDao laundryDao = new LaundryDao();
 					List<LaundryBeans> laundryList = laundryDao.getUserLaundryReq(uid);
-	
+					
+				if(laundryList.size()>0 && session.getAttribute("currentSessionUser")!=null){
 					for (LaundryBeans laundry : laundryList) {
 				%>
 					<tr id="<%=laundry.getLid()%>">
-	
+
 						<td><%=laundry.getLid()%></td>
-						<td><%=laundry.getUid()%></td>
-						<td><%=laundry.getUname()%></td>
 						<td><%=laundry.getItem()%></td>
 						<td><%=laundry.getDate()%></td>
 						<td><%=laundry.getTotal()%></td>
 						<td><%=laundry.getBag() %></td>
 						<td><%=laundry.getBeaded_skirt() %></td>
-						
+
 						<% if(laundry.getStatus()==0){ %>
-							<td class="pending-td">Pending</td>
+						<td class="pending-td">Pending</td>
 						<%}else if(laundry.getStatus()==1){ %>
-							<td class="success-td">finished</td>
+						<td class="success-td">finished</td>
+						<%} else if(laundry.getStatus()==2){ %>
+						<td class="warning-td">Deny</td>
 						<%} %>
 						<td><a
 							href="LaundryHandler?action=deleteReq&lid=<%=laundry.getLid()%>">Delete</a></td>
@@ -131,7 +132,7 @@
 								data-target="#dropdown_menu<%=laundry.getLid()%>"
 								data-whatever="<%=laundry.getLid()%>">Edit</button></td>
 					</tr>
-	
+
 					<div class="modal fade" id="dropdown_menu<%=laundry.getLid()%>"
 						tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 						aria-hidden="true">
@@ -144,11 +145,12 @@
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
-								<form action="LaundryHandler?lid=<%=laundry.getLid()%>" method="post">
+								<form action="LaundryHandler?lid=<%=laundry.getLid()%>"
+									method="post">
 									<div class="form_body">
 										<div class="form-group">
 											<input type="hidden" value="editLaundryReq" name="action">
-											<input type="hidden" value="user-laundry.jsp" name="lastUrl">
+											<input type="hidden" value="user-profile.jsp" name="lastUrl">
 											<label>User Name</label><br> <input type="text"
 												name="destination" value="<%=laundry.getUname()%>"
 												required="required"><br>
@@ -177,9 +179,16 @@
 							</div>
 						</div>
 					</div>
-	
+
 					<%
 					}
+				} else if (laundryList.size() == 0 && session.getAttribute("currentSessionUser") != null) {
+					%>
+					<tr style="text-align: center">
+						<td colspan="9"><h6>You don't have any requested laundry request yet.</h6></td>
+					</tr>
+				<%
+				}
 				%>
 				</table>
 			</div>

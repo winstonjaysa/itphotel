@@ -23,7 +23,7 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Account</title>
 </head>
 <body>
 	<%@include file="naviBar-user.jsp"%>
@@ -67,6 +67,7 @@
 					<tr>
 						<th>Request Id</th>
 						<th>Destination</th>
+						<th>Vehicle Type</th>
 						<th>Request date</th>
 						<th>Amount</th>
 						<th>Confirm</th>
@@ -82,6 +83,7 @@
 					<tr id="<%=travel.getTid()%>">
 						<td><%=travel.getTid()%></td>
 						<td><%=travel.getDestination()%></td>
+						<td><%=travel.getVehicle()%></td>
 						<td><%=travel.getNeedDate()%></td>
 						<td><%=travel.getCost()%></td>
 						<%
@@ -100,8 +102,7 @@
 										data-whatever="<%=travel.getTid()%>" disabled="disabled">Edit</button>
 									<button type="button" class="btn dropdown-item"
 										disabled="disabled">
-										<a
-											href="TransManageHandler?action=deleteReq&tid=<%=travel.getTid()%>">Del</a>
+										<a href="TransManageHandler?action=deleteReq&tid=<%=travel.getTid()%>">Del</a>
 									</button>
 								</div>
 							</div>
@@ -237,9 +238,31 @@
 											<div class="form-group">
 												<input type="hidden" value="editTravelReq" name="action">
 												<input type="hidden" value="user-profile.jsp" name="lastUrl">
-												<label>Destination </label><br> <input type="text"
-													name="destination" value="<%=travel.getDestination()%>"
-													required="required"><br>
+												<label>Destination </label><br> 
+												<!-- <input type="text" name="destination" value="<%=travel.getDestination()%>"
+													required="required">  -->
+												<br>
+												<select name="destination" id="dLocationEdit<%=travel.getTid()%>" onchange="funcDestinationEdit(<%=travel.getTid()%>)">
+													<option>ArugamBay</option>
+													<option>HortonPlace</option>
+													<option>YalaPark</option>
+													<option>Trincomalee</option>
+											 	</select>
+												 <label >Vehicle type</label>
+												 <br>
+												 <select name="vehicle" id="vehicleType" required>
+													<option >Tuk</option>
+													<option >Buddy</option>
+													<option>Micro</option>
+													<option>Mini</option>
+													<option>Car</option>
+													<option>Minivan</option>
+													<option>Van</option>
+													<option>Vip</option>
+												</select>
+												<label >Cost (lkr)</label>
+												<br>
+												<input type="text" name="travelCostEdit" id="travelCostEdit<%=travel.getTid()%>" placeholder="Cost" value="19750">
 											</div>
 											<div class="form-group">
 												<label>Need date </label><br> <input type="date"
@@ -302,7 +325,8 @@
 					<%
 					LaundryDao laundryDao = new LaundryDao();
 					List<LaundryBeans> laundryList = laundryDao.getUserLaundryReq(uid);
-	
+					
+				if(laundryList.size()>0 && session.getAttribute("currentSessionUser")!=null){
 					for (LaundryBeans laundry : laundryList) {
 				%>
 					<tr id="<%=laundry.getLid()%>">
@@ -377,12 +401,22 @@
 
 					<%
 					}
+				} else if (laundryList.size() == 0 && session.getAttribute("currentSessionUser") != null) {
+					%>
+					<tr style="text-align: center">
+						<td colspan="7"><h6>You don't have any requested laundry request yet.</h6></td>
+					</tr>
+					<%
+				}
 				%>
 				</table>
 			</div>
 		</div>
 		<div id="tab_3" class="panel_main">
 			<div class="travel_main_2">
+				<div>
+					<h3>Recent Room Reservation</h3>
+				</div>
 				<table style="text-align: center;">
 					<tr>
 						<th>Rid</th>
@@ -400,7 +434,8 @@
 					<%
 					ReservationDao dao = new ReservationDao();
 					List<ReservationBeans> resList = dao.displayUserReservationreq(0, uid);
-	
+				
+				if(resList.size()>0 && session.getAttribute("currentSessionUser")!=null){
 					for (ReservationBeans res : resList) {
 				%>
 					<tr id="<%=res.getRid()%>">
@@ -462,6 +497,13 @@
 					</div>
 					<%
 						}
+					} else if (resList.size() == 0 && session.getAttribute("currentSessionUser") != null) {
+					%>
+							<tr style="text-align: center">
+								<td colspan="9"><h6>You don't have any requested Room Reservation yet.</h6></td>
+							</tr>
+					<%
+					}
 					%>
 				</table>
 
@@ -492,22 +534,28 @@
 					for (UserBean res : userDetails) {
 				%>
 				<div class="form-group">
+					<h5>Profile</h5>
+					<br>
 					<form action="UserHandler?action=editUser&uid=<%=uid %>" method="post">
-						<div class="">
-							<label>User name</label>
-							<input type="text" name="uname" value="<%=res.getFname()%>">
+						<div class="divDiv">
+							<div class="form-group-details">
+								<label>User name</label>
+								<input type="text" name="uname" value="<%=res.getUname()%>">
+							</div>
+							<div class="form-group-details">
+								<label>Role</label>
+								<input type="text" name="reole" value="<%=res.getRole()%> - <%=res.getAdmin_role_type() %>" readonly="readonly">
+							</div>
 						</div>
-						<div class="">
-							<label>First name</label>
-							<input type="text" name="fname" value="<%=res.getFname()%>">
-						</div>
-						<div class="">
-							<label>Last name</label>
-							<input type="text" name="lname" value="<%=res.getLname()%>">
-						</div>
-						<div class="">
-							<label>Role</label>
-							<input type="text" name="reole" value="<%=res.getRole()%>" readonly="readonly">
+						<div class="divDiv">
+							<div class="form-group-details">
+								<label>First name</label>
+								<input type="text" name="fname" value="<%=res.getFname()%>">
+							</div>
+							<div class="form-group-details">
+								<label>Last name</label>
+								<input type="text" name="lname" value="<%=res.getLname()%>">
+							</div>
 						</div>
 						<button type="submit">Save changes</button>
 					</form>
@@ -516,8 +564,9 @@
 					}
 				%>
 				<div class="form-group">
-					<h5>Cancel Account</h5>
-					<p>Warning: You will not be able to access your account data, your MEGA contacts or conversations after you confirm this action.</p>
+					<h5 >Cancel Account</h5>
+					<br>
+					<p><span class="span-warning">Warning:</span> You will not be able to access your account data, your contacts or conversations after you confirm this action.</p>
 					<button type="submit">Cancel Account</button>
 				</div>
 			</div>
@@ -557,6 +606,22 @@
 	}
 	$(lastSelectedTab).fadeIn();
 
+	
+function funcDestinationEdit(parY) {
+		
+		var x=document.getElementById('dLocationEdit'+parY).value;	
+		
+		if(x=='ArugamBay'){
+			document.getElementById('travelCostEdit'+parY).value=19750;
+		}else if(x=='HortonPlace'){
+			document.getElementById('travelCostEdit'+parY).value=11500;
+		}else if(x=='YalaPark'){
+			document.getElementById('travelCostEdit'+parY).value=13400;
+		}else if(x=='Trincomalee'){
+			document.getElementById('travelCostEdit'+parY).value=15850;
+		}
+		
+	}
 	
 	
 	

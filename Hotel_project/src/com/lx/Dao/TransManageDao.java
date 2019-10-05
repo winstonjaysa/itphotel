@@ -271,6 +271,24 @@ public class TransManageDao {
 		}
 		return ans;
 	}
+	public Integer reportChart_yearly(int i) {
+		int ans = 0;
+		try {
+			String sql = "SELECT COUNT(tid) FROM travel WHERE isApproved=? AND YEAR(needDate) = YEAR(CURRENT_DATE())";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, i);
+
+			ResultSet rs = ps.executeQuery();
+
+			rs.next();
+			String x = rs.getString(1);
+			System.out.println(x);
+			ans = Integer.parseInt(x);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ans;
+	}
 	
 	public double costSum() {
 		double value = 0.0;
