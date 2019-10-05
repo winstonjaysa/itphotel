@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.lx.Beans.LaundryBeans;
+import com.lx.Beans.TransManageBeans;
 import com.lx.Beans.paymentBean;
 import com.lx.Dao.LaundryDao;
 
@@ -23,6 +24,7 @@ public class LaundryHandler extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
+		String edit = request.getParameter("edit");
 		
 		if(action.equals("deleteReq")) {
 			int lid= Integer.parseInt(request.getParameter("lid"));
@@ -35,6 +37,22 @@ public class LaundryHandler extends HttpServlet {
 			
 			System.out.println("delete successfull");
 			response.sendRedirect("user-laundry.jsp?status=successReq");
+		}else if (action.equals("confirm")) {
+			int lid = Integer.parseInt(request.getParameter("lid"));
+
+			LaundryBeans laundry = new LaundryBeans();
+
+			laundry.setLid(lid);
+			if (edit.equals("conf")) {
+				laundry.setStatus(1);;
+			}
+			if (edit.equals("deny")) {
+				laundry.setStatus(2);
+			}
+			dao.confirmReq(laundry);
+
+			System.out.println("confirmed");
+			response.sendRedirect("admin-laundry.jsp?status=succuss");
 		}
 	}
 

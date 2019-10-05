@@ -214,7 +214,7 @@
 						     		<div class="form_body">
 							     		<div class="form-group">
 							         		 <input type="hidden" value="editPayment" name="action">
-											 <label>Destination </label><br>
+											 <label>Feedback </label><br>
 											 <input type="text" name="description" value="<%=cb.getDescription()%>" required="required"><br>
 										</div>
 										<div class="form-group">

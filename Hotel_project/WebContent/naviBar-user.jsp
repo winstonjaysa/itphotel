@@ -20,7 +20,7 @@
 	%>
 	<nav>
 		<a href="index.jsp">HOME</a><span class="division"> |</span>
-		<a href="admin.jsp">Features</a><span class="division"> |</span>
+		<a href="admin.jsp">Event</a><span class="division"> |</span>
 		<a href="travel.jsp">tour</a><span class="division"> |</span>
 		<a href="user-reservation.jsp">ROOMs</a>
 	</nav>
@@ -31,6 +31,7 @@
 	<% 
 		}
 		else if(sessionUserBean!=null && sessionUserBean.getRole().equals("user")){
+			int uid_for_propic=sessionUserBean.getUid();
 	%>
 	<nav>
 		<a href="index.jsp">HOME</a><span class="division"> |</span>
@@ -41,7 +42,9 @@
 	</nav>
 	<div class="acc_dropdown" >
 		<div class="acc_ico" >
-			<img src="img/user2-160x160.jpg" onclick="functionAcc()" id="acc-img">
+			
+					<img src="user-propic.jsp?uid=<%=uid_for_propic %>" onclick="functionAcc()" id="acc-img">
+			
 		</div>
 		<div class="acc_ico-content" id="accDropdown">
 			<a href="user-profile.jsp">
@@ -71,6 +74,8 @@
 	<% 
 		}
 		else if(sessionUserBean!=null && sessionUserBean.getRole().equals("admin")){
+			
+			int uid_for_propic=sessionUserBean.getUid();
 	%>
 	<nav>
 		<a href="index.jsp">HOME</a><span class="division"> |</span>
@@ -92,14 +97,20 @@
 			<a href="admin-employee.jsp">ADMIN</a><span class="division"> |</span>
 		<%
 			} 
+		else if(sessionUserBean.getAdmin_role_type().equals("laun")) {%>
+			<a href="admin-laundry.jsp">ADMIN</a><span class="division"> |</span>
+		<%
+			} 
 		%>
 		<a href="admin.jsp">Features</a><span class="division"> |</span>
 		<a href="travel.jsp">tour</a><span class="division"> |</span>
-		<a href="user-reservation.jsp">ROOM</a>
+		<a href="user-reservation.jsp">ROOM</a><span class="division"> |</span>
+		<a href="user-laundry.jsp">laundry</a>
 	</nav>
 	<div class="acc_dropdown" >
 		<div class="acc_ico" >
-			<img src="img/user2-160x160.jpg" onclick="functionAcc()" id="acc-img">
+		<!-- 	<img src="img/user2-160x160.jpg" onclick="functionAcc()" id="acc-img"> -->
+			<img src="user-propic.jsp?uid=<%=uid_for_propic %>" onclick="functionAcc()" id="acc-img">
 		</div>
 		<div class="acc_ico-content" id="accDropdown">
 			<a href="user-profile.jsp">

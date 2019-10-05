@@ -2,10 +2,12 @@ package com.lx.Handler;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -18,8 +20,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.lx.Beans.TransManageBeans;
 import com.lx.Beans.UserBean;
 import com.lx.Dao.UserDao;
+import com.lx.DbConnection.ConnectionProvider;
+import com.mysql.jdbc.Blob;
 
 @WebServlet("/UserHandler")
 @MultipartConfig(maxFileSize = 16177216)
@@ -104,42 +109,59 @@ public class UserHandler extends HttpServlet {
 			response.sendRedirect("index.jsp");
 			System.out.println("New user add success!");
 
-		} else if (action.equals("allUsers")) {
+		}
+		else if (action.equals("allUsers")) {
 			response.sendRedirect("index.jsp");
 			request.setAttribute("users", dao.getAllUsers());
-		} else if (action.equals("uploadimg")) {
+		
+		} 
+		else if(action.equals("UpdatePropic")) {
+			
+			response.setContentType("text/html;charset=UTF-8");
+	        out = response.getWriter();
+	        int result = 0;
+	        Connection myConn = null;
+			ResultSet myRs = null;
+			PreparedStatement myStmt = null;
+	        Part part = request.getPart("propic");
+	        if (part != null) {
+	            try {
+	            	myConn=ConnectionProvider.getConeection();
+	            	String sql = "UPDATE users SET propic=? WHERE uid=?";
+	   		
+	            	myStmt = myConn.prepareStatement(sql); 
+	   		
+	            	int uid = Integer.parseInt(request.getParameter("uid"));
+	                InputStream is = part.getInputStream();
+	                myStmt.setBlob(1, is);
+	                myStmt.setInt(2,uid);
+	               
+	                myStmt.execute();
+	                if (result > 0) {
+	                    response.sendRedirect("user-profile.jsp");
+	                } else {
+	                    response.sendRedirect("user-profile.jsp");
+	                }
+	            } catch (Exception e) {
+	                out.println(e);
+	            }
+	        }
+		}
+		else if (action.equals("editUser")) {
+			int uid = Integer.parseInt(request.getParameter("uid"));
 
-			Part part = request.getPart("img");
-			String name = request.getParameter("name");
-			int result = 0;
-			if (part != null) {
-				try {
-					Class.forName("com.mysql.jdbc.Driver");
-					Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/img", "root", "");
-					PreparedStatement ps = conn.prepareStatement("INSERT INTO imgtable(img,name) VALUES (?,?)");
-					InputStream is = part.getInputStream();
+			UserBean ub = new UserBean();
 
-					ps.setBlob(1, is);
-					ps.setString(2, name);
+			ub.setUid(uid);
+			ub.setUname(request.getParameter("uname"));
+			ub.setFname(request.getParameter("fname"));
+			ub.setLname(request.getParameter("lname"));
+			
+			
+			dao.editUser(ub);
 
-					result = ps.executeUpdate();
-					if (result > 0) {
-						out.println("<h1>uploaded</h1>");
-						response.sendRedirect("index.jsp");
-					}
-
-				} catch (SQLException e) {
-					e.printStackTrace();
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (NullPointerException e) {
-					// TODO: handle exception
-					e.printStackTrace();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-
-			}
+			System.out.println("Edit successfull the reqested user details!");
+			response.sendRedirect("user-profile.jsp");
 		}
 	}
 

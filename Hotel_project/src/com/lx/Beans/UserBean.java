@@ -1,9 +1,10 @@
 package com.lx.Beans;
 
+import com.mysql.jdbc.Blob;
+
 public class UserBean {
 	private String fname,lname,uname,password,role,admin_role_type;
 	private boolean valid;
-	
 	
 	public String getPassword() {
 		return password;
@@ -54,5 +55,7 @@ public class UserBean {
 	public void setAdmin_role_type(String admin_role_type) {
 		this.admin_role_type = admin_role_type;
 	}
+	
+	
 	
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lx.Beans.LaundryBeans;
+import com.lx.Beans.TransManageBeans;
 import com.lx.Beans.paymentBean;
 import com.lx.DbConnection.ConnectionProvider;
 
@@ -144,5 +145,56 @@ public class LaundryDao {
 		 
 	 }
 	
+	
+	//admin pg
+	public List getAllLaundryReq() 
+	 {
+		 List payments = new ArrayList();
+		 
+		 try
+		 {
+			 	String sql = "SELECT * FROM laundryreq";
+	    		PreparedStatement ps = conn.prepareStatement(sql);
+	    		ResultSet rs = ps.executeQuery();
+	    		
+	    		
+	    		while (rs.next()) {
+	    			LaundryBeans pb = new LaundryBeans();
+	    			
+	    			pb.setLid(rs.getInt("lid"));
+	    			pb.setUid(rs.getInt("uid"));
+	    			pb.setUname(rs.getString("uname"));
+	    			pb.setDate(rs.getString("date"));
+	    			pb.setItem(rs.getString("item"));
+	    			pb.setTotal(rs.getInt("total"));
+	    			pb.setStatus(rs.getInt("status"));
+	    			
+	    			payments.add(pb);
+	    			
+	    			
+	    		}
+		 } 
+		 catch (SQLException e) 
+		 {
+			 e.printStackTrace();
+		 }
+		 
+		 return payments;
+		 
+	 }
+	
+	public void confirmReq(LaundryBeans laundry) {
+		try {
+			String sql = "UPDATE laundryreq SET status=? WHERE lid=?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, laundry.getStatus());
+			ps.setInt(2, laundry.getLid());
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 }

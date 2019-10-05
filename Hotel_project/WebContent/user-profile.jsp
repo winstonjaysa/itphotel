@@ -7,6 +7,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/profile.css">
 <link rel="stylesheet" href="css/travel.css">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -40,25 +41,19 @@
 		<p>MAIN NAVIGATION</p>
 		<a data-tab="#tab_1" data-tabCss="#panel_1">
 			<div class="panel active" id="Panel_1">
-				<i class="fa fa-car-side"></i>
-				<span>Travel</span>
+				<i class="fa fa-car-side"></i> <span>Travel</span>
 			</div>
 		</a> <a data-tab="#tab_2" data-tabCss="#panel_2">
 			<div class="panel" id="Panel_2">
-				<i class="fas fa-tshirt"></i>
-				<span>Laundry</span>
+				<i class="fas fa-tshirt"></i> <span>Laundry</span>
 			</div>
-		</a> 
-		<a data-tab="#tab_3" data-tabCss="#panel_3">
+		</a> <a data-tab="#tab_3" data-tabCss="#panel_3">
 			<div class="panel" id="Panel_3">
-				<i class="fas fa-hotel"></i>
-				<span>Reservation</span>
+				<i class="fas fa-hotel"></i> <span>Reservation</span>
 			</div>
-		</a>
-		<a data-tab="#tab_4" data-tabCss="#panel_4">
+		</a> <a data-tab="#tab_4" data-tabCss="#panel_4">
 			<div class="panel" id="Panel_4">
-				<i class="fas fa-user-alt"></i>
-				<span>Account</span>
+				<i class="fas fa-user-alt"></i> <span>Account</span>
 			</div>
 		</a>
 	</div>
@@ -137,16 +132,16 @@
 								</div>
 							</div>
 						</td>
-	
+
 						<div class="modal fade" id="MesssgeDialogBox<%=travel.getTid()%>"
 							tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 							aria-hidden="true">
-	
+
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
 										<h5 class="modal-title" id="exampleModalLabel">Change</h5>
-	
+
 										<button type="button" class="close" data-dismiss="modal"
 											aria-label="Close">
 											<span aria-hidden="true">&times;</span>
@@ -160,11 +155,12 @@
 												<input type="hidden" value="travel.jsp" name="lastUrl">
 												<label>message</label>
 												<!--<textarea name="messageA" placeholder="send message to user"></textarea>  -->
-												<textarea name="messageU" placeholder="send message to admin"></textarea>
+												<textarea name="messageU"
+													placeholder="send message to admin"></textarea>
 												<button type="submit">Send</button>
 											</div>
 										</form>
-	
+
 									</div>
 									<div class="messageListDiv" id="d1">
 										<div class="messageListDiv_body " id="msList">
@@ -235,7 +231,8 @@
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
-									<form action="TransManageHandler?tid=<%=travel.getTid()%>" method="post">
+									<form action="TransManageHandler?tid=<%=travel.getTid()%>"
+										method="post">
 										<div class="form_body">
 											<div class="form-group">
 												<input type="hidden" value="editTravelReq" name="action">
@@ -281,29 +278,27 @@
 						}
 					%>
 				</table>
-	
+
 			</div>
 		</div>
 		<div id="tab_2" class="panel_main">
-			<div class="travel_main_2" >
+			<div class="travel_main_2">
 				<div>
 					<h3>Recent Laundry Requests</h3>
 				</div>
 				<table style="text-align: center;">
 					<tr>
 						<th>Lid</th>
-						<th>Uid</th>
-						<th>Uname</th>
 						<th>Item</th>
 						<th>Date</th>
-						<th>Total</th>
+						<th>Price</th>
 						<th>Bag</th>
 						<th>Beaded Skirt</th>
 						<th>Status</th>
 						<th></th>
 						<th></th>
 					</tr>
-	
+
 					<%
 					LaundryDao laundryDao = new LaundryDao();
 					List<LaundryBeans> laundryList = laundryDao.getUserLaundryReq(uid);
@@ -311,20 +306,20 @@
 					for (LaundryBeans laundry : laundryList) {
 				%>
 					<tr id="<%=laundry.getLid()%>">
-	
+
 						<td><%=laundry.getLid()%></td>
-						<td><%=laundry.getUid()%></td>
-						<td><%=laundry.getUname()%></td>
 						<td><%=laundry.getItem()%></td>
 						<td><%=laundry.getDate()%></td>
 						<td><%=laundry.getTotal()%></td>
 						<td><%=laundry.getBag() %></td>
 						<td><%=laundry.getBeaded_skirt() %></td>
-						
+
 						<% if(laundry.getStatus()==0){ %>
-							<td class="pending-td">Pending</td>
+						<td class="pending-td">Pending</td>
 						<%}else if(laundry.getStatus()==1){ %>
-							<td class="success-td">finished</td>
+						<td class="success-td">finished</td>
+						<%} else if(laundry.getStatus()==2){ %>
+						<td class="warning-td">Deny</td>
 						<%} %>
 						<td><a
 							href="LaundryHandler?action=deleteReq&lid=<%=laundry.getLid()%>">Delete</a></td>
@@ -332,7 +327,7 @@
 								data-target="#dropdown_menu<%=laundry.getLid()%>"
 								data-whatever="<%=laundry.getLid()%>">Edit</button></td>
 					</tr>
-	
+
 					<div class="modal fade" id="dropdown_menu<%=laundry.getLid()%>"
 						tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 						aria-hidden="true">
@@ -345,7 +340,8 @@
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
-								<form action="LaundryHandler?lid=<%=laundry.getLid()%>" method="post">
+								<form action="LaundryHandler?lid=<%=laundry.getLid()%>"
+									method="post">
 									<div class="form_body">
 										<div class="form-group">
 											<input type="hidden" value="editLaundryReq" name="action">
@@ -378,7 +374,7 @@
 							</div>
 						</div>
 					</div>
-	
+
 					<%
 					}
 				%>
@@ -386,21 +382,21 @@
 			</div>
 		</div>
 		<div id="tab_3" class="panel_main">
-			<div class="travel_main_2" >
+			<div class="travel_main_2">
 				<table style="text-align: center;">
 					<tr>
 						<th>Rid</th>
 						<th>Room type</th>
 						<th>Package</th>
-						<th>Check-in </th>
+						<th>Check-in</th>
 						<th>Check-out</th>
 						<th>Adults</th>
 						<th>Children</th>
 						<th></th>
 						<th></th>
-	
+
 					</tr>
-	
+
 					<%
 					ReservationDao dao = new ReservationDao();
 					List<ReservationBeans> resList = dao.displayUserReservationreq(0, uid);
@@ -409,30 +405,27 @@
 				%>
 					<tr id="<%=res.getRid()%>">
 						<td><%=res.getRid()%></td>
-					<%if(res.getReservation_type()==1){ %>
+						<%if(res.getReservation_type()==1){ %>
 						<td>Executive</td>
-					<%}else if(res.getReservation_type()==2){ %>
+						<%}else if(res.getReservation_type()==2){ %>
 						<td>Presidential</td>
-					<%} else if(res.getReservation_type()==3){ %>
+						<%} else if(res.getReservation_type()==3){ %>
 						<td>Deluxe</td>
-					<%} %>
+						<%} %>
 						<td><%=res.getBudget_package_type()%></td>
 						<td><%=res.getCheck_in()%></td>
 						<td><%=res.getCheck_out()%></td>
 						<td><%=res.getAdults()%></td>
 						<td><%=res.getChildren()%></td>
-						
+
 						<td>
-							<button class="btn dropdown-item" data-toggle="modal" data-target="#dropdown_menu<%=res.getRid()%>"
-								data-whatever="<%=res.getRid()%>">
-									Edit
-							</button>
+							<button class="btn dropdown-item" data-toggle="modal"
+								data-target="#dropdown_menu<%=res.getRid()%>"
+								data-whatever="<%=res.getRid()%>">Edit</button>
 						</td>
-						<td>
-							<a href="ReservationHandler?action=deleteReservationReq&rid=<%=res.getRid()%>">
-								Delete
-							</a>
-							<!-- <button type="button" onclick="ReservationHandler?action=deleteReservationReq&rid=<%=res.getRid()%>">Delete</button> -->
+						<td><a
+							href="ReservationHandler?action=deleteReservationReq&rid=<%=res.getRid()%>">
+								Delete </a> <!-- <button type="button" onclick="ReservationHandler?action=deleteReservationReq&rid=<%=res.getRid()%>">Delete</button> -->
 						</td>
 					</tr>
 					<div class="modal fade" id="dropdown_menu<%=res.getRid()%>"
@@ -447,12 +440,14 @@
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
-								<form action="ReservationHandler?rid=<%=res.getRid()%>" method="post">
+								<form action="ReservationHandler?rid=<%=res.getRid()%>"
+									method="post">
 									<div class="form_body">
 										<div class="form-group">
 											<input type="hidden" value="editReservationReq" name="action">
-											<label>Budget_package_type</label><br> 
-											<input type="number" name="budget_package_type" value="<%=res.getBudget_package_type()%>"
+											<label>Budget_package_type</label><br> <input
+												type="number" name="budget_package_type"
+												value="<%=res.getBudget_package_type()%>"
 												required="required"><br>
 										</div>
 									</div>
@@ -466,10 +461,65 @@
 						</div>
 					</div>
 					<%
+						}
+					%>
+				</table>
+
+			</div>
+		</div>
+		<div id="tab_4" class="panel_main">
+			<div class="travel_main_2 proDiv">
+				<div class="form-group imgChoose">
+					<div class="imgDiv">
+						<img src="user-propic.jsp?uid=<%=uid%>" alt="no image" >
+					</div>
+					<form action="UserHandler?action=UpdatePropic" method="post" enctype="multipart/form-data" >
+						<div id="choose">
+							<input type="file" id="real-file" name="propic" hidden="hidden" />
+							<!-- <button type="button" id="custom-button1" >Change picture</button>  -->
+							<div class="cameraRadiusDiv" id="custom-button1">
+								<i class="fas fa-camera" ></i>
+							</div>
+						</div>
+						<input type="hidden" name="uid" value="<%=uid%>"> 
+						<button type="submit">Change picture</button>
+					</form>
+				</div>
+				<%
+					UserDao userDao = new UserDao();
+					List<UserBean> userDetails = userDao.getUser(uid);
+	
+					for (UserBean res : userDetails) {
+				%>
+				<div class="form-group">
+					<form action="UserHandler?action=editUser&uid=<%=uid %>" method="post">
+						<div class="">
+							<label>User name</label>
+							<input type="text" name="uname" value="<%=res.getFname()%>">
+						</div>
+						<div class="">
+							<label>First name</label>
+							<input type="text" name="fname" value="<%=res.getFname()%>">
+						</div>
+						<div class="">
+							<label>Last name</label>
+							<input type="text" name="lname" value="<%=res.getLname()%>">
+						</div>
+						<div class="">
+							<label>Role</label>
+							<input type="text" name="reole" value="<%=res.getRole()%>" readonly="readonly">
+						</div>
+						<button type="submit">Save changes</button>
+					</form>
+				</div>
+				<%
 					}
 				%>
-				</table>
-	
+				<div class="form-group">
+					<h5>Cancel Account</h5>
+					<p>Warning: You will not be able to access your account data, your MEGA contacts or conversations after you confirm this action.</p>
+					<button type="submit">Cancel Account</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -503,8 +553,29 @@
 
 	var lastSelectedTab = sessionStorage.getItem("currentTab");
 	if (!lastSelectedTab) {
-		lastSelectedTab = "#tab_1";
+		lastSelectedTab = "#tab_4";
 	}
 	$(lastSelectedTab).fadeIn();
+
+	
+	
+	
+	
+	const realFileBtn = document.getElementById("real-file");
+	const customBtn = document.getElementById("custom-button1");
+	const customTxt = document.getElementById("custom-text");
+
+	customBtn.addEventListener("click", function() {
+		realFileBtn.click();
+	});
+
+	realFileBtn.addEventListener("change", function() {
+		if (realFileBtn.value) {
+			customTxt.innerHTML = realFileBtn.value
+					.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+		} else {
+			customTxt.innerHTML = "No file chosen, yet.";
+		}
+	});
 </script>
 </html>

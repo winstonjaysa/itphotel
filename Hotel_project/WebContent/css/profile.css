@@ -1,0 +1,55 @@
+@charset "ISO-8859-1";
+
+.proDiv button{
+	width: auto;
+	height: auto;
+	margin: 0;
+	background: #fe435b;
+	font: 16px 'Montserrat', sans-serif;
+	color: #fff;
+	border: 0;
+	padding: 15px 10px 15px 10px;
+	cursor: pointer;
+	
+}
+
+.proDiv .form-group {
+	/*background: #0884ff !important;*/
+	width: 100%;
+	height: auto;
+	overflow: auto;
+	margin-bottom: 10px;
+}
+
+
+
+.proDiv .imgChoose{
+	width: auto;
+	height: 250px;
+}
+.proDiv .imgChoose .imgDiv{
+	width: 150px;
+	height: 150px;
+}
+.proDiv .imgChoose .imgDiv img{
+	width: 100%;
+	height: 100%;
+}
+.proDiv .imgChoose form{
+	position:relative;
+	display: block;
+	top:20px;
+}
+
+.proDiv .imgChoose form .cameraRadiusDiv{
+	position:absolute;
+	top: -55px;
+	left:115px;
+	width: 28px;
+	height: 28px;
+	background: #fe435b;
+	border-radius: 50%;
+	text-align: center;
+	color: #ececec;
+	cursor: pointer;
+}

@@ -9,8 +9,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.lx.Beans.TransManageBeans;
 import com.lx.Beans.UserBean;
 import com.lx.DbConnection.ConnectionProvider;
+import com.mysql.jdbc.Blob;
 
 public class UserDao {
 	private Connection conn;
@@ -86,6 +88,50 @@ public class UserDao {
 		return users;
 	}
 	
+	public List getUser(int uid) {
+		List users=new ArrayList(); 
+		
+		try {
+			String sql="SELECT * FROM users WHERE uid='"+uid+" '";
+			
+			PreparedStatement ps=conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			
+			while(rs.next()) {
+				UserBean userbean=new UserBean();
+				
+				userbean.setUid(rs.getInt("uid"));
+				userbean.setUname(rs.getString("uname"));
+				userbean.setFname(rs.getString("fname"));
+				userbean.setLname(rs.getString("lname"));
+				userbean.setRole(rs.getString("role"));
+				
+				users.add(userbean);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return users;
+	}
+	
+	public void editUser(UserBean ub) {
+		try {
+			String sql = "UPDATE users SET fname=?,lname=?,uname=? WHERE uid=?";
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ps.setString(1, ub.getFname());
+			ps.setString(2, ub.getLname());
+			ps.setString(3, ub.getUname());
+			ps.setInt(4, ub.getUid());
+
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public UserBean loginCheck(UserBean ub) {
 		
 		 String username = ub.getUname();    
@@ -127,6 +173,8 @@ public class UserDao {
 		
 		return ub;
 	}
+	
+	
 //	public static UserBean login(UserBean bean) {
 //		
 //        //preparing some objects for connection 

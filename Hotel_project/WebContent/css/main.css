@@ -213,6 +213,7 @@ table a {
 }
 .acc_ico img{
 	width: 100%;
+	height:100%;
 	border-radius: 50%;
 	border: solid 3px rgba(265,265,265,1);
 }
