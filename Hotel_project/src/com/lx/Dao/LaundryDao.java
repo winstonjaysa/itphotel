@@ -223,6 +223,7 @@ public class LaundryDao {
 			}else if(gg.equals("grossProfit")) {
 				sql= "SELECT SUM(total) FROM laundryreq";
 			}
+			
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 
@@ -235,6 +236,24 @@ public class LaundryDao {
 		}
 		return count;
 
+	}
+    public Integer chart(int i) {
+		int ans = 0;
+		try {
+			String sql = "SELECT COUNT(lid) FROM laundryreq WHERE status=? ";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, i);
+
+			ResultSet rs = ps.executeQuery();
+
+			rs.next();
+			String x = rs.getString(1);
+			System.out.println(x);
+			ans = Integer.parseInt(x);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ans;
 	}
 	
 }

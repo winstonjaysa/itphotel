@@ -176,7 +176,7 @@ padding-left:160px;
 		<section>
 			<div class="card">
 				<h6>Gross profit </h6>
-				<p><%=dao.costSum() %></p>
+				<p>$<%=dao.costSum() %></p>
 			</div>
 			<div class="card">
 				<h6>Total visitors </h6>

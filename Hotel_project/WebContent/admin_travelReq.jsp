@@ -3,7 +3,7 @@
 			<div class="searchbox-table" style="margin-top: 30px">
 				<input class="form-control" id="myInput" type="text" placeholder="Search..">
 			</div>
-			<div style="margin-top: 30px">
+			<div style="width:100%; margin-top: 30px">
 				<h3>Requested Rides</h3>
 			</div>
 			

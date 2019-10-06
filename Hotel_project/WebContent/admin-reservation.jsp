@@ -45,7 +45,7 @@
 }
 
 .container canvas {
-	height=320px;
+	height:320px;
 }
 
 .container {

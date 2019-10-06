@@ -124,27 +124,45 @@ public class paymentDao
 		 return payments;
 		 
 	 }
-//	 
-//	 
-//	 public paymentBean getpaymentbyid(int paymentId) 
-//	 {
-//		 paymentBean pb = new paymentBean();
-//		 
-//		 try 
-//		 {
-//			 String sql = "SELECT * FROM payment WHERE billid=?";
-//	           PreparedStatement ps = conn.prepareStatement(sql);
-//	           ps.setInt(1, paymentId);
-//	           
-//	           ResultSet rs = ps.executeQuery();
-//		 } 
-//		 
-//		 catch (SQLException e)
-//		 {
-//			 e.printStackTrace();
-//		 }
-//		 
-//		 return pb;
-//	 }
-	
+	 
+	 public Integer totPaymet(String gg) {
+			int count = 0;
+			try {
+				String sql=null;
+				
+				if(gg.equals("totBill")) {
+					 sql= "SELECT COUNT(pid) FROM payment";
+				}else if(gg.equals("totPrice")) {
+					 sql= "SELECT SUM(price) FROM payment";
+				}
+				
+				//graph
+				else if(gg.equals("Travel")) {
+					sql= "SELECT COUNT(category) FROM payment WHERE category='"+gg+"'";
+				}else if(gg.equals("Electricity")) {
+					sql= "SELECT COUNT(category) FROM payment WHERE category='"+gg+"'";
+				}else if(gg.equals("Reservation")) {
+					sql= "SELECT COUNT(category) FROM payment WHERE category='"+gg+"'";
+				}else if(gg.equals("Water")) {
+					sql= "SELECT COUNT(category) FROM payment WHERE category='"+gg+"'";
+				}else if(gg.equals("Employee")) {
+					sql= "SELECT COUNT(category) FROM payment WHERE category='"+gg+"'";
+				}else if(gg.equals("Laundry")) {
+					sql= "SELECT COUNT(category) FROM payment WHERE category='"+gg+"'";
+				}else if(gg.equals("Other")) {
+					sql= "SELECT COUNT(category) FROM payment WHERE category='"+gg+"'";
+				}
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery();
+
+				rs.next();
+				String sum = rs.getString(1);
+				count = Integer.parseInt(sum);
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return count;
+
+		}
 }

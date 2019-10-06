@@ -24,7 +24,78 @@
 
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<title>Insert title here</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+
+<style type="text/css">
+.summary{
+	position:relative;
+	display:flex;
+	flex-wrap:wrap;
+	width:100%;
+	top:10px;
+	left:50px;
+	margin-bottom: 50px;
+}
+.summary section {
+	display: flex;
+	flex-wrap: wrap;
+}
+.ui-tabs-anchor {
+	outline: none;
+	width: 1200px;
+	height: 800px;
+}
+
+.container canvas {
+	height:320px;
+}
+
+.container {
+	width: 620PX;
+	height: 380px !important;
+	padding: 15px;
+	background: #f2f5fb;
+	margin: 10px 10px;
+}
+.summary{
+	position:relative;
+	display:flex;
+	flex-wrap:wrap;
+	width:100%;
+	top:10px;
+	left:50px;
+	margin-bottom: 50px;
+}
+
+.card{
+	display:block;
+	width: 200px;
+	height: 70px;
+	min-height: 70px;
+	padding: 5px 10px;
+	margin: 10px;
+}
+.card:nth-child(1){
+	background: #f39c12;
+}
+.card:nth-child(2){
+	background: #00a65a;
+}
+.card:nth-child(3){
+	background: #dd4b39;
+}
+.card:nth-child(4){
+	background: #00c0ef;
+}
+.card h6{
+	color:white;
+	margin: 4px 10px;
+}
+.card p{
+	margin: 10px 10px;
+}
+</style>
+<title>Admin-Payment</title>
 </head>
 <body>
 	<% 
@@ -69,6 +140,12 @@
 			<div class="panel" id="Panel_3">
 			<i class="fas fa-comments"></i>
 			<span>Message</span>
+		</div>
+		</a>
+		<a data-tab="#tab_4" data-tabCss="#panel_4">
+			<div class="panel" id="Panel_4">
+			<i class="fas fa-comments"></i>
+			<span>Summary</span>
 		</div>
 		</a>
 	</div>
@@ -232,6 +309,35 @@
 				</div>
 			</div>
 		</div>
+		<div id="tab_4" class="panel_main">
+			<div class="summary">
+				<section>
+					<div class="card">
+						<h6>Total Payed Bill </h6>
+						<p><%=dao.totPaymet("totBill") %></p>
+					</div>
+					<div class="card">
+						<h6>Total Cost</h6>
+						<p>$ <%=dao.totPaymet("totPrice") %></p>
+					</div>
+				</section>
+			</div>
+			<div class="summary">
+				 <div class="container">
+					<input type="number" id="Travel" value="<%=dao.totPaymet("Travel")%>" disabled hidden>
+					<input type="number" id="Laundry" value="<%=dao.totPaymet("Laundry")%>" disabled hidden>
+					<input type="number" id="Electricity" value="<%=dao.totPaymet("Electricity")%>" disabled hidden>
+					<input type="number" id="Reservation" value="<%=dao.totPaymet("Reservation")%>" disabled hidden>
+					<input type="number" id="Water" value="<%=dao.totPaymet("Water")%>" disabled hidden>
+					<input type="number" id="Employee" value="<%=dao.totPaymet("Employee")%>" disabled hidden>
+					<input type="number" id="Other" value="<%=dao.totPaymet("Other")%>" disabled hidden>
+					
+					
+						<h4><span id="currentMonth"></span>Payment status</h4>
+						<canvas id="myChart" ></canvas>
+				</div>  
+			</div>
+		</div>
 	</div>
 
 </body>
@@ -288,6 +394,59 @@ function confirmDel(id){
 	  else{
 
 		    }
-	}		
+	}	
+	
+	
+	
+	var Travel = document.getElementById("Travel").value;
+	var Electricity = document.getElementById("Electricity").value;
+	var Reservation = document.getElementById("Reservation").value;
+	var Water = document.getElementById("Water").value;
+	var Employee = document.getElementById("Employee").value;
+	var Laundry = document.getElementById("Laundry").value;
+	var Other = document.getElementById("Other").value;
+	
+	
+	var ctx = document.getElementById('myChart').getContext('2d');
+	var myChart = new Chart(ctx,
+			{
+				type : 'bar',
+				data : {
+					labels : [ 'Travel', 'Electricity', 'Reservation','Water','Employee','Laundry','Other' ],
+					datasets : [ {
+						label : '# of Votes',
+						data : [ Travel, Electricity, Reservation,Water,Employee,Laundry,Other ],
+						backgroundColor : [
+						//'rgba(255, 99, 132, 0.2)',
+						'rgba(204, 246, 228, 0.3)',
+						//'rgba(54, 162, 235, 0.2)',
+						'rgba(253, 230, 216, 0.3)',
+						//'rgba(255, 206, 86, 0.2)',
+						'rgba(253, 216, 239, 0.3)',
+								'rgba(75, 192, 192, 0.2)',
+								'rgba(153, 102, 255, 0.2)',
+								'rgba(255, 159, 64, 0.2)' ],
+						borderColor : [
+						//'rgba(255, 99, 132, 1)',
+						'rgba(38, 134, 78, 1)',
+						//'rgba(54, 162, 235, 1)',
+						'rgba(201, 102, 50, 1)',
+						//'rgba(255, 206, 86, 1)',
+						'rgba(222, 11, 142, 1)', 'rgba(75, 192, 192, 1)',
+								'rgba(153, 102, 255, 1)',
+								'rgba(255, 159, 64, 1)' ],
+						borderWidth : 1
+					} ]
+				},
+				options : {
+					scales : {
+						yAxes : [ {
+							ticks : {
+								beginAtZero : true
+							}
+						} ]
+					}
+				}
+			});
 </script>
 </html>

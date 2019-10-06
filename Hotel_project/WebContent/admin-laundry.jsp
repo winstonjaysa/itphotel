@@ -22,8 +22,8 @@
 	rel="stylesheet">
 <script src="https://kit.fontawesome.com/6bcee8e3da.js"></script>
 
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 <style type="text/css">
 .summary{
 	position:relative;
@@ -230,6 +230,16 @@
 				<p>$ <%=dao.totLaundryReq("grossProfit") %></p>
 			</div>
 		</div>
+		<div class="summary">
+				 <div class="container">
+					<input type="number" id="prog" value="<%=dao.chart(0)%>" disabled hidden>
+					<input type="number" id="finish" value="<%=dao.chart(1)%>" disabled hidden>
+					<input type="number" id="washing" value="<%=dao.chart(2)%>" disabled hidden>
+					
+						<h4><span id="currentMonth">month</span> Taxi request status</h4>
+						<canvas id="myChart" ></canvas>
+				</div>  
+			</div>	
 	</div>
 	</div>
 </body>
@@ -298,5 +308,51 @@ function confirmDel(id){
 		  });
 		});
 	
+	
+	var prog = document.getElementById("prog").value;
+	var washing = document.getElementById("washing").value;
+	var finish = document.getElementById("finish").value;
+	
+	var ctx = document.getElementById('myChart').getContext('2d');
+	var myChart = new Chart(ctx,
+			{
+				type : 'bar',
+				data : {
+					labels : [ 'Progress', 'Washing', 'Finished' ],
+					datasets : [ {
+						label : '# of Votes',
+						data : [ prog, washing, finish ],
+						backgroundColor : [
+						//'rgba(255, 99, 132, 0.2)',
+						'rgba(204, 246, 228, 0.3)',
+						//'rgba(54, 162, 235, 0.2)',
+						'rgba(253, 230, 216, 0.3)',
+						//'rgba(255, 206, 86, 0.2)',
+						'rgba(253, 216, 239, 0.3)',
+								'rgba(75, 192, 192, 0.2)',
+								'rgba(153, 102, 255, 0.2)',
+								'rgba(255, 159, 64, 0.2)' ],
+						borderColor : [
+						//'rgba(255, 99, 132, 1)',
+						'rgba(38, 134, 78, 1)',
+						//'rgba(54, 162, 235, 1)',
+						'rgba(201, 102, 50, 1)',
+						//'rgba(255, 206, 86, 1)',
+						'rgba(222, 11, 142, 1)', 'rgba(75, 192, 192, 1)',
+								'rgba(153, 102, 255, 1)',
+								'rgba(255, 159, 64, 1)' ],
+						borderWidth : 1
+					} ]
+				},
+				options : {
+					scales : {
+						yAxes : [ {
+							ticks : {
+								beginAtZero : true
+							}
+						} ]
+					}
+				}
+			});
 </script>
 </html>
