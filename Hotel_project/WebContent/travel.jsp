@@ -46,8 +46,12 @@
 <div class="main">
 	
 	<section id="travelSug">
-		<div class="popup-notification-pannel" id="popup-notification-pannel">
-			<p>successfully. <i class="fas fa-clipboard-check"></i></p>
+		<div class="popup-notification-pannel successColour" id="popup-notification-pannel">
+			<p><%if(request.getParameter("message")!=null){ %>
+				<%=request.getParameter("message") %> 
+				<%} %>
+				<i class="fas fa-cog"></i>
+			</p>
 		</div>
 		<div class="headTitle">
 			<h2>Popular destinations in 2019</h2>
@@ -183,7 +187,7 @@
 							  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 							    <button type="button" class=" btn dropdown-item" data-toggle="modal" data-target="#exampleModal" data-whatever="<%=travel.getTid()%>" disabled="disabled">Edit</button>
 							    <button type="button" class="btn dropdown-item" disabled="disabled"><a href="TransManageHandler?action=deleteReq&tid=<%=travel.getTid()%>">Del</a></button>
-							    <button type="button" class="btn dropdown-item" data-toggle="modal" data-target="#MesssgeDialogBox<%=travel.getTid()%>" data-whatever="<%=travel.getTid()%>,<%=travel.getUid()%>">Message</button>
+							    <button type="button" class="btn dropdown-item" onclick="disMessageSession('#MesssgeDialogBox<%=travel.getTid()%>')" data-toggle="modal" data-target="#MesssgeDialogBox<%=travel.getTid()%>" data-whatever="<%=travel.getTid()%>,<%=travel.getUid()%>">Message</button>
 							  </div>
 						</div>
 					</td>
@@ -371,7 +375,7 @@ $('#dropdown_menu').on('show.bs.modal', function (event){
 	  modal.find('.modal-body input').val(recipient)
 	})
 	
-	
+/*	
 $("#navigation a").on("click", function(e){
     e.preventDefault();
     
@@ -380,6 +384,28 @@ $("#navigation a").on("click", function(e){
     $(".panel_main").hide();
     $(currTab).fadeIn();
   });
+  
+	var lastSelectedTab = sessionStorage.getItem("currentTab");
+    if (!lastSelectedTab) {
+      lastSelectedTab = "#tab_1";
+    }
+    $(lastSelectedTab).fadeIn();
+    
+   */ 
+    
+function disMessageSession(gg){
+    //eg.preventDefault();
+    
+    var currTab = gg;
+    sessionStorage.setItem("currentTab", currTab);
+    document.getElementById(currTab).fadeIn();
+  };
+  
+	var lastSelectedTab = sessionStorage.getItem("currentTab");
+    if (lastSelectedTab) {
+    	document.getElementById(currTab).fadeIn();
+    }
+   // $(lastSelectedTab).fadeIn();
 
 /* ********** */
 	/* javascript for showing the bottom of the div content with overflow hidden */
@@ -462,7 +488,7 @@ function confirmInsert(){
 //window.onload = function(){
 function notifyPopup(){
 	document.getElementById("popup-notification-pannel").style.opacity = 1;
-	window.setTimeout(fadeout, 3000);
+	window.setTimeout(fadeout, 5000);
 	}
  
 function fadeout() {

@@ -1,0 +1,163 @@
+@charset "ISO-8859-1";
+
+.reg-log-main-div{
+	display:flex;
+	flex-direction:row;
+	width: 100%;
+	height:100vh;
+	
+}
+
+.mainImgDiv{
+	width: 40%;
+	height: 100%;
+	margin: 0;
+	overflow: hidden;
+}
+.mainImgDiv img{
+	width: 100%;
+	height: 100%;
+}
+.mainFormDiv{
+	width: 60%;
+	height:100%;
+	
+	
+}
+.mainFormDiv-reg{
+	padding:180px;
+	padding-top: 100px;
+}
+.mainFormDiv-log{
+	padding:260px;
+	padding-top: 130px;
+}
+.trpdiv{
+	width:100%;
+	height: 100%;
+}
+.trpdiv h2{
+	margin-bottom: 20px ;
+}
+.trpdiv span a{
+	font-weight: 600;
+	color: #cc0019;
+}
+.warningColor{
+	color: #cc0019;
+}
+.trpdiv_form_div{
+	display:flex;
+	flex-direction:column;
+	width: 100%;
+	
+}
+.trpdiv_form_group{
+	display:flex;
+	flex-direction:row;
+	width: 100%;
+	
+}
+.trpdiv_form_info{
+	display:flex;
+	flex-direction:column;
+	height:80px;
+	margin: 10px 30px 10px 0;
+}
+.trpdiv_form_info-reg{
+	width: 50%;
+}
+.trpdiv_form_info-log{
+	width: 100%;
+}
+
+.trpdiv_form_info label{
+	color: #777d7b;
+}
+.trpdiv_form_info input[type=text],input[type=number],input[type=password]{
+	width: 100%;
+	padding: 8px 15px;
+	border:2px solid #e1e1e1;
+	border-radius:5px; 
+	color: #868c8a;
+}
+.trpdiv_form_div input[type=checkbox]{
+	width: 20px;
+	color: #cc0019;
+}
+
+.trpdiv input[type=submit]{
+	
+	background: #fe435b;
+	font-size:13px;
+	font-weight:600;
+	color:#f2f2f2;
+	padding: 8px 22px 9px 22px;
+	margin-top: 15px;
+	border:0;
+	border-radius: 3px;
+}
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.container input[type=checkbox] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  margin-right:50px;
+  margin-top:15px;
+  background-color: #eee;
+}
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+.container input:checked ~ .checkmark {
+  background-color: #cc0019;
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+.container .checkmark:after {
+  left: 7px;
+  top: 4px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.condition{
+	margin-left: 25px;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #212529;
+	text-align: left;
+}

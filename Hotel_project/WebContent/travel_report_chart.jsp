@@ -11,8 +11,6 @@ a {
 	text-decoration: none;
 }
 
-
-
 h4 {
 	text-align: center;
 	margin-top: 0px;
@@ -115,8 +113,7 @@ h4 {
 			<input type="number" id="y_pending" value="<%=dao.reportChart_yearly(0)%>" disabled hidden>
 			<input type="number" id="y_deny" value="<%=dao.reportChart_yearly(2)%>" disabled hidden>
 			
-			
-				<h4><span >2019</span> Taxi request status</h4>
+			<h4><span >2019</span> Taxi request status</h4>
 				<canvas id="y_myChart" height="200px"></canvas>
 		</div>
 		

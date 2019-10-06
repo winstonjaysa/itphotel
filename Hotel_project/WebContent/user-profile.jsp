@@ -544,7 +544,7 @@
 							</div>
 							<div class="form-group-details">
 								<label>Role</label>
-								<input type="text" name="reole" value="<%=res.getRole()%> - <%=res.getAdmin_role_type() %>" readonly="readonly">
+								<input type="text" name="reole" value="<%=res.getRole()%> <%if(res.getAdmin_role_type()!=null){ %> - <%=res.getAdmin_role_type() %> <%} %>" readonly="readonly">
 							</div>
 						</div>
 						<div class="divDiv">

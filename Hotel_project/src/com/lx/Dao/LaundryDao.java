@@ -22,7 +22,7 @@ public class LaundryDao {
 	
 	public void NewLoundryReq(LaundryBeans laundryBeans) {
 		try {
-			String sql = "INSERT INTO laundryreq (uid,uname,nic,item,date,quantity,bag,beaded_skirt,unitprice,total,status) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO laundryreq (uid,uname,nic,item,date,quantity,bag,beaded_skirt,unitprice,total,status,tshirt,frock,trousers,jeans) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			
 			PreparedStatement ls = conn.prepareStatement(sql);
 			
@@ -37,6 +37,10 @@ public class LaundryDao {
 			ls.setDouble(9,laundryBeans.getUnitPrice());
 			ls.setDouble(10,laundryBeans.getTotal());
 			ls.setInt(11, laundryBeans.getStatus());
+			ls.setInt(12, laundryBeans.getTshirt());
+			ls.setInt(13, laundryBeans.getFrock());
+			ls.setInt(14, laundryBeans.getTrousers());
+			ls.setInt(15, laundryBeans.getJeans());
 			
 			ls.executeUpdate();
 			
@@ -82,6 +86,10 @@ public class LaundryDao {
 				lb.setItem(re.getString("item"));
 				lb.setDate(re.getString("date"));
 				lb.setTotal(re.getDouble("total"));
+				lb.setTshirt(re.getInt("tshirt"));
+				lb.setFrock(re.getInt("frock"));
+				lb.setTrousers(re.getInt("trousers"));
+				lb.setJeans(re.getInt("jeans"));
 				lb.setBag(re.getInt("bag"));
 				lb.setBeaded_skirt(re.getInt("beaded_skirt"));
 				lb.setStatus(re.getInt("status"));
@@ -127,13 +135,17 @@ public class LaundryDao {
 	 {
 		 try 
 		 {
-			 String sql = "UPDATE laundryreq SET bag=?,beaded_skirt=? WHERE lid=?";
+			 String sql = "UPDATE laundryreq SET bag=?,beaded_skirt=?,tshirt=?,frock=?,trousers=?,jeans=? WHERE lid=?";
 	    	 PreparedStatement ps = conn.prepareStatement(sql);
 //	    	 	
 	    	 	
 	    	 	ps.setInt(1, lb.getBag());
 	    	 	ps.setInt(2, lb.getBeaded_skirt());
-	    	 	ps.setInt(3, lb.getLid());
+	    	 	ps.setInt(3, lb.getTshirt());
+	    	 	ps.setInt(4, lb.getFrock());
+	    	 	ps.setInt(5, lb.getTrousers());
+	    	 	ps.setInt(6, lb.getJeans());
+	    	 	ps.setInt(7, lb.getLid());
 	    	 	
 	    	 	ps.executeUpdate();
 	    		

@@ -285,13 +285,20 @@ table a {
 
 #popup-notification-pannel{
 	position:fixed;
-	width:250px;
-	height: 100px;
+	width:auto;
+	height: 80px;
+	padding: 16px 30px; 
+	opacity:0;
+	transition:0.5s;
+	z-index:5;
+}
+.successColour{
 	background:#ccf6e4;
 	color:#26864e;
-	padding: 25px 30px; 
-	opacity:0;
-	z-index:5;
+}
+.warningColour{
+	background:#ffa5b0;
+	color:#cc0019;
 }
 
 #popup-notification-pannel p{
@@ -302,7 +309,18 @@ table a {
 	top:5px;
 	font-size: 30px;
 	margin: 5px 5px 5px 15px;
+	-webkit-animation: rotation 2s infinite linear;
 }
+
+@-webkit-keyframes rotation {
+		from {
+				-webkit-transform: rotate(0deg);
+		}
+		to {
+				-webkit-transform: rotate(359deg);
+		}
+}
+
 /********************/
 .leftPanel{
 	position: fixed;

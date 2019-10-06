@@ -60,6 +60,8 @@ public class LaundryHandler extends HttpServlet {
 		String action = request.getParameter("action");
 		String url = request.getParameter("lastUrl");
 		
+		
+		
 		if(action.equals("newLaundryRq")) {
 			LaundryBeans laundry = new LaundryBeans();
 			
@@ -73,12 +75,18 @@ public class LaundryHandler extends HttpServlet {
 			laundry.setTotal(Double.parseDouble(request.getParameter("total")));
 			laundry.setBag(Integer.parseInt(request.getParameter("bag")));
 			laundry.setBeaded_skirt(Integer.parseInt(request.getParameter("breaded-skirt")));
+			laundry.setTshirt(Integer.parseInt(request.getParameter("tshirt")));
+			laundry.setFrock(Integer.parseInt(request.getParameter("frock")));
+			laundry.setTrousers(Integer.parseInt(request.getParameter("trousers")));
+			laundry.setJeans(Integer.parseInt(request.getParameter("jeans")));
 			laundry.setStatus(0);
 			
 			
 			dao.NewLoundryReq(laundry);
 			System.out.println("inserted");
-			response.sendRedirect("user-laundry.jsp?status=successReq");
+			
+			String message="You have successfully added a laundry request.";
+			response.sendRedirect("user-laundry.jsp?status=successReq&message="+message+"");
 			
 			
 			
@@ -87,6 +95,10 @@ public class LaundryHandler extends HttpServlet {
         	LaundryBeans lb = new LaundryBeans();
         	
         	
+        	lb.setTshirt(Integer.parseInt(request.getParameter("tshirt")));
+        	lb.setFrock(Integer.parseInt(request.getParameter("frock")));
+        	lb.setTrousers(Integer.parseInt(request.getParameter("trousers")));
+        	lb.setJeans(Integer.parseInt(request.getParameter("jeans")));
         	lb.setBag(Integer.parseInt(request.getParameter("bag")));
         	lb.setBeaded_skirt(Integer.parseInt(request.getParameter("Beaded_skirt")));
         	lb.setLid(Integer.parseInt(request.getParameter("lid")));

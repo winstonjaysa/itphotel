@@ -45,13 +45,17 @@
 	<br>
 	
 	<section>
-		<div class="popup-notification-pannel" id="popup-notification-pannel">
-			<p>successfully. <i class="fas fa-check-circle"></i></p>
+		<div class="popup-notification-pannel successColour" id="popup-notification-pannel">
+			<p><%if(request.getParameter("message")!=null){ %>
+				<%=request.getParameter("message") %> 
+				<%} %>
+				<i class="fas fa-cog"></i>
+			</p>
 		</div>
 		<div class="card-1">
 			<div class="form-style">
 			<div id="error_message"></div>
-				<form onsubmit="return validate();" action="LaundryHandler" method="post">
+				<form onsubmit="return confirm('Are you sure?')" action="LaundryHandler" method="post">
 					<input type="hidden" name="action" value="newLaundryRq">
 					<input type="hidden" name="uid" value="<%=uid%>">
 					<input type="hidden" name="uname" value="<%=uname%>">
@@ -60,24 +64,41 @@
 					
 					
 					<div class="form_item">
-						<label>date</label> <input type="date" name="date">
+						<label>date</label>
+						<input id="datefield" type='date' name="date" min='1899-01-01' max='2022-07-01' onclick="dateGet()" required="required"></input>
+					</div>
+					<div class="form_item">
+						<label>T-shirt </label><br> 
+						<input type="number" name="tshirt" id="tshirt" value="0" min="0" max="15" required="required" ><br>
+					</div>
+					<div class="form_item">
+						<label>Frock </label><br> 
+						<input type="number" name="frock" id="frock" value="0" min="0" max="15" required="required"><br>
+					</div>
+					<div class="form_item">
+						<label>Trousers </label><br> 
+						<input type="number" name="trousers" id="trousers" value="0" min="0" max="15" required="required"><br>
+					</div>
+					<div class="form_item">
+						<label>Jeans </label><br> 
+						<input type="number" name="jeans" id="jeans" value="0" min="0" max="15" required="required"><br>
 					</div>
 					<div class="form_item">
 						<label>bag</label> 
-						<input type="number" name="bag" id="bag" min="0" max="15">
+						<input type="number" name="bag" id="bag" min="0" max="15" value="0">
 					</div>
 					<div class="form_item">
 						<label>breaded skirt</label> 
-						<input type="number" name="breaded-skirt" id="skirt" min="0" max="15"> <br>
+						<input type="number" name="breaded-skirt" id="skirt" min="0" max="15" value="0"> <br>
 						<br>
 					</div>
 					<div class="form_item">
 						<label>items</label> 
-						<input type="text" name="item" id="dis-items" readonly>
+						<input type="text" name="item" id="dis-items" value="0" readonly>
 					</div>
 					<div class="form_item">
 						<label>total</label> 
-						<input type="text" name="total" id="dis-tot" readonly>
+						<input type="text" name="total" id="dis-tot" value="0" readonly>
 					</div>
 					<!-- <button type="submit">submit</button>  -->
 					<input type="submit">
@@ -96,6 +117,10 @@
 						<th>Item</th>
 						<th>Date</th>
 						<th>Price</th>
+						<th>T-shirts</th>
+						<th>Frock</th>
+						<th>Trousers</th>
+						<th>Jeans</th>
 						<th>Bag</th>
 						<th>Beaded Skirt</th>
 						<th>Status</th>
@@ -116,6 +141,10 @@
 						<td><%=laundry.getItem()%></td>
 						<td><%=laundry.getDate()%></td>
 						<td><%=laundry.getTotal()%></td>
+						<td><%=laundry.getTshirt() %></td>
+						<td><%=laundry.getFrock() %></td>
+						<td><%=laundry.getTrousers()%></td>
+						<td><%=laundry.getJeans() %></td>
 						<td><%=laundry.getBag() %></td>
 						<td><%=laundry.getBeaded_skirt() %></td>
 
@@ -127,7 +156,7 @@
 						<td class="warning-td">Deny</td>
 						<%} %>
 						<td><a
-							href="LaundryHandler?action=deleteReq&lid=<%=laundry.getLid()%>">Delete</a></td>
+							href="LaundryHandler?action=deleteReq&lid=<%=laundry.getLid()%> " onclick="return confirm('Are you sure?')">Delete</a></td>
 						<td><button class="btn dropdown-item" data-toggle="modal"
 								data-target="#dropdown_menu<%=laundry.getLid()%>"
 								data-whatever="<%=laundry.getLid()%>">Edit</button></td>
@@ -150,15 +179,28 @@
 									<div class="form_body">
 										<div class="form-group">
 											<input type="hidden" value="editLaundryReq" name="action">
-											<input type="hidden" value="user-profile.jsp" name="lastUrl">
-											<label>User Name</label><br> <input type="text"
+											<input type="hidden" value="user-laundry.jsp" name="lastUrl">
+											<label>User Name</label><br> 
+											<input type="text"
 												name="destination" value="<%=laundry.getUname()%>"
-												required="required"><br>
+												readonly="readonly"><br>
+										</div>
+									
+										<div class="form-group">
+											<label>T-shirt </label><br> <input type="text" name="tshirt"
+												value="<%=laundry.getTshirt()%>" required="required" ><br>
 										</div>
 										<div class="form-group">
-											<label>Need date </label><br> <input type="date"
-												name="needdate" value="<%=laundry.getDate()%>"
-												required="required"><br>
+											<label>Frock </label><br> <input type="text" name="frock"
+												value="<%=laundry.getFrock()%>" required="required"><br>
+										</div>
+										<div class="form-group">
+											<label>Trousers </label><br> <input type="text" name="trousers"
+												value="<%=laundry.getTrousers()%>" required="required"><br>
+										</div>
+										<div class="form-group">
+											<label>Jeans </label><br> <input type="text" name="jeans"
+												value="<%=laundry.getJeans()%>" required="required"><br>
 										</div>
 										<div class="form-group">
 											<label>Bag </label><br> <input type="text" name="bag"
@@ -194,23 +236,59 @@
 			</div>
 </body>
 <script type="text/javascript">
+
+//date picker range code
+function dateGet(){
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+	 if(dd<10){
+	        dd='0'+dd
+	    } 
+	    if(mm<10){
+	        mm='0'+mm
+	    } 
+	
+	today = yyyy+'-'+mm+'-'+dd;
+	document.getElementById("datefield").setAttribute("min", today);
+}	
+
+
 	var first = document.getElementById('bag');
 	var second = document.getElementById('skirt');
+	var three = document.getElementById('tshirt');
+	var four = document.getElementById('frock');
+	var five = document.getElementById('trousers');
+	var six = document.getElementById('jeans');
 	var result1 = document.getElementById('dis-tot');
 	var result2 = document.getElementById('dis-items');
 
 	first.addEventListener("input", sum);
 	second.addEventListener("input", sum);
+	three.addEventListener("input", sum);
+	four.addEventListener("input", sum);
+	five.addEventListener("input", sum);
+	six.addEventListener("input", sum);
 
 	function sum() {
 
 		var one = parseInt(first.value) || 0;
 		var two = parseInt(second.value) || 0;
+		var it3 = parseInt(three.value) || 0;
+		var it4 = parseInt(four.value) || 0;
+		var it5 = parseInt(five.value) || 0;
+		var it6 = parseInt(six.value) || 0;
 
 		var onetot = one * 10;
 		var twotot = two * 20;
-		var tot = one + two;
-		var add = onetot + twotot;
+		var it3tot = it3 * 5;
+		var it4tot = it4 * 15;
+		var it5tot = it5 * 30;
+		var it6tot = it6 * 3;
+		
+		var tot = one + two+it3+it4+it5+it6;
+		var add = onetot + twotot+it3tot+it4tot+it5tot+it6tot;
 
 		result1.value = add;
 		result2.value = tot;

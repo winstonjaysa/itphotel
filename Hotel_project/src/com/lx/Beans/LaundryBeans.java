@@ -4,7 +4,7 @@ public class LaundryBeans {
 	private String uname, nic, item, date;
 	private int lid, quantity,bag,beaded_skirt,beaded_shalwar_top,uid,status;
 	private double unitPrice, total;
-	
+	private int tshirt,frock,trousers,jeans;
 	
 	
 	public int getLid() {
@@ -78,6 +78,30 @@ public class LaundryBeans {
 	}
 	public void setBeaded_skirt(int beaded_skirt) {
 		this.beaded_skirt = beaded_skirt;
+	}
+	public int getTshirt() {
+		return tshirt;
+	}
+	public void setTshirt(int tshirt) {
+		this.tshirt = tshirt;
+	}
+	public int getFrock() {
+		return frock;
+	}
+	public void setFrock(int frock) {
+		this.frock = frock;
+	}
+	public int getTrousers() {
+		return trousers;
+	}
+	public void setTrousers(int trousers) {
+		this.trousers = trousers;
+	}
+	public int getJeans() {
+		return jeans;
+	}
+	public void setJeans(int jeans) {
+		this.jeans = jeans;
 	}
 	public int getBeaded_shalwar_top() {
 		return beaded_shalwar_top;

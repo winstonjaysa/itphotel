@@ -11,7 +11,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/home.css">
+<link rel="stylesheet" href="css/log-reg.css">
 <link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -37,32 +37,60 @@
 	
 %>
 	<%@include file="naviBar-user.jsp"%>
+<div class="reg-log-main-div">
+	<div class="mainImgDiv">
+			<img src="img/log-reg/rg_bg_1.jpg">
+	</div>
+	<div class="mainFormDiv mainFormDiv-log" >
+			<div class="trpdiv">
+			<span class="status-warning">
+				<%
+				if(request.getParameter("status")!=null&& request.getParameter("status").equals("wrongvalid")){
+					%>
+						Wrong username or password entered !
+					<% 
+				}
+				else if(request.getParameter("status")!=null&& request.getParameter("status").equals("loginfirst")){
+					%>
+						You must login first ! 
+					<% 
+				}
+				%>
+				</span>
+				<form action="UserHandler" method="post" >
+					<h2>Login</h2>
+					<label style="font-size: 14px;margin-top: 10px;font-weight: 600;">Already have an account? <span ><a href="#">Login in.</a></span></label>
+					
+					<input type="hidden" name="action" value="login">
 
-	
-<div class="trpdiv" style="width: 400px;">
-	<span class="status-warning">
-		<%
-		if(request.getParameter("status")!=null&& request.getParameter("status").equals("wrongvalid")){
-			%>
-				Wrong username or password entered !
-			<% 
-		}
-		else if(request.getParameter("status")!=null&& request.getParameter("status").equals("loginfirst")){
-			%>
-				You must login first ! 
-			<% 
-		}
-		%>
-	</span>
-	<h2>Login</h2>
-	<form action="UserHandler" method="post" >
-		<input type="hidden" name="action" value="login">
-		<label>Username | Email</label>
-		<input type="text" name="userName">
-		<label>password</label>
-		<input type="password" name="password">
-		<button type="submit">Login</button>
-	</form>
+					<div class="trpdiv_form_div">
+						<div class="trpdiv_form_group">
+							<div class="trpdiv_form_info trpdiv_form_info-log">
+								<label>Username | Email</label>
+								<input type="text" name="userName">
+							</div>
+						</div>
+					</div>
+					<div class="trpdiv_form_div">
+						<div class="trpdiv_form_group">
+							<div class="trpdiv_form_info trpdiv_form_info-log">
+								<label>password</label>
+								<input type="password" name="password">
+							</div>
+						</div>
+					</div>
+					<div class="trpdiv_form_group">
+							<div class="">
+								<label class="container"> 
+									<input type="checkbox" name="confirmEmailMessage" ><span class="checkmark"></span>
+								</label>
+									<span class="condition">Remember me.</span>
+							</div>	
+					</div>
+					<input type="submit" value="Login">
+				</form>
+			</div>
+		</div>
 </div>
 </body>
 <script type="text/javascript">

@@ -246,14 +246,23 @@ button {
 	width: 350px;
 }
 .trpdiv input[type=submit]{
-	width: 350px;
-	float: right;
+	position:relative;
+	background: #fe435b !important;
+	width: 140px;
+	height: 50px;
+	font: 15px 'Montserrat', sans-serif;
+	color: #fff;
+	border: 0;
+	margin:0;
+	padding: 5px;
+	cursor: pointer;
 }
 
 .customtrpdiv{
 	padding-top: 15px;
 	padding-bottom: 15px;
 	top:55%;
+	width: 400px;
 }
 .side-cont{
 	position: relative;

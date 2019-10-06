@@ -75,7 +75,10 @@ public class TransManageHandler extends HttpServlet {
 			travel.setIsApproved(0);
 			
 			dao.NewArrange(travel);
-			response.sendRedirect("travel.jsp?status=successReq");
+			
+			String message="You have successfully changed your request.";
+			
+			response.sendRedirect("travel.jsp?status=successReq&message="+message+"");
 			System.out.println("Arrange success!");
 		}
 		
