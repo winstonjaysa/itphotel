@@ -247,8 +247,8 @@ margin-bottom: 0px;
 													<input type="text" name="gender" value="<%=pb.getGender()%>" required="required"><br>
 												</div>
 												<div class="form-group">
-													<label>Age</label><br>
-													<input type="number" name="age" value="<%=pb.getAge()%>" required="required"><br>
+													<label>DOB</label><br>
+													<input type="date" name="age" value="<%=pb.getDob()%>" required="required"><br>
 												</div>
 												<div class="form-group">
 													<label>Position</label><br>
@@ -295,7 +295,7 @@ margin-bottom: 0px;
 							
 							<div class="form_item">
 								<label>Employee ID</label>
-								<input type="number" name="pid" placeholder="pid" id="pid">
+								<input type="text" name="pid" placeholder="pid" id="pid">
 							</div>
 							<div class="form_item">
 								<label>Nic</label>
@@ -356,7 +356,7 @@ margin-bottom: 0px;
 					<button type="button" id="custom-button1" style="margin-bottom:60px;margin-right:60px">CHOOSE A FILE</button>
                     
                     </div>
-<!--             		<span id="custom-text" style="margin-left:50px;">No file chosen, yet.</span> -->
+                    <!-- <span id="custom-text" style="margin-left:50px;">No file chosen, yet.</span> -->
             		<div class="form_item">
             		
 								<label>Key Id</label>
@@ -486,8 +486,8 @@ margin-bottom: 0px;
 								
 							</tr>
 							<%
-								}
 								//}
+								}
 							%>
 		
 						</tbody>
@@ -552,13 +552,17 @@ margin-bottom: 0px;
         	position = document.getElementById("position");
         	hourlyrate = document.getElementById("hourlyrate");
         	fixedsalary = document.getElementById("fixedsalary");
-
+        	letterNumber = /^[0-9a-zA-Z]+$/;
+        	val = document.getElementById("nic").value;
+        	 
+        	
+        	
            if( document.myForm.ename.value == "" ) {
               alert( "Please provide the Employee Name!" );
               document.myForm.ename.focus() ;
               return false;
            }
-           if( document.myForm.pid.value == ""|| isNaN( document.myForm.pid.value)) {
+           if( document.myForm.pid.value == "") {
 
               alert( "Please provide Employee Id!" );
               document.myForm.pid.focus() ;
@@ -584,19 +588,37 @@ margin-bottom: 0px;
            }
           
 
-           if( document.myForm.age.value == "" ) {
-              alert( "Please employees age!");
+           if( document.myForm.age.value == "") {
+              alert( "Please employees DOB!");
               document.myForm.age.focus() ;
               return false;
            }
 
-           if( document.myForm.hourlyrate.value == "" ) {
+           if( document.myForm.hourlyrate.value == "") {
               alert( "Please provide employees hourlyrate!" );
               document.myForm.hourlyrate.focus() ;
               return false;
            }
+           
+           if(document.myForm.hourlyrate.value < 0){
+        	   
+        	   alert( "cant have negative salary!" );
+               document.myForm.hourlyrate.focus() ;
+               return false;
+        	   
+           }
+           
+           
+           if(document.myForm.fixedsalary.value < 0){
+        	   
+        	   alert( "cant have negative salary!" );
+               document.myForm.fixedsalary.focus() ;
+               return false;
+        	   
+           }
+           
 
-           if( document.myForm.fixedsalary.value == "") {
+           if( document.myForm.fixedsalary.value == "" || document.myForm.fixedsalary.value < 0) {
                alert( "Please provide employees fixedsalary!" );
                document.myForm.fixedsalary.focus() ;
                return false;
@@ -611,6 +633,9 @@ margin-bottom: 0px;
               return false;
            }
 
+           
+        
+           
            if((document.myForm.hourlyrate.value != "")&&(document.myForm.fixedsalary.value != "")){  
         		 
         	   
@@ -649,14 +674,54 @@ margin-bottom: 0px;
               document.myForm1.pid1.focus() ;
               return false;
            }
-           if( document.myForm1.tax.value == "" && document.myForm1.tax.value < 0) {
+           if( document.myForm1.tax.value == "") {
 
-              alert( "Please provide a valid tax Rate" );
+              alert( "Please provide a value for tax Rate" );
               document.myForm1.tax.focus() ;
               return false;
           
               
            }
+           
+           if( document.myForm1.ltaken.value == "") {
+
+               alert( "Please provide a value for hourlyrate" );
+               document.myForm1.ltaken.focus() ;
+               return false;
+           
+               
+            }
+           
+           if( document.myForm1.hworked.value == "") {
+
+               alert( "Please provide a value for fixedsalary" );
+               document.myForm1.hworked.focus() ;
+               return false;
+           
+               
+            }
+           if(document.myForm1.tax.value < 0){
+        	   
+        	   alert( "cant have negative tax" );
+               document.myForm1.tax.focus() ;
+               return false;
+        	   
+           }
+           
+           if(document.myForm1.hworked.value < 0){
+        	   
+        	   alert( "cant have negative salary" );
+               document.myForm1.hworked.focus() ;
+               return false;
+        	   
+           }
+           if(document.myForm1.ltaken.value < 0){
+	   
+	           alert( "cant have negative salary" );
+               document.myForm1.ltaken.focus() ;
+               return false;
+	   
+              }
            
              if((document.myForm1.hworked.value != 0.0)&&(document.myForm1.ltaken.value != 0.0)){  
         		 

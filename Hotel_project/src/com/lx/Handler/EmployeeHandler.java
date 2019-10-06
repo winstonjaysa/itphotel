@@ -131,7 +131,7 @@ public class EmployeeHandler extends HttpServlet {
         	pbean.setName(request.getParameter("name"));
         	pbean.setAddress(request.getParameter("address"));
         	pbean.setGender(request.getParameter("gender"));
-        	pbean.setAge(Integer.parseInt(request.getParameter("age")));
+        	pbean.setDob(request.getParameter("age"));
         	pbean.setPosition(request.getParameter("position"));
         	pbean.setHourlyrate(Double.parseDouble(request.getParameter("hourlyrate")));
         	pbean.setFixed(Double.parseDouble(request.getParameter("fixedsalary")));

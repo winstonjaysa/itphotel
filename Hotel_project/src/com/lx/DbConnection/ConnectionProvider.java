@@ -13,7 +13,7 @@ public class ConnectionProvider {
 		else {
 			try {
 				String driver = "com.mysql.jdbc.Driver";
-				String url = "jdbc:mysql://localhost:3306/hoteldb";
+				String url = "jdbc:mysql://localhost:3306/hoteldb3";
 				String user = "root";
 				String password = "";
 				Class.forName(driver);
