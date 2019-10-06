@@ -46,6 +46,7 @@
 					<img src="user-propic.jsp?uid=<%=uid_for_propic %>" onclick="functionAcc()" id="acc-img">
 			
 		</div>
+		<span class="userName" ><%=sessionUserBean.getUname() %></span>
 		<div class="acc_ico-content" id="accDropdown">
 			<a href="user-profile.jsp">
 				<div class="acc-card">
@@ -112,10 +113,12 @@
 		<a href="user-laundry.jsp">laundry</a>
 	</nav>
 	<div class="acc_dropdown" >
+		
 		<div class="acc_ico" >
 		<!-- 	<img src="img/user2-160x160.jpg" onclick="functionAcc()" id="acc-img"> -->
 			<img src="user-propic.jsp?uid=<%=uid_for_propic %>" onclick="functionAcc()" id="acc-img">
 		</div>
+		<span class="userName" ><%=sessionUserBean.getUname() %></span>
 		<div class="acc_ico-content" id="accDropdown">
 			<a href="user-profile.jsp">
 				<div class="acc-card">

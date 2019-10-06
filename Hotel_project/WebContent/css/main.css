@@ -203,7 +203,8 @@ table a {
 .acc_dropdown{
 	position: relative;
 	float: right;
-	display: inline-block;
+	width:180px;
+	/* display: inline-block; */
 	cursor: pointer;
 }
 .acc_ico{
@@ -220,7 +221,17 @@ table a {
 .acc_ico img:hover{
 	border: solid 3px #fe435b;
 }
-
+.userName{
+	position:absolute;
+	color: white;
+	width:110px;
+	left: 60px;
+	top: 20px;
+	overflow: hidden;
+	font-size: 18px;
+	text-transform: capitalize;
+	font-weight: 600;
+}
 .acc_ico-content{
 	display: none;
   	position: absolute;

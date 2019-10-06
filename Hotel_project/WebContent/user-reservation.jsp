@@ -197,7 +197,7 @@
 			<img src="img/Room/deluxe1.jpg">
 		</div>
 		<div class="roomForm">
-			<h2 >Executive Room</h2>
+			<h2 >Deluxe Room</h2>
 			<div class="roomFeatures">
 				<h3>Features</h3>
 				

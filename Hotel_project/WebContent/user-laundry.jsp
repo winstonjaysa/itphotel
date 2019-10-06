@@ -227,7 +227,7 @@
 				} else if (laundryList.size() == 0 && session.getAttribute("currentSessionUser") != null) {
 					%>
 					<tr style="text-align: center">
-						<td colspan="9"><h6>You don't have any requested laundry request yet.</h6></td>
+						<td colspan="13"><h6>You don't have any requested laundry request yet.</h6></td>
 					</tr>
 				<%
 				}

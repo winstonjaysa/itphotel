@@ -30,17 +30,17 @@ public class contactUsDao
 	    {
 	    	try 
 	    	{
-	    		String sql = "INSERT INTO contactus(uid,uname,date,email,subject,message,status) VALUES (?,?,?,?,?,?,?)";
+	    		String sql = "INSERT INTO contactus(uname,date,email,subject,message,status) VALUES (?,?,?,?,?,?)";
 	    		PreparedStatement ps = conn.prepareStatement(sql);
 	    		
 	    		
-	    		ps.setInt(1, cb.getUid());
-	    		ps.setString(2, cb.getUname() );
-	    		ps.setString(3, cb.getDate() );
-	    		ps.setString(4, cb.getEmail() );
-	    		ps.setString(5, cb.getSubject() );
-	    		ps.setString(6, cb.getMessage());
-	    		ps.setBoolean(7, cb.isStatus());
+	    		//ps.setInt(1, cb.getUid());
+	    		ps.setString(1, cb.getUname() );
+	    		ps.setString(2, cb.getDate() );
+	    		ps.setString(3, cb.getEmail() );
+	    		ps.setString(4, cb.getSubject() );
+	    		ps.setString(5, cb.getMessage());
+	    		ps.setBoolean(6, cb.isStatus());
 	    		
 	    		ps.executeUpdate();
 	    		
@@ -155,7 +155,7 @@ public class contactUsDao
 	    			ContactUsBeans cb = new ContactUsBeans();
 
 	    			cb.setCid(rs.getInt("cid"));
-	    			cb.setUid(rs.getInt("uid"));
+	    			//cb.setUid(rs.getInt("uid"));
 	    			cb.setUname(rs.getString("uname"));
 	    			cb.setDate(rs.getString("date"));
 	    			cb.setEmail(rs.getString("email"));
@@ -342,10 +342,10 @@ public class contactUsDao
 	    
 	    //report 
 	    
-	    public Integer totFeedbacks() {
+	    public Integer totFeedbacks(String gg) {
 			int count = 0;
 			try {
-				String sql = "SELECT COUNT(cid) FROM contactus";
+				String sql = "SELECT COUNT(cid) FROM contactus WHERE subject='"+gg+"'";
 				PreparedStatement ps = conn.prepareStatement(sql);
 				ResultSet rs = ps.executeQuery();
 

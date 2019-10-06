@@ -209,4 +209,32 @@ public class LaundryDao {
 		}
 	}
 	
+	//report 
+    
+    public Integer totLaundryReq(String gg) {
+		int count = 0;
+		try {
+			String sql=null;
+			
+			if(gg.equals("totReq")) {
+				 sql= "SELECT COUNT(lid) FROM laundryreq";
+			}else if(gg.equals("totItem")) {
+				 sql= "SELECT SUM(item) FROM laundryreq";
+			}else if(gg.equals("grossProfit")) {
+				sql= "SELECT SUM(total) FROM laundryreq";
+			}
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			rs.next();
+			String sum = rs.getString(1);
+			count = Integer.parseInt(sum);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+
+	}
+	
 }

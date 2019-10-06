@@ -76,8 +76,102 @@ h4 {
 .card p{
 	margin: 10px 10px;
 }
-</style>
 
+button.print-button {
+  width: 60px;
+  height: 60px;
+}
+span.print-icon, span.print-icon::before, span.print-icon::after, button.print-button:hover .print-icon::after {
+  border: solid 4px #333;
+}
+span.print-icon::after {
+  border-width: 2px;
+}
+
+button.print-button {
+  position: relative;
+  padding: 0;
+  border: 0;
+  
+  border: none;
+  background: transparent;
+}
+
+span.print-icon, span.print-icon::before, span.print-icon::after, button.print-button:hover .print-icon::after {
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+span.print-icon {
+  position: relative;
+  display: inline-block;  
+  padding: 0;
+  margin-top: 20%;
+
+  width: 60%;
+  height: 35%;
+  background: #fff;
+  border-radius: 20% 20% 0 0;
+}
+
+span.print-icon::before {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  left: 12%;
+  right: 12%;
+  height: 110%;
+
+  transition: height .2s .15s;
+}
+
+span.print-icon::after {
+  content: " ";
+  position: absolute;
+  top: 55%;
+  left: 12%;
+  right: 12%;
+  height: 0%;
+  background: #fff;
+  background-repeat: no-repeat;
+  background-size: 70% 90%;
+  background-position: center;
+  background-image: linear-gradient(
+    to top,
+    #fff 0, #fff 14%,
+    #333 14%, #333 28%,
+    #fff 28%, #fff 42%,
+    #333 42%, #333 56%,
+    #fff 56%, #fff 70%,
+    #333 70%, #333 84%,
+    #fff 84%, #fff 100%
+  );
+
+  transition: height .2s, border-width 0s .2s, width 0s .2s;
+}
+
+button.print-button:hover {
+  cursor: pointer;
+}
+
+button.print-button:hover .print-icon::before {
+  height:0px;
+  transition: height .2s;
+}
+button.print-button:hover .print-icon::after {
+  height:120%;
+  transition: height .2s .15s, border-width 0s .16s;
+}
+
+.print-button,h3{
+
+ display: inline-block;
+ margin-left:270px;
+padding-left:160px;
+}
+
+</style>
+<div id="reportmain" >
 	<div class="summary">
 		<section>
 			<div class="card">
@@ -96,9 +190,11 @@ h4 {
 				<h6>Unread messages </h6>
 				<p><%=dao.reportChartTidCount("unread") %></p>
 			</div>
+			
+			<button onclick="print()" class="print-button"><span class="print-icon"></span></button>
 		</section>
 	</div>
-	<div class="summary">
+	<div class="summary" >
 		<div class="container">
 			<input type="number" id="confm" value="<%=dao.reportChart(1)%>" disabled hidden>
 			<input type="number" id="pending" value="<%=dao.reportChart(0)%>" disabled hidden>
@@ -119,6 +215,7 @@ h4 {
 		
 		
 	</div>
+</div>
 	<!-- <section>
 		<button onclick="my()">Tap</button>
 		<p id="id1">fghj</p>
@@ -219,7 +316,8 @@ h4 {
 				});
 		
 	</script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script>
 		document.getElementById("ggg").innerHTML = document
 				.getElementById("confm").value;
@@ -254,4 +352,24 @@ h4 {
 			}
 		//**************
 		
+		
+		
+		function print(){
+					//  alert("nfjn");
+					  var data = document.getElementById("reportmain");  
+					  html2canvas(data).then(canvas => {  
+					    // Few necessary setting options  
+					    var imgWidth = 208;   
+					    var pageHeight = 295;    
+					    var imgHeight = canvas.height * imgWidth / canvas.width;  
+					    var heightLeft = imgHeight;  
+
+					    const contentDataURL = canvas.toDataURL('image/png')  
+					    let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF  
+					    var position = 0;  
+					    pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
+					    pdf.save('suppliers.pdf'); // Generated PDF   
+					  });  
+					}
+				
 	</script>

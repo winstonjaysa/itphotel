@@ -157,4 +157,75 @@ public class ReservationDao {
 			e.printStackTrace();
 		}
 	}
+	
+	//report 
+	
+    public Integer totReport() {
+		int count = 0;
+		try {
+			String sql = "SELECT COUNT(rid) FROM reservation";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			rs.next();
+			String sum = rs.getString(1);
+			count = Integer.parseInt(sum);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+
+	}
+	
+	public Integer totReport(String gg) {
+		int count = 0;
+		try {
+			String sql=null;
+			
+			if(gg.equals("total_visitors")) {
+				sql= "SELECT SUM(adults) FROM reservation ";
+			}else if(gg.equals("total_children")) {
+				sql= "SELECT SUM(children) FROM reservation ";
+			}
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			rs.next();
+			String sum = rs.getString(1);
+			count = Integer.parseInt(sum);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+
+	}
+	
+	public Integer mostBookedRoom(String gg) {
+		int count = 0;
+		try {
+			String sql=null;
+			
+			if(gg.equals("Executive")) {
+				sql= "SELECT COUNT(reservation_type) FROM reservation WHERE reservation_type=1";
+			}else if(gg.equals("Presidential")) {
+				sql= "SELECT COUNT(reservation_type) FROM reservation WHERE reservation_type=2";
+			}else if(gg.equals("Deluxe")) {
+				sql= "SELECT COUNT(reservation_type) FROM reservation WHERE reservation_type=3";
+			}
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			
+			rs.next();
+			String sum = rs.getString(1);
+			count = Integer.parseInt(sum);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+		
+	}
 }

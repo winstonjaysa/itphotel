@@ -96,12 +96,13 @@ public class ContactusHandler extends HttpServlet {
         String action = request.getParameter("action");
         
         
-        if(!((uId)== null) && action.equalsIgnoreCase("insert")) 
+       // if(!((uId)== null) && action.equalsIgnoreCase("insert")) 
+         if(action.equalsIgnoreCase("insert")) 
         {
-        	int id = Integer.parseInt(uId);
+        //	int id = Integer.parseInt(uId);
         	ContactUsBeans cb = new ContactUsBeans();
 	
-        	cb.setUid(id);
+        	//cb.setUid(id);
         	cb.setUname(request.getParameter("uname"));  
         	cb.setDate(request.getParameter("date"));
         	cb.setEmail(request.getParameter("email"));

@@ -23,7 +23,7 @@
 </head>
 <body>
 <%
-	UserBean sessionCurrentBean=(UserBean) session.getAttribute("currentSessionUser");
+/*	UserBean sessionCurrentBean=(UserBean) session.getAttribute("currentSessionUser");
 	String uname=null;
 	int uid=0;
 	if(session.getAttribute("currentSessionUser")==null){
@@ -32,7 +32,7 @@
 	else if(session.getAttribute("currentSessionUser")!=null){
 		uname=sessionCurrentBean.getUname();
 		uid=sessionCurrentBean.getUid();
-	}
+	} */
 %>
 <%@include file="naviBar-user.jsp"%>
 
@@ -40,9 +40,10 @@
 <div id="error_message"></div>
 	<form action="ContactusHandler" method="post" onsubmit="return validate();">
 		<input type="hidden" name="action" value="insert">
-		<input type="hidden" name="uid" value="<%=uid%>">
-		<label>User name : <%=uname%></label>
-		<input type="hidden" name="uname" value="<%=uname%>" id="uname">
+	<!-- 	<input type="hidden" name="uid" value="<%//uid%>">  
+		<label>User name : <%//uname%></label> -->
+		<label>User name</label>
+		<input type="text" name="uname" id="uname">
 		<br>
 		<label>email</label>
 		<input type="text" name="email" id="email">

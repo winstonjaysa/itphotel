@@ -39,7 +39,7 @@
 }
 
 .container canvas {
-	height: 500px;
+	height=320px;
 }
 
 .container {
@@ -142,9 +142,12 @@
 			%>
 			
 			<table id="myTable" style="text-align: center;">
+				<div style="margin-top: 30px">
+					<h3 >Recent Contact Message</h3>
+				</div>
 				<tr>	
-					<th>User id</th>
-					<th>User name</th>
+					<th>Cid</th>
+					<th>Name</th>
 					<th>Date</th>
 					<th>Email</th>
 					<th>Subject</th>
@@ -154,8 +157,8 @@
 					<%
 						for(ContactUsBeans cb:userContactList){
 					%>
-					<tr id="<%=cb.getUid()%>">
-						<td><%=cb.getUid() %></td>
+					<tr id="<%=cb.getCid()%>">
+						<td><%=cb.getCid() %></td>
 						<td><%=cb.getUname() %></td>
 						<td><%=cb.getDate() %></td>
 						<td><%=cb.getEmail() %></td>
@@ -176,6 +179,9 @@
 			%>
 			
 			<table id="myTable2" style="text-align: center;width: 800px">
+				<div style="margin-top: 30px">
+					<h3 >Recent Contact Message</h3>
+				</div>
 				<tbody>
 					<tr>
 						<th>Admin</th>
@@ -272,19 +278,19 @@
 				<section>
 					<div class="card">
 						<h6>Total Feedback </h6>
-						<p><%=dao.totFeedbacks() %></p>
+						<p><%=dao.totFeedbacks("Feedback") %></p>
 					</div>
 					<div class="card">
-						<h6>Gross profit </h6>
-						<p></p>
+						<h6>Laundry</h6>
+						<p><%=dao.totFeedbacks("Laundry") %></p>
 					</div>
 					<div class="card">
-						<h6>Total Requests </h6>
-						<p></p>
+						<h6>Travel</h6>
+						<p><%=dao.totFeedbacks("Travel") %></p>
 					</div>
 					<div class="card">
-						<h6>Unread messages </h6>
-						<p></p>
+						<h6>Reservation</h6>
+						<p><%=dao.totFeedbacks("Reservation") %></p>
 					</div>
 				</section>
 			</div>
@@ -297,7 +303,7 @@
 					
 					
 						<h4><span id="currentMonth">month</span> Taxi request status</h4>
-						<canvas id="myChart" height="320px"></canvas>
+						<canvas id="myChart" ></canvas>
 				</div>  
 			</div>			
 		</div>

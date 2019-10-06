@@ -24,7 +24,75 @@
 
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	
+<style type="text/css">
+.summary{
+	position:relative;
+	display:flex;
+	flex-wrap:wrap;
+	width:100%;
+	top:10px;
+	left:50px;
+	margin-bottom: 50px;
+}
+.summary section {
+	display: flex;
+	flex-wrap: wrap;
+}
+.ui-tabs-anchor {
+	outline: none;
+	width: 1200px;
+	height: 800px;
+}
+
+.container canvas {
+	height=320px;
+}
+
+.container {
+	width: 420PX;
+	height: 330px !important;
+	padding: 15px;
+	background: #f2f5fb;
+	margin: 10px 10px;
+}
+.summary{
+	position:relative;
+	display:flex;
+	flex-wrap:wrap;
+	width:100%;
+	top:10px;
+	left:50px;
+	margin-bottom: 50px;
+}
+
+.card{
+	display:block;
+	width: 200px;
+	height: 70px;
+	min-height: 70px;
+	padding: 5px 10px;
+	margin: 10px;
+}
+.card:nth-child(1){
+	background: #f39c12;
+}
+.card:nth-child(2){
+	background: #00a65a;
+}
+.card:nth-child(3){
+	background: #dd4b39;
+}
+.card:nth-child(4){
+	background: #00c0ef;
+}
+.card h6{
+	color:white;
+	margin: 4px 10px;
+}
+.card p{
+	margin: 10px 10px;
+}
+</style>
 <title>Laundry Admin</title>
 </head>
 <body>
@@ -78,7 +146,10 @@
 	<div class="mainDiv">
 		<div id="tab_1" class="panel_main">
 				<div class="travel_main_2">
-					<div>
+					<div class="searchbox-table" >
+						<input class="form-control" id="myInput" type="text" placeholder="Search..">
+					</div>
+					<div style="margin-top: 30px">
 						<h3>Recent Laundry Requests</h3>
 					</div>
 					<table style="text-align: center;">
@@ -98,43 +169,44 @@
 							List<LaundryBeans> laundrylist = dao.getAllLaundryReq();
 							for (LaundryBeans laundry : laundrylist) {
 						%>
-						<tr id="<%=laundry.getLid()%>">
-							<td><%=laundry.getLid()%></td>
-							<td><%=laundry.getUname()%></td>
-							<td><%=laundry.getDate()%></td>
-							<td><%=laundry.getItem()%></td>
-							<td><%=laundry.getTotal()%></td>
-							<%
-								if(laundry.getStatus()==0){ 
+						<tbody id="t1">
+							<tr id="<%=laundry.getLid()%>">
+								<td><%=laundry.getLid()%></td>
+								<td><%=laundry.getUname()%></td>
+								<td><%=laundry.getDate()%></td>
+								<td><%=laundry.getItem()%></td>
+								<td><%=laundry.getTotal()%></td>
+								<%
+									if(laundry.getStatus()==0){ 
+									%>
+										<td class="pending-td">Pending</td>
+								<%  }
+									else if(laundry.getStatus()==1){ 
+									%>
+									<td class="success-td">Confirmed</td>
+								<%  }
+									else if(laundry.getStatus()==2){ 
+									%>
+									<td class="warning-td">Deny</td>
+								<%
+									}
 								%>
-									<td class="pending-td">Pending</td>
-							<%  }
-								else if(laundry.getStatus()==1){ 
-								%>
-								<td class="success-td">Confirmed</td>
-							<%  }
-								else if(laundry.getStatus()==2){ 
-								%>
-								<td class="warning-td">Deny</td>
-							<%
-								}
-							%>
-							<td>
-								
-								<div class="dropdown">
-		  							<span class="drop_menu" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					  					<i class="fa fa-ellipsis-v" ></i>
-					  				</span>
-									  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									    <a href="LaundryHandler?action=confirm&edit=conf&lid=<%=laundry.getLid()%>"><button type="button" class="btn dropdown-item">Confirm</button></a>
-									    <a href="LaundryHandler?action=confirm&edit=deny&lid=<%=laundry.getLid()%>"><button type="button" class="btn dropdown-item">Deny</button></a>
-									   </div>
-								  
-								</div>
-								
-							</td>
-						</tr>
-						
+								<td>
+									
+									<div class="dropdown">
+			  							<span class="drop_menu" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						  					<i class="fa fa-ellipsis-v" ></i>
+						  				</span>
+										  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										    <a href="LaundryHandler?action=confirm&edit=conf&lid=<%=laundry.getLid()%>"><button type="button" class="btn dropdown-item">Confirm</button></a>
+										    <a href="LaundryHandler?action=confirm&edit=deny&lid=<%=laundry.getLid()%>"><button type="button" class="btn dropdown-item">Deny</button></a>
+										   </div>
+									  
+									</div>
+									
+								</td>
+							</tr>
+						</tbody>
 						
 						
 						<%
@@ -143,9 +215,22 @@
 					</table>
 				</div>
 		</div>
-	</div>
 	<div id="tab_2" class="panel_main">
-		
+		<div class="summary">
+			<div class="card">
+				<h6>Total Laundry Request </h6>
+				<p><%=dao.totLaundryReq("totReq") %></p>
+			</div>
+			<div class="card">
+				<h6>Total Items</h6>
+				<p><%=dao.totLaundryReq("totItem") %></p>
+			</div>
+			<div class="card">
+				<h6>Gross Profit</h6>
+				<p>$ <%=dao.totLaundryReq("grossProfit") %></p>
+			</div>
+		</div>
+	</div>
 	</div>
 </body>
 <script>
@@ -201,6 +286,17 @@ function confirmDel(id){
 	  else{
 
 		    }
-	}		
+	}	
+	
+	
+	$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#t1 tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		    });
+		  });
+		});
+	
 </script>
 </html>

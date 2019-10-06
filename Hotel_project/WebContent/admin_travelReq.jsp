@@ -1,12 +1,13 @@
 <section>
 		<div class="card-1">
-			<h3>Requested Rides</h3>
-			
-			<div class="searchbox-table">
+			<div class="searchbox-table" style="margin-top: 30px">
 				<input class="form-control" id="myInput" type="text" placeholder="Search..">
 			</div>
+			<div style="margin-top: 30px">
+				<h3>Requested Rides</h3>
+			</div>
 			
-			<table style="text-align: center;" id="t1">
+			<table style="text-align: center;" >
 				<tr>
 					<th>Travel Id</th>
 					<th>User id</th>
@@ -20,7 +21,8 @@
 				<%
 				List<TransManageBeans> travelList=dao.getAllTravel();
 			for(TransManageBeans travel:travelList){
-		%>
+		%>	<tbody id="t1">
+		
 				<tr>
 					<td><%=travel.getTid() %></td>
 					<td><%=travel.getUid() %></td>
@@ -143,7 +145,7 @@
 						
 						
 				</tr>
-					
+			</tbody>
 				<%
 					}
 				%>		
