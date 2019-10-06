@@ -306,7 +306,7 @@
 											<br>
 											<label >Cost (lkr)</label>
 											<br>
-											<input type="text" name="travelCostEdit" id="travelCostEdit<%=travel.getTid()%>" placeholder="Cost" value="19750">
+											<input type="text" name="travelCostEdit" id="travelCostEdit<%=travel.getTid()%>" placeholder="Cost" value="19750" readonly="readonly">
 										</div>
 										<div class="form-group">
 											<label>Need date </label><br>

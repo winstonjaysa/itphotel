@@ -133,7 +133,7 @@
 			</div>
 		</a> <a data-tab="#tab_2" data-tabCss="#panel_2">
 			<div class="panel" id="Panel_2">
-				<i class="fas fa-chart-bar"></i> <span>Report</span>
+				<i class="fas fa-file-alt"></i><span>Summary</span>
 			</div>
 		</a> 
 		<a data-tab="#tab_3" data-tabCss="#panel_3">
@@ -144,8 +144,8 @@
 		</a>
 		<a data-tab="#tab_4" data-tabCss="#panel_4">
 			<div class="panel" id="Panel_4">
-			<i class="fas fa-comments"></i>
-			<span>Summary</span>
+			<i class="fas fa-chart-bar"></i>
+			<span>Report</span>
 		</div>
 		</a>
 	</div>
@@ -154,16 +154,16 @@
 			<section>
 				<div class="card-1">
 					<div class="form-style">
-						<form action="payamenthandler" method="post">
+						<form action="payamenthandler" method="post" onsubmit="return confirm('Are you sure?')">
 							<input type="hidden" name="action" value="insert">
 							<h3>Add Payment Details</h3>
 							<div class="form_item">
 								<label>Payment Id</label>
-								<input type="text" name="billid">
+								<input type="text" name="billid" required="required">
 							</div>
 							<div class="form_item">
 								<label>Date</label>
-								<input type="date" name="date">
+								<input type="date" name="date" required="required">
 							</div>
 							<div class="form_item">
 								<label>Payment Method</label>
@@ -186,7 +186,7 @@
 							</div>
 							<div class="form_item">
 								<label>Price</label>
-								<input type="text" name="price">
+								<input type="number" name="price" required="required">
 							</div>
 							<button type="submit">submit</button>
 						</form>
