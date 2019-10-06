@@ -3,11 +3,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import com.lx.Beans.employeeBean;
@@ -33,9 +35,15 @@ public class employeeDao {
     }
     
     
-    public void addEmployee(employeeBean pb) 
+    
+    
+    
+    public void addEmployee(employeeBean pb)
     
     {
+    	
+    	
+    	
     	try 
     	{
     		String sql = "insert into employee"
@@ -43,17 +51,15 @@ public class employeeDao {
 					+"values (?,?,?,?,?,?,?,?,?)";
     		PreparedStatement ps = conn.prepareStatement(sql);
     		
-    		//java.util.Date utilDate = new java.util.Date();
-    		//java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-    		//date1 =new SimpleDateFormat("dd/MM/yyyy").parse(pb.getDob());
     		
+    		  
     		
     		ps.setInt(1,pb.getPid());
     		ps.setString(2, pb.getNic());
     		ps.setString(3, pb.getName());
     		ps.setString(4, pb.getAddress());
     		ps.setString(5, pb.getGender());
-    		ps.setString(6,pb.getDob());
+    	    ps.setString(6,pb.getDob());
     		ps.setString(7, pb.getPosition());
     		ps.setDouble(8, pb.getHourlyrate());
     		ps.setDouble(9, pb.getFixed());
@@ -61,7 +67,7 @@ public class employeeDao {
     		
 		} 
     	
-    	catch (SQLException e) 
+    	catch (Exception e) 
     	{
     		e.printStackTrace();
 		}
@@ -88,7 +94,7 @@ public class employeeDao {
     {
     	try
     	{
-    		String sql = "UPDATE employee SET pid=?,nic=?,name=?,address=?,gender=?,age=?,position=?,hourlyrate=?,fixedsalary=? WHERE empid=?";
+    		String sql = "UPDATE employee SET pid=?,nic=?,name=?,address=?,gender=?,dateofbirth=?,position=?,hourlyrate=?,fixedsalary=? WHERE empid=?";
     		PreparedStatement ps = conn.prepareStatement(sql);
     		
     		ps.setInt(1,pb.getPid());
@@ -96,7 +102,7 @@ public class employeeDao {
     		ps.setString(3, pb.getName());
     		ps.setString(4, pb.getAddress());
     		ps.setString(5, pb.getGender());
-    		ps.setInt(6, pb.getAge());
+    		ps.setString(6, pb.getDob());
     		ps.setString(7, pb.getPosition());
     		ps.setDouble(8, pb.getHourlyrate());
     		ps.setDouble(9, pb.getFixed());
@@ -132,17 +138,9 @@ public class employeeDao {
     		while (rs.next()) {
     			employeeBean pb = new employeeBean();
     		
-    			String date1 = rs.getString("dateofbirth");
+  
     			
-    			DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
- 			Date startDate;
-   			try {
-  			    startDate = df.parse(date1);
-   			    String newDateString = df.format(startDate);
-    			    System.out.println(newDateString);
- 			} catch (Exception e) {
-    			    e.printStackTrace();
-    			}
+    		
     			
     			pb.setId(rs.getInt("empid"));
     			pb.setPid(rs.getInt("pid"));

@@ -96,7 +96,7 @@ public class EmployeeHandler extends HttpServlet {
         
         
 		
-		if(!((pId)== null) && action.equalsIgnoreCase("insert")) 
+		if(!((pId)== null) && action.equalsIgnoreCase("insert"))
         {
         	int id = Integer.parseInt(pId);
         	employeeBean pbean = new employeeBean();
@@ -111,7 +111,9 @@ public class EmployeeHandler extends HttpServlet {
         	pbean.setPosition(request.getParameter("position"));
         	pbean.setHourlyrate(Double.parseDouble(request.getParameter("hourlyrate")));
         	pbean.setFixed(Double.parseDouble(request.getParameter("fixedsalary")));
-        	dao.addEmployee(pbean);
+        	
+			dao.addEmployee(pbean);
+			
         	response.sendRedirect("admin-employee.jsp#tab_1");
         	request.setAttribute("employee", dao.getAllEmployee());    
            	System.out.println("Record Added Successfully");

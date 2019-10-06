@@ -39,11 +39,13 @@ input[type=radio] {
 
 .my-custom-scrollbar {
 position: relative;
-height: 350px;
+height: auto;
+min-height:80px;
 width:1125px;
 overflow: auto;
-
+margin-bottom: 100px;
 }
+
 .table-wrapper-scroll-y {
 display: block;
 }

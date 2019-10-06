@@ -28,7 +28,7 @@
             os.flush();
             os.close();
         } else {
-            System.out.println("No image found with this id.");
+            //System.out.println("No image found with this id.");
         }
     } catch (Exception e) {
         out.println(e);
