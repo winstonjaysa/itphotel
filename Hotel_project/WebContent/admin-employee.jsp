@@ -87,7 +87,7 @@ margin-bottom: 0px;
 </head>
 <body>
 <%
-	
+	contactUsDao dao_Contact=new contactUsDao();
 	UserBean sessionCurrentBean=(UserBean) session.getAttribute("currentSessionUser");
 
 	String uNAME=(String)session.getAttribute("currentU");
@@ -145,6 +145,11 @@ margin-bottom: 0px;
 		<a data-tab="#tab_6" data-tabCss="#panel_6">
 			<div class="panel" id="Panel_6">
 				<i class="fa fa-area-chart" aria-hidden="true"></i> <span>Report</span>
+			</div>
+		</a>
+		<a data-tab="#tab_7" data-tabCss="#panel_7">
+			<div class="panel" id="Panel_7">
+				<i class="fas fa-comments"></i><span>Message</span>
 			</div>
 		</a>
 	</div>
@@ -507,7 +512,56 @@ margin-bottom: 0px;
 					</div>
 			</section>
 		</div>
-		
+		<div id="tab_7" class="panel_main">
+			<div class="card-1">
+				<div class="admin-message">
+					<div class="admin-message-display-div">
+						<%
+					List<ContactUsBeans> adminMessage=dao_Contact.getAdminsContactMeassages(uid);
+						for(ContactUsBeans cb:adminMessage){
+							
+						//	if ((cb.getInbox()==null || cb.getInbox().isEmpty()) && (!cb.getReply().isEmpty() || cb.getReply()!=null)){
+							if(cb.getTo_uid()==uid){
+						%>
+						<div class="form-group">
+							<div class="divclass1">
+								<p><%=cb.getReply() %></p>
+							</div>
+						</div>
+						<%
+						}
+							//else if ((cb.getReply()==null || cb.getReply().isEmpty()) && (!cb.getInbox().isEmpty() || cb.getInbox()!=null)){
+							else if(cb.getTo_uid()==17 && cb.getUid()==uid){
+						%>
+						<div class="form-group">
+							<div class="divclass2">
+								<p><%=cb.getInbox() %></p>
+							</div>
+						</div>
+						<%
+						}
+						}
+						%>
+					</div>
+					<div class="fixed-div-message">
+						<div class="admin-message-send-div">
+							<form action="ContactusHandler" method="post">
+								<input type="hidden" name="action" value="insertAdmin">
+								<input type="hidden" name="msType" value="2">
+								<input type="hidden" name="uid" value="<%=uid%>">
+								<input type="hidden" name="to_uid" value="17">
+								<input type="hidden" name="uname" value="<%=uname%>">
+								<input type="hidden" name="link" value="admin-employee.jsp">
+								
+								<input type="text" name="inbox">
+									
+								<button type="submit">submit</button>
+							</form>
+						</div>
+					</div>				
+				</div>
+			</div>
+		</div>		
 </body>
 
 

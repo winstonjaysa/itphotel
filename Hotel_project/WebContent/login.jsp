@@ -59,7 +59,7 @@
 				</span>
 				<form action="UserHandler" method="post" >
 					<h2>Login</h2>
-					<label style="font-size: 14px;margin-top: 10px;font-weight: 600;">Already have an account? <span ><a href="#">Login in.</a></span></label>
+					<label style="font-size: 14px;margin-top: 10px;font-weight: 600;">Already have an account? <span ><a href="reg.jsp">Register.</a></span></label>
 					
 					<input type="hidden" name="action" value="login">
 

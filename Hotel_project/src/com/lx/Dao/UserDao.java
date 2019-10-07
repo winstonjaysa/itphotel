@@ -133,6 +133,23 @@ public class UserDao {
 		}
 	}
 	
+	public void editPassword(int uid,String npass,String opass) {
+		try {
+			String sql = "UPDATE users SET password=? WHERE password=? AND uid=?";
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			
+			ps.setString(1, npass);
+			ps.setString(2, opass);
+			ps.setInt(3,uid);
+
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public UserBean loginCheck(UserBean ub) {
 		
 		 String username = ub.getUname();    

@@ -51,7 +51,9 @@ public class TransManageHandler extends HttpServlet {
 			dao.deleteReq(travel);
 			
 			System.out.println("delete successfull!");
-			response.sendRedirect("travel.jsp?status=successReq");
+			
+			String message="You have successfully delete your request.";
+			response.sendRedirect("travel.jsp?status=successReq&message="+message+"");
 		}
 	}
 
@@ -76,7 +78,7 @@ public class TransManageHandler extends HttpServlet {
 			
 			dao.NewArrange(travel);
 			
-			String message="You have successfully changed your request.";
+			String message="You have successfully added your request.";
 			
 			response.sendRedirect("travel.jsp?status=successReq&message="+message+"");
 			System.out.println("Arrange success!");

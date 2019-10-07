@@ -162,6 +162,18 @@ public class UserHandler extends HttpServlet {
 
 			System.out.println("Edit successfull the reqested user details!");
 			response.sendRedirect("user-profile.jsp");
+		
+		}else if (action.equals("editPassword")) {
+			int uid = Integer.parseInt(request.getParameter("uid"));
+			String npass = request.getParameter("npass");
+			String opass = request.getParameter("opass");
+
+			
+			
+			dao.editPassword(uid,npass,opass);
+
+			System.out.println("Edit successfull the reqested user details!");
+			response.sendRedirect("user-profile.jsp");
 		}
 	}
 

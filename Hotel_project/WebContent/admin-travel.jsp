@@ -125,6 +125,7 @@
 						<div class="admin-message-send-div">
 							<form action="ContactusHandler" method="post">
 								<input type="hidden" name="action" value="insertAdmin">
+								<input type="hidden" name="msType" value="2">
 								<input type="hidden" name="uid" value="<%=uid%>">
 								<input type="hidden" name="to_uid" value="17">
 								<input type="hidden" name="uname" value="<%=uname%>">

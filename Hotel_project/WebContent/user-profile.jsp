@@ -564,6 +564,29 @@
 					}
 				%>
 				<div class="form-group">
+					<h5>Password</h5>
+					<br>
+					<form action="UserHandler?action=editPassword&uid=<%=uid %>" method="post" onsubmit="return macthPass()" name="changePassForm">
+						<div class="divDiv">
+							<div class="form-group-details">
+								<label>New password</label>
+								<input type="password" name="npass" id="npass" >
+							</div>
+							<div class="form-group-details">
+								<label>Confirm password</label>
+								<input type="password" name="cpass" id="cpass" >
+							</div>
+						</div>
+						<div class="divDiv">
+							<div class="form-group-details">
+								<label>Old password</label>
+								<input type="password" name="opass" >
+							</div>
+						</div>
+						<button type="submit">Save password</button>
+					</form>
+				</div>
+				<div class="form-group">
 					<h5 >Cancel Account</h5>
 					<br>
 					<p><span class="span-warning">Warning:</span> You will not be able to access your account data, your contacts or conversations after you confirm this action.</p>
@@ -623,7 +646,17 @@ function funcDestinationEdit(parY) {
 		
 	}
 	
-	
+	function macthPass(){
+		var newpass=changePassForm.npass.value;
+		var conpass=changePassForm.cpass.value;
+		
+		if(newpass==conpass){
+			alert('same');
+			return true;
+		}else {
+			return false;
+		}
+	}
 	
 	
 	const realFileBtn = document.getElementById("real-file");

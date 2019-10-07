@@ -225,7 +225,7 @@ button {
 .trpdiv label{
 	margin-top: 15px;
 }
-.trpdiv input{
+.trpdiv input,select{
 	height: 50px;
 	color: #fff;
 	background: rgba(0, 0, 0, 0.2);
@@ -242,7 +242,7 @@ button {
 	margin:15px !important;
 	font-size: 18px;
 }
-.trpdiv input[type=text],input[type=password],input[type=submit]{
+.trpdiv input[type=text],input[type=password],input[type=submit],select{
 	width: 350px;
 }
 .trpdiv input[type=submit]{

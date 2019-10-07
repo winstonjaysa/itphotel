@@ -49,11 +49,12 @@
 					<h6 style="font-size: 16px;font-weight: 300;">Sign up now to receive exclusive offers and promotions.<br>
 						In order to receivethe best deals that are customized to your wants.
 					</h6>
-					<label style="font-size: 14px;margin-top: 10px;font-weight: 600;">Already have an account? <span ><a href="#">Login in.</a></span></label>
-					<div id="error_message"></div>
+					<label style="font-size: 14px;margin-top: 10px;font-weight: 600;">Already have an account? <span ><a href="login.jsp">Login in.</a></span></label>
 				
 					<input type="hidden" name="action" value="register">
+					<div id="error_message"></div>
 					<div class="trpdiv_form_div">
+						
 						<div class="trpdiv_form_group">
 							<div class="trpdiv_form_info trpdiv_form_info-reg">
 							<label>firstName </label>
