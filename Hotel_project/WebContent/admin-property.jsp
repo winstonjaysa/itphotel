@@ -17,6 +17,9 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="validation.js"></script>
 <link rel="stylesheet" href="css/main.css">
+
+<link rel="stylesheet" href="css/chartp.css">
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -25,6 +28,11 @@
 <script src="https://kit.fontawesome.com/6bcee8e3da.js"></script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+
+
+
 
 </head>
 <body>
@@ -70,13 +78,20 @@
 			<div class="panel" id="Panel_2">
 				<i class="fas fa-couch"></i> <span>Insert Property</span>
 			</div>
+			
 		</a> <a data-tab="#tab_3" data-tabCss="#panel_3">
 			<div class="panel" id="Panel_3">
-				<i class="fas fa-cogs"></i> <span>Change</span>
+				<i class="fas fa-cogs"></i> <span>Messenger</span>
+			</div>
+		</a><a data-tab="#tab_4" data-tabCss="#panel_4">
+			<div class="panel" id="Panel_4">
+				<i class="fas fa-cogs"></i> <span>Report</span>
 			</div>
 		</a>
+		
 	</div>
 	<div class="mainDiv">
+	
 		<div id="tab_1" class="panel_main">
 			<section>
 				<div class="card-1">
@@ -87,7 +102,7 @@
 	
 				
 				<br>
-					<h3>Requested Rides</h3>
+					<h3>Property Database</h3>
 					<div class="searchbox-table">
 						<input class="form-control" id="myInput" type="text" placeholder="Search..">
 			 		</div>
@@ -105,8 +120,7 @@
 								<th class="column6"> Number</th>
 		
 		
-								<th class="column3">Edit</th>
-								<th class="column6">Delete</th>
+								
 								
 							</tr>
 						</thead>
@@ -127,13 +141,12 @@
 		
 		
 								<td class="column3">
-									<button type="button" class=" btn dropdown-item" data-toggle="modal" data-target="#dropdown_menu<%=pb.getPropid()%>" data-whatever="<%=pb.getPropid()%>">Edit</button>
+									<button type="button" class=" btn dropdown-item" data-toggle="modal" data-target="#dropdown_menu<%=pb.getPropid()%>" data-whatever="<%=pb.getPropid()%>"> <h6>Edit</h6> </button>
 								</td>
 								<td class="column6">
-									<a href="PropetyHandler?action=delete&propertyId=<%=pb.getPropid()%>">
-										Delete
-									</a>
+									<a href="PropetyHandler?action=delete&propertyId=<%=pb.getPropid()%>"> <h6> Delete</h6> </a>
 								</td>
+																
 								
 								<div class="modal fade" id="dropdown_menu<%=pb.getPropid()%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">  
 								  <div class="modal-dialog" role="document">
@@ -151,10 +164,23 @@
 													<label>Property ID</label><br>
 													<input type="text" name="pid" value="<%=pb.getPid()%>" required="required"><br>
 												</div>
+												
 									     		<div class="form-group">
 													 <label>Property Name</label><br>
-													 <input type="text" name="pname" value="<%=pb.getPname()%>" required="required"><br>
+													 	<select name="pname" value="<%=pb.getPname()%>"  style="width:50%" ><br>
+													 		
+															<option>Table</option>
+															<option>Chair</option>
+															<option>Television</option>
+															<option>Air conditione</option>
+															<option>Refrigerator</option>
+															<option>Telephone</option>
+														</select>		 
 												</div>
+												
+												
+												
+												
 												<div class="form-group">
 													<label>Property Value </label><br>
 													<input type="text" name="pvalue" value="<%=pb.getPvalue()%>" required="required"><br>
@@ -195,6 +221,7 @@
 				</div>
 			</section>
 		</div>
+		
 		<div id="tab_2" class="panel_main">
 			<section>
 				<div class="card-1">
@@ -206,31 +233,41 @@
 							
 							<div class="form_item">
 								<label>Property ID</label>
-								<input type="text" name="pid" placeholder="pid">
+								<input type="text" name="pid" placeholder="Property ID">
 							</div>
+							
 							<div class="form_item">
 								<label>Property Name</label>
-								<input type="text" name="pname" placeholder="pname">
+									<select  name="pname" style="width:50%"><br>
+										<option>Table</option>
+										<option>Chair</option>
+										<option>Television</option>
+										<option>Air conditione</option>
+										<option>Refrigerator</option>
+										<option>Telephone</option>
+										
+									</select>	
 							</div>
+							
 							<div class="form_item">
 								<label>Property Value</label>
-								<input type="text" name="pvalue" placeholder="pvalue">
+								<input type="text" name="pvalue" placeholder="Property Value">
 							</div>
 							<div class="form_item">
 								<label>No of Units</label>
-								<input type="text" name="pnoofItems" placeholder="pnoofItems">
+								<input type="text" name="pnoofItems" placeholder="No of Units">
 							</div>
 							<div class="form_item">
 								<label>Company Name</label>
-								<input type="text" name="pbrand" placeholder="pbrand">
+								<input type="text" name="pbrand" placeholder="Company Name">
 							</div>
 							<div class="form_item">
 								<label>Company Email</label>
-								<input type="text" name="pemail" placeholder="pemail">
+								<input type="email" name="pemail" placeholder="XXX@mail.com">
 							</div>
 							<div class="form_item">
 								<label>Company Phone Number</label>
-								<input type="text" name="ppnumber" placeholder="ppnumber">
+								<input type="text" name="ppnumber" placeholder="077XXXXXXXX">
 							</div>
 
 							<button type="submit">Save Property</button>
@@ -240,6 +277,7 @@
 				</div>
 			</section>
 		</div>
+		
 		<div id="tab_3" class="panel_main">
 			<div class="card-1">
 				<div class="admin-message">
@@ -289,20 +327,110 @@
 				</div>
 			</div>
 		</div>
+		
+		<div id="tab_4" class="panel_main">
+			<div class="card-1" style="overflow-x:hidden">
+			<div class="summary">
+			
+		<section>
+			<div class="card">
+				<h6>No of Properties</h6>
+				<p><%=dao.CountProperty() %></p>
+			</div>
+			
+			<div class="card">
+				<h6>Cost of Properties </h6>
+				<p><%=dao.TotalValueProperty()%></p>	
+			</div>
+			
+	
+		</section>
+		
+		<div class="summary">
+			<div class="container">
+			
+			 	<input type="number" id="table" value=" " disabled hidden="">
+				<input type="number" id="airconditione" value="" disabled hidden="">
+				<input type="number" id="chair" value="" disabled hidden="" >
+				<input type="number" id="television" value="" disabled hidden="" >
+				
+				<input type="number" id="telephone" value="" disabled hidden="" >  
+				
+				
+				
+				<h4><span id="currentMonth"></span> property analysis report</h4>
+				<canvas id="myChart" height="100px"></canvas>
+			</div>
+			<div class="container">
+				<h4><span id="currentMonth"></span></h4>
+				<canvas id="myChart" height="60px"></canvas>
+			</div>
+		</div>
+		
+		
+	
+			</div>
+		</div>
+				
 	</div>
+	
 </body>
 
 
 <script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-</script>
+		var table = document.getElementById("table").value;
+		var air = document.getElementById("airconditione").value;
+		var tel = document.getElementById("telephone").value;		
+		var chair = document.getElementById("chair").value;
+		var tv = document.getElementById("television").value;
+		
+		
+		var ctx = document.getElementById('myChart').getContext('2d');
+		var myChart = new Chart(ctx,
+				{
+					type : 'bar',
+					data : {
+						labels : [ 'table', 'airconditione','telephone', 'chair', 'television' ],
+						datasets : [ {
+							label : '# of Votes',
+							data : [ table, air ,tel , chair, tv ],
+							backgroundColor : [
+							//'rgba(255, 99, 132, 0.2)',
+							'rgba(204, 246, 228, 0.3)',
+							//'rgba(54, 162, 235, 0.2)',
+							'rgba(253, 230, 216, 0.3)',
+							//'rgba(255, 206, 86, 0.2)',
+							'rgba(253, 216, 239, 0.3)',
+									'rgba(75, 192, 192, 0.2)',
+									'rgba(153, 102, 255, 0.2)',
+									'rgba(255, 159, 64, 0.2)' ],
+							borderColor : [
+							//'rgba(255, 99, 132, 1)',
+							'rgba(38, 134, 78, 1)',
+							//'rgba(54, 162, 235, 1)',
+							'rgba(201, 102, 50, 1)',
+							//'rgba(255, 206, 86, 1)',
+							'rgba(222, 11, 142, 1)', 'rgba(75, 192, 192, 1)',
+									'rgba(153, 102, 255, 1)',
+									'rgba(255, 159, 64, 1)' ],
+							borderWidth : 1
+						} ]
+					},
+					options : {
+						scales : {
+							yAxes : [ {
+								ticks : {
+									beginAtZero : true
+								}
+							} ]
+						}
+					}
+				});
+	</script>
+	
+
+
+
 
 
   <script type = "text/javascript">
@@ -364,17 +492,6 @@ $(document).ready(function(){
         }
 
   </script>
-
-
-
-
-
-
-
-
-
-
-
 
 
 

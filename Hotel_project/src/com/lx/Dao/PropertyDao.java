@@ -177,5 +177,169 @@ public class PropertyDao
     }
     
     
+    public Integer CountProperty() 
+    {
+    	int count = 0;	
+    	try 
+    	{
+			String sql = "SELECT COUNT(propid) FROM properties";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			String sum = rs.getString(1);
+			count = Integer.parseInt(sum);		
+		} 
+    	catch (SQLException e) 
+    	{
+    		e.printStackTrace();
+		}  	
+    	return count;	
+    }
+    
+    
+    public Integer TotalValueProperty() 
+    {
+    	int count = 0;	
+    	try 
+    	{
+			String sql = "SELECT SUM(pvalue) FROM properties";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			String sum = rs.getString(1);
+			count = Integer.parseInt(sum);		
+		} 
+    	catch (SQLException e) 
+    	{
+    		e.printStackTrace();
+		}  	
+    	return count;	
+    }
+    
+    public Integer PropertyreportChart() 
+    {
+    	int count = 0;	
+    	try 
+    	{
+    		String sql = "SELECT SUM(pnoofItems) FROM properties WHERE pname ='Table'";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			String sum = rs.getString(1);
+			count = Integer.parseInt(sum);		
+		} 
+    	catch (SQLException e) 
+    	{
+    		e.printStackTrace();
+		}  	
+    	return count;	
+    }
+    
+    public Integer PropertyreportChart2() 
+    {
+    	int count = 0;	
+    	try 
+    	{
+    		String sql = "SELECT SUM(pnoofItems) FROM properties WHERE pname ='Air conditione'";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			String sum = rs.getString(1);
+			count = Integer.parseInt(sum);		
+		} 
+    	catch (SQLException e) 
+    	{
+    		e.printStackTrace();
+		}  	
+    	return count;	
+    }
+    
+    public Integer PropertyreportChart3() 
+    {
+    	int count = 0;	
+    	try 
+    	{
+    		String sql = "SELECT SUM(pnoofItems) FROM properties WHERE pname ='Telephone'";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			String sum = rs.getString(1);
+			count = Integer.parseInt(sum);		
+		} 
+    	catch (SQLException e) 
+    	{
+    		e.printStackTrace();
+		}  	
+    	return count;	
+    }
+    
+    public Integer PropertyreportChart4() 
+    {
+    	int count = 0;	
+    	try 
+    	{
+    		String sql = "SELECT SUM(pnoofItems) FROM properties WHERE pname ='Refrigerator'";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			String sum = rs.getString(1);
+			count = Integer.parseInt(sum);		
+		} 
+    	catch (SQLException e) 
+    	{
+    		e.printStackTrace();
+		}  	
+    	return count;	
+    }
+    
+    public Integer PropertyreportChart5() 
+    {
+    	int count = 0;	
+    	try 
+    	{
+    		String sql = "SELECT SUM(pnoofItems) FROM properties WHERE pname ='Television'";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			String sum = rs.getString(1);
+			count = Integer.parseInt(sum);		
+		} 
+    	catch (SQLException e) 
+    	{
+    		e.printStackTrace();
+		}  	
+    	return count;	
+    }
+    
+    public Integer PropertyreportChart6() 
+    {
+    	int count = 0;	
+    	try 
+    	{
+    		String sql = "SELECT SUM(pnoofItems) FROM properties WHERE pname ='Chair'";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			String sum = rs.getString(1);
+			count = Integer.parseInt(sum);		
+		} 
+    	catch (SQLException e) 
+    	{
+    		e.printStackTrace();
+		}  	
+    	return count;	
+    }
+    
+    
+    
+    
+    
+
+	
+
+    
+    
+    
+    
 
 }
